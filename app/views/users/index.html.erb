@@ -1,0 +1,14 @@
+
+<ul class="items">
+<% @users.each do |user| %>
+  <li>
+    <dl>
+      <dt><%= link_to user.name, user_path(user.login) %></dt>
+      <dd>
+        <%= link_to "#{user.items_count}宝贝", items_user_path(user.login) %>
+        <%= link_to "#{user.followers_count}粉丝", followers_user_path(user.login) %>
+        <%= link_to "#{user.following_count}关注", following_user_path(user.login) %>
+      </dd>
+  </li>
+<% end %>
+</ul>

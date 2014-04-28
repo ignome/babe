@@ -1,0 +1,51 @@
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav navbar-right">
+        <% if current_user %>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b>发布</a>
+          <%= render_list :class => "dropdown-menu" do |li|
+            li << link_to( t('common.publish'), new_item_path )
+            li << link_to( t('common.styles'), new_style_path )
+          end %>
+        </li>
+
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.name%><b class="caret"></b></a>
+          <%= render_list :class => "dropdown-menu" do |li|
+              li << link_to(t("common.my_home"), user_path(current_user.login) )
+              unless params[:controller].match(/cpanel/)
+                li << link_to(t("common.edit_account"), edit_user_registration_path)
+              end
+              li << link_to(t("users.signout"), destroy_user_session_path, method: "delete" )
+            end %>
+        </li>
+        <% else %>
+        <li><%= link_to t('users.signin'), new_user_session_path %> </li>
+        <li><%= link_to t('users.signup'), new_user_registration_path %> </li>
+        <% end %>
+        <li><a href="/help">帮助中心</a></li>
+        <li><a>收藏</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="search">
+  <div class="container">
+    <div class="col-md-3">
+      <h4 class="logo">小蘑菇</h4>
+    </div>
+    <div class="col-md-9">
+      <div class="col-md-5 pull-right" id="search">
+        <div class="input-group">
+          <input type="text" class="form-control">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">查找</button>
+          </span>          
+        </div><!-- /input-group -->
+      </div>
+    </div>
+  </div>
+</div>

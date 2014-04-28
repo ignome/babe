@@ -1,0 +1,16 @@
+/*
+ *= require bootstrap.min
+ *= require_self
+ */
+
+.navbar{text-shadow: 0 1px 0 #fff;border-bottom: 1px solid #e5e5e5;margin-bottom: 0}
+.logo {float: left;}
+.logo a{padding: 15px; font-size: 22px; line-height: 20px; display: block;}
+.box{border: solid 1px #e3e3e3; padding: 20px;}
+.row{padding: 30px;}
+
+#signup{min-height:450px; background: rgb(243,243,243) url(/assets/body-bg.png) no-repeat; padding: 15px;}
+
+.site-footer {position: relative; padding-top: 40px; padding-bottom: 10px;font-size: 12px;line-height: 1.5;color: #777;}
+.site-footer-links {float: left; margin: 0;list-style: none;}
+.site-footer-links li {display: inline-block; line-height: 16px;margin-left: 10px;}

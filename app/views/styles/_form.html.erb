@@ -1,0 +1,122 @@
+<%= content_for :styles do %>
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="/jquery-file-uploader/css/jquery.fileupload.css">
+<link rel="stylesheet" href="/jquery-file-uploader/css/jquery.fileupload-ui.css">
+<% end %>
+
+<div class="container" id="main">
+  <div class="row new">
+    <%= simple_form_for @style, html:{id: 'fileupload', class: 'form-horizontal'} do |f| %>
+    <%= render "shared/error", :target => @style %>
+    
+    <div class="col-md-8 files">
+      <ul id="files"></li>
+    </div>
+
+    <div class="col-md-4 actions">
+      <ul>
+        <li>
+          <span class="btn btn-success fileinput-button">
+              <i class="glyphicon glyphicon-picture"></i>
+              <span>从电脑上选择文件上传</span>
+              <input type="file" name="files[]" multiple>
+          </span>
+        </li>
+
+        <li>
+          <ul id="items" class="items"></ul>
+        </li>
+        <li>
+          <div class="input-group">
+            <input type="text" name="url" id="url" class="form-control" placeholder="http://">
+            <span class="input-group-btn">
+              <button class="btn btn-default" id="add" type="submit">添加单品</button>
+            </span>
+          </div>
+        </li>
+
+        <li>
+          <textarea name="style[body]"></textarea>
+          <br/>
+          <small>(140个字以内描述搭配风格)</small>
+        </li>
+
+        <li >
+          <button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-ok"></i> 发布 </button>
+        </li>
+      </ul>
+    </div>
+    
+    <% end %>
+  </div>
+</div>
+
+<%= content_for :scripts do %>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <li class="">
+      <dl>
+        <dt><img src="{%= file.thumbnail_url %}" /></dt>
+        <dd><input type="hidden" name="style[photo][id][]" value="{%= file.id%}" /></dd>
+      <dl>
+    </li>
+{% } %}
+</script>
+
+<script id="template-item" type="text/x-tmpl">
+<li>
+  <a href="{%= o.url %}" target="blank" >{%= o.title %} {%= o.price %} </a>
+  <input type="hidden" name="style[item][id][]" value="{%= o.id%}" />
+</li>
+</script>
+
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="/jquery-file-uploader/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="/assets/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="/assets/load-image.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="/jquery-file-uploader/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="/jquery-file-uploader/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="/jquery-file-uploader/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="/jquery-file-uploader/js/jquery.fileupload-image.js"></script>
+
+<script type="text/javascript">
+$(function(){
+  
+  'use strict';
+  
+  $('#fileupload').fileupload({
+    url: '/photos',
+    dataType: 'json',
+    ///*
+    done: function (e, data) {
+      console.log(data.result.files);
+
+      $('#files').append( tmpl('template-download', data.result) );
+      
+    }
+    //*/
+  });
+
+  $('#add').on('click', function(){
+    $.ajax({
+      url: '/items',
+      method: 'POST',
+      dataType: 'json',
+      data: {url: $('#url').val()},
+      success: function(data){
+        console.log(data);
+        $('#items').append(tmpl('template-item', data));
+      }
+    });
+  });
+
+});
+</script>
+<% end %>

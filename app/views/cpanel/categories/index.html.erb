@@ -1,0 +1,63 @@
+<div class="table-responsive">
+  <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th class="center">
+          <label>
+            <input type="checkbox" class="ace">
+            <span class="lbl"></span>
+          </label>
+        </th>
+        <th>分类名称</th>
+        <th>访问路径</th>
+        <th>排序</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody></tbody>
+  </table>
+</div>
+
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+  <tr>
+    <td>{%= o.id %}</td>
+    {% for( var i=0; i < o.depth; i++ ) { %}
+    <td></td>
+    {% } %}
+
+    <td colspan="{%= o.max - o.depth %}">
+        {%=o.name%}
+    </td>
+    <td> {%=o.slug%} </td>
+    <td> {%=o.sort%} </td>
+    <td>
+        <a href="category/{%=o.id%}/edit">编辑</a>
+        <a class="icon-remove" data-confirm="确定要删除吗?" data-method="delete" href="category/{%=o.id%}" rel="nofollow">删除</a>
+    </td>
+  </tr>
+</script>
+
+<%= content_for :scripts do %>
+<script src="/assets/tmpl.min.js"></script>
+<script src="/category.json"></script>
+<script type="text/javascript">
+var $tbody = $('#sample-table-1 tbody');
+var max = tree['depth'];
+
+$('#sample-table-1 thead tr th').eq(1).attr('colspan', max);
+
+function render_node(tree, depth){
+  for(var i=0; i < tree.length; i++){
+    node = tree[i];
+    node['depth'] = depth;
+    node['max'] = max;
+    $tbody.append( tmpl('template-upload', node) );
+    if (node['child'].length > 0) render_node(node['child'], depth+1)
+  }
+}
+render_node(tree['tree'], 0);
+</script>
+<% end %>
+

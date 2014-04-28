@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= render_page_title %>
+  <%= stylesheet_link_tag    "user", media: "all"%>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<%= render_body_tag %>
+<div id="wrap">
+  <header class="navbar bs-docs-nav" role="banner">
+    <div class="container">
+      <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+        <span class="logo"><a href="/">小蘑菇</a></span>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/">首页</a> </li>
+          <li><a href="/explore/clothes">单品</a> </li>
+          <li><a href="/styles">搭配</a></li>
+          <li><a href="/topics">社区</a></li>
+          <li><a href="/help">帮助中心</a></li>
+          <li><li><%= link_to t('users.signin'), new_user_session_path %> </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <%= yield %>
+  <div class="container">
+    <div class="row site-footer">
+      <div class="col-md-9 text-center">
+        <ul class="site-footer-links">
+          <li>© 2014 <span title="corp">QF</span>, Inc.</li>
+          <li><a href="/site/terms">关于</a></li>
+          <li><a href="/site/privacy">条款</a></li>
+          <li><a href="/security">隐私</a></li>
+          <li><a href="/contact">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

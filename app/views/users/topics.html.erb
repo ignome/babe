@@ -1,0 +1,12 @@
+<%= render 'profile' %>
+<%= render 'path' %>
+
+<ul >
+  <% @topics.each do |topic| %>
+  <li>
+    <%=topic.node.name %>
+    <%=link_to topic.title, topic_path(topic.id) %>
+    <%=topic.created_at.to_s(:short)%>
+  </li>
+  <% end %>
+</ul>

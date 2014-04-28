@@ -1,0 +1,36 @@
+
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <td class="first">ID</td>
+    <td style="width:300px">Title</td>
+    <td>Node</td>
+    <td>User</td>
+    <td>Replies</td>
+    <td>at</td>
+    <td style="width:100px"></td>
+  </tr>
+
+<% @topics.each do |topic| %>
+  <tr >
+    <td class="first"><%= topic.id %></td>
+    <td>
+      <%= truncate(topic.title,:length => 30) %>
+    </td>
+    <td><%= topic.node.name if topic.node %></td>
+    <td><%= topic.user.login if topic.user %></td>
+    <td>0</td>
+    <td>
+      
+    </td>
+    <td>
+      
+      <%= link_to "", edit_cpanel_topic_path(topic), :class => "icon small_edit" %>
+    
+        <%= link_to "", cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %>
+     
+    </td>
+
+  </tr>
+<% end %>
+</table>
+<%= will_paginate @topics %>

@@ -1,0 +1,30 @@
+
+<div class="full">
+  <h1 class="alt">
+    <em> <a href="/account">账户</a><span class="step">/</span> </em>个人信息</h1>
+  <p>编辑 名字、头像、个人介绍等.</p>
+</div>
+
+<div id="main">
+  
+  <%= render "path" %>
+
+  <div class="session-form alt">  
+
+    <%= render "shared/error", :target => resource if params[:by].blank? %>
+
+      <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put,  class: 'form-horizontal', size: '30' } ) do |f| %>
+      
+        <%= f.input :name, label: '显示名字' %>
+        
+        <%= f.input :email, label: '邮件地址', :input_html => {:disabled => (!resource.email.blank?) } %>
+        
+
+        <div class="form-btns">
+            <%= f.submit "更新资料", :class => "form-sub", 'data-disable-with' => t("common.submitting") %>
+        </div>
+        <% end %>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,129 @@
+<div class="slider">
+    <ul class="banner">
+      <li style="background-image: url('/1.jpg');">
+        <div class="inner">
+          <h1>The jQuery slider that just slides.</h1>
+        </div>
+      </li>
+
+      <li style="background-image: url('/2.jpg');">
+        <div class="inner">
+          <h1>Fluid, flexible, fantastically minimal.</h1>
+        </div>
+      </li>
+
+      <li style="background-image: url('/3.jpg');">
+        <div class="inner">
+
+          <a class="btn" href="//github.com/idiot/unslider">参与</a>
+        </div>
+      </li>
+
+      <li style="background-image: url('/4.jpg');">
+        <div class="inner">
+        </div>
+      </li>
+    </ul>
+</div>
+
+<div class="cat box">
+  <div class="sub">
+    <ul class="first"></ul>
+  </div>
+</div>
+
+<div style="height:120px;"></div>
+
+<div id="groupon">
+  <div class="container">
+    <div class="row">
+      <div class="hd clearfix"><h2> 人气团购 </h2></div>
+      <div class="col-md-6 item">        
+      </div>
+      <div class="col-md-6 item"></div>
+    </div>
+  </div>
+</div>
+
+<div class="recommend">
+  <div class="container">
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="hd clearfix"><h2>推荐 搭配</h2></div>
+        <div id="styles">
+          <ul class="items">
+            <%= render partial: 'styles/item', collection: @styles %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="list">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="hd clearfix">
+          <h2>最新 单品 </h2>
+          <ul class="pagination">
+            <li><a href="#">全部</a></li>
+            <li><a href="#">0-80</a></li>
+            <li><a href="#">80-300</a></li>
+            <li><a href="#">更高</a></li>
+            <li>
+              <span>
+              <input type="text" />
+              -
+              <input type="text" />
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <ul class="items">
+          <%= render partial: 'items/item', collection: @items %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= content_for :scripts do %>
+<script id="template-nav" type="text/x-tmpl">
+{% for(var i=0, e = o.tree.length; i < e; i++) { %}
+<li  data-tag="{%= i +1 %}">
+  <h3 class="title">
+      <a href="/explore/{%=o.tree[i].slug%}" target="_blank" class="primary_navlist_h fl mr10">{%= o.tree[i]['name'] %}</a>
+  </h3>
+  <ol class="secondary clearfix">
+      {% for(var j=0, k=o.tree[i].child.length; j < k ; j++) { %}
+      <li> <a href="/explore/{%=o.tree[i].slug%}/{%= o.tree[i].child[j].slug%}" target="_blank">{%= o.tree[i].child[j].name %}</a> </li>
+      {% } %}
+  </ol>
+</li>
+{% } %}
+</script>
+
+<script src="//unslider.com/unslider.js"></script>
+<script src="/category.json"></script>
+<script src="/assets/tmpl.min.js"></script>
+<script type="text/javascript">
+$(function() {
+  $('.slider').unslider({
+    speed: 500,               //  The speed to animate each slide (in milliseconds)
+    delay: 6000,              //  The delay between slide animations (in milliseconds)
+    complete: function() {},  //  A function that gets called after every slide animation
+    keys: true,               //  Enable keyboard (left, right) arrow shortcuts
+    dots: true,               //  Display dot navigation
+    fluid: false              //  Support responsive design. May break non-responsive designs
+  });
+});
+
+$(document).ready(function(){
+  var $nav = $('.sub ul');
+      $nav.append( tmpl('template-nav', tree) );
+});
+
+</script>
+<% end %>

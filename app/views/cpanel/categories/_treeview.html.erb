@@ -1,0 +1,28 @@
+<script type="text/javascript" src="/category.json"></script>
+<script type="text/javascript">
+window.Treeview = {
+  tree : [],
+
+  render : function(nodes, target ){
+    target = arguments.length > 2 ? target : 'category';
+
+    Treeview.loop(nodes, 0, 0);
+    Treeview.tree[0] = '<option value="0"> Choice ...</option>';
+
+    $('#' + target).append( Treeview.tree.join("\n") );
+  },
+
+  loop : function(nodes, parent, depth){
+    for(var i=0, e=nodes.length; i<e; i++){
+      node = nodes[i];
+      label = '|-';
+      for(var k=0; k < depth; k++){
+        label += '-';
+      }
+
+      Treeview.tree[Treeview.tree.length] = '<option value="'+ node['id'] +'">'+ label + node['name'] +'</option>';
+      if ( node.child.length > 0 ) Treeview.loop(node['child'], node['id'], depth + 1);
+    }
+  }
+}
+</script>

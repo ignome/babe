@@ -1,0 +1,4 @@
+<div class="radius-box-btn like fav">
+  <span class="glyphicon glyphicon-heart">&nbsp;</span>
+  <%= link_to "#{@item.likes_count}#{t('item.like')}", like_item_path(@item), class: 'fav-toggle' %>
+</div>

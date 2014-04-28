@@ -1,0 +1,12 @@
+<%= simple_form_for([:cpanel,@node],  html:{class: 'form-horizontal'}) do |f| %>
+  <%= render 'shared/error', :target => @node %>
+ 
+    <%= f.input :name %>
+    <%= f.input :section_id, :collection => Section.all.collect { |s| [s.name,s.id] } %>
+    <%= f.input :sort %>
+    <%= f.input :description, :input_html => {:class => "xxlarge"} %>
+    <div class="form-actions">
+      <%= f.submit t("common.submit"), :class => "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+      <%= link_to 'Back', cpanel_nodes_path %>
+    </div>
+<% end %>

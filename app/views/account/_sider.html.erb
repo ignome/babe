@@ -1,0 +1,13 @@
+<div class="profile">
+  <%= user_avatar_tag(current_user, :big) %>
+  <h5> <%= current_user.name %> </h5>
+
+  <h3> 账号设置 </h3>
+
+  <%= render_list class: 'tabs' do |li|
+  li << link_to( '基本信息', edit_user_registration_path)
+  li << link_to( '修改密码', account_password_path)
+  li << link_to( '头像定制', account_avatar_path)
+  li << link_to( '其它', account_addition_path)
+  end %>
+</div>

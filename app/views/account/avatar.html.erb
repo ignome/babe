@@ -1,0 +1,18 @@
+<div class="container" id="main">
+  <div class="row edit">
+    <div class="col-md-2 col-md-offset-1 sider">
+      <%= render 'account/sider' %>
+    </div>
+
+    <div class="col-md-8 main">
+      <%= simple_form_for(@user, :url => account_avatar_path, :html => {:enctype =>  "multipart/form-data"}) do |f| %>
+      <%= image_tag @user.avatar.url if @user.avatar %>
+      <%= f.input_field :avatar %>
+      <div class="form-btns">
+        <%= f.submit '更新头像', class: 'form-sub' %>
+      </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>

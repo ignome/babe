@@ -1,0 +1,20 @@
+<li class="item box round">
+  <div class="cover">
+    <%= link_to style_path(item.id) do %>
+    <%= image_tag item.photos.first.file.url %>
+    <% end %>
+  </div>
+  <div class="thumb">
+    <% item.photos.recent.each do |photo| %>
+      <%= link_to style_path(item.id) do %>
+      <%= image_tag photo.file.default.url %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="text">
+    <%=link_to style_path item.id do %>
+    <h5 class="user"><%= item.user.name %></h5>
+    <p class="title">这里什么着落显示在这里好像有点放不下的样子</p>
+    <% end %>
+  </div>
+</li>

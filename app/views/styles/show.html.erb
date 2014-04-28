@@ -1,0 +1,99 @@
+<div class="container" id="main">
+  <div class="row round">
+
+    <div class="col-md-7 photo">
+      <ul>
+      <% @style.photos.each do |photo| %>
+        <li><%= image_tag photo.file.url %></li>
+      <% end %>
+      </ul>
+    </div>
+
+    <div class="col-md-5 info">
+      <div class="attention user">
+        <dl>
+          <dt><%= user_avatar_tag(@style.user) %></dt>
+          <dd>
+            <h5><%= @style.user.name %></h5>
+            <span class="round-sm"><i class="glyphicon glyphicon-plus"></i><%= link_to '加关注', user_follow_path(@style.user.login), class: "follow" %></span>
+            <em>
+              <%= link_to "#{@style.user.items_count} #{t('item.name')}", items_user_path(@style.user.login)%>
+              <%= link_to "#{@style.user.followers_count} #{t('users.follower')}", followers_user_path(@style.user.login) %>
+              <%= link_to "#{@style.user.following_count} #{t('users.following')}", following_user_path(@style.user.login) %>
+            </em>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="summary">
+        <p>
+          什么也没说.
+        </p>
+        <small class="pull-right"><i class="glyphicon glyphicon-time"></i>发布<%=time_ago_in_words(@style.created_at)%></small>
+      </div>
+
+      <!-- list here -->
+      <h4 class="title"><i class="glyphicon glyphicon-shopping-cart"></i>搭配单品</h4>
+
+      <div class="items">
+        <ol>
+          <% @style.items.each do |item| %>
+          <li class="round">
+            <span class="plus round-sm"><i class="glyphicon glyphicon-plus"></i></span>
+            <div class="cover">
+              <%= image_tag item.cover, size: '80x80' %>
+            </div>
+            <div class="item">
+              <div class="title">
+                <%= link_to item.title, item.url %>
+              </div>
+              <div class="buy">
+                <em>&yen;<%= item.price %></em>
+                <span><i class="glyphicon glyphicon-shopping-cart"></i>去购买</span>
+              </div>
+            </div>
+          </li>
+          <% end %>
+        </ol>
+      </div>
+
+      <!-- tools here -->
+      <div class="tools ">
+        <ul class="pagehead-actions">
+          <li>
+            <a href="/" class="btn btn-default btn-xs with-count" rel="nofollow">
+              <span class="glyphicon glyphicon-heart"></span>喜欢
+            </a>
+
+            <a class="social-count" href="/plataformatec/simple_form/stargazers">
+              4,304
+            </a>
+
+          </li>
+
+          <li>
+            <a href="/" class="btn btn-default btn-xs with-count" rel="nofollow">
+              <span class="glyphicon glyphicon-star"></span>收藏
+            </a>
+            <a href="/plataformatec/simple_form/network" class="social-count">
+              698
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- comments here -->
+      <div class="comment">
+        <%= render 'comments/comment', :target => @style %>
+
+        <% @style.comments.each do |comment| %>
+        <div class="">
+
+          <p><%= comment.body %> </p>
+        </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

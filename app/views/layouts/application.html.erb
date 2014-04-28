@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= render_page_title %>
+  <%= stylesheet_link_tag    "application", media: "all"%>
+  <%= javascript_include_tag "application" %>
+  <%= yield :styles %>
+  <%= csrf_meta_tags %>
+</head>
+<%= render_body_tag %>
+
+<%= render 'shared/header' %>
+
+<%= notice_message %>
+
+<div id="wrap">
+  <div class="menu">
+    <div class="container">
+      <div class="row menu">
+        <div class="col-md-1 col-offset-2 home"><a href="/"><i class="glyphicon glyphicon-home"></i></a></div>
+        <div class="col-md-8">
+          <%= render 'shared/menu' %>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+  <%= yield %>
+</div>
+
+<%= render 'shared/footer' %>
+
+<%= yield :scripts %>
+
+</body>
+</html>

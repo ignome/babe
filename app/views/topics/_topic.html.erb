@@ -1,0 +1,13 @@
+<div class="topic clearfix" id="topic-">
+  <h2><%= link_to topic.title, topic_path(topic) %></h2>
+  <div class="time"><%= topic.user.name %> <%= topic.created_at.to_s(:short) %></div>
+  <div class="summary">
+    <div class="text"><%= truncate(topic.body, length: 140) %></div>
+    <ul class="thumb clearfix">
+      <% topic.photos.each do |photo| %>
+      <li ><%= image_tag photo.file.url, width: '200' %></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="more"><%= link_to '继续阅读...', topic_path(topic.id) %></div>
+</div>

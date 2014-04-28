@@ -1,0 +1,90 @@
+<div class="container" id="main">
+  <div class="row box details">
+    <div class="col-md-7 photo">
+      <h4><%= @item.title %></h4>
+      <div class="zoom">
+        <%= image_tag @item.covers.first.file.url %>
+      </div>
+      <div class="thumb clearfix center-block">
+        <ul>
+          <% @item.covers.each do |cover| %>
+          <li class="box"><%= image_tag cover.file.default.url, url: cover.file.url, size: '50x50' %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="comment">
+        <%= render 'comments/comment', :target => @item %>
+      </div>
+    </div>
+
+    <div class="col-md-5 info">
+      <div class="user">
+        <dl>
+          <dt><%= user_avatar_tag(@item.user) %></dt>
+          <dd>
+            <h5><%= @item.user.name %></h5>
+            <span class="round-sm"><i class="glyphicon glyphicon-plus"></i><%= link_to '加关注', user_follow_path(@item.user.login), class: "follow" %></span>
+            <%= link_to "#{@item.user.items_count} #{t('item.name')}", user_path(@item.user.login) %>
+            <%= link_to "#{@item.user.followers_count} #{t('users.follower')}", followers_user_path(@item.user.login) %>
+            <%= link_to "#{@item.user.following_count} #{t('users.following')}", following_user_path(@item.user.login) %>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="buy">
+        <span class="price">&yen;<b><%= @item.price %></b></span>
+        <span class="round url">
+          <%= link_to @item.url, target: '_blank' do %>
+          <i class="glyphicon glyphicon-shopping-cart"></i> 去购买 </a>
+          <% end %>
+      </div>
+
+      <div class="tools ">
+        <ul class="pagehead-actions">
+          <li>
+            <a href="/" class="btn btn-default btn-xs with-count" rel="nofollow">
+              <span class="glyphicon glyphicon-heart-empty"></span>喜欢
+            </a>
+
+            <a class="social-count" href="/plataformatec/simple_form/stargazers">
+              4,304
+            </a>
+
+          </li>
+
+          <li>
+            <a href="/" class="btn btn-default btn-xs with-count" rel="nofollow">
+              <span class="glyphicon glyphicon-star"></span>收藏
+            </a>
+            <a href="/plataformatec/simple_form/network" class="social-count">
+              698
+            </a>
+          </li>
+
+          <li>
+            <a href="/" class="btn btn-default btn-xs with-count" rel="nofollow">
+              <span class="glyphicon glyphicon-share"></span>分享到
+            </a>
+            <a href="/plataformatec/simple_form/network" class="social-count">
+              微博 微信 QQ空间
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="comments">
+        <h4 class="title"><i class="glyphicon glyphicon-comment"></i>辣妈们说</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="row guess">
+    <h4> 猜你喜欢 </h4>
+    <div class="col-md-12 box">
+    </div>
+  </div>
+</div>
+
+<%- content_for :scripts do -%>
+<%= javascript_include_tag "items", "data-turbolinks-track" => true %>
+<%- end -%>

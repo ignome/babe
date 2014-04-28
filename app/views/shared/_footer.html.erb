@@ -1,0 +1,61 @@
+<div id="footer">
+  <div id="footer-inner">
+    <div class="group">
+      <div class="footer-links">
+        <p class="logo"><a href="/">小蘑菇</a></p>
+        <p>辣妈集市汇聚潮品、优品，淘出新味道.</p>
+      </div>
+      <div class="footer-links">
+        <h3>公司</h3>
+        <ul>
+          <li><a href="/about" id="f-home">关于</a></li>
+          <li><a href="/contact">联系我们</a></li>
+          <li><a href="/terms">免责申明</a></li>
+          <li><a href="/privacy">版权说明</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h3>社区</h3>
+        <ul>
+          <li><a href="/join">问答</a></li>
+          <li><a href="/buy">主题</a></li>
+          <li><a href="/granteen">推广</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h3>帮助</h3>
+        <ul>
+          <li><a href="http://blog.dribbble.com">进入社区讨论</a></li>
+          <li><a href="/meetups">如何发布单品</a></li>
+          <li><a href="">如何发布搭配</a></li>
+          <li><a href="">如何申请达人</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+
+    <p>Copyright © 2011–2014 Quick Fish LLC. 所有内容版权归属各作者所有 未经授权不得转载.</p>
+
+    <p class="follow">
+      <a href="http://twitter.com/dribbble"><img alt="Icon-team-twitter" src="http://d13yacurqjgara.cloudfront.net/assets/icon-team-twitter-225d7c7bbf69a2e84d91f484d78c689f.png" width="24"></a>
+      <a href="http://facebook.com/dribbble"><img alt="Icon-team-facebook" src="http://d13yacurqjgara.cloudfront.net/assets/icon-team-facebook-a9ed2573a6c0130360de20ba1e0fedf8.png" width="24"></a>
+      <a href="http://meetup.com/dribbble"><img alt="Icon-team-meetup" src="http://d13yacurqjgara.cloudfront.net/assets/icon-team-meetup-fea7f3327a4d741d27ff9454cbebe44f.png" width="24"></a>
+      <a href="http://instagram.com/dribbble"><img alt="Icon-team-instagram" src="http://d13yacurqjgara.cloudfront.net/assets/icon-team-instagram-77614abc74782b09aa717d8d1762b87e.png" width="24"></a>
+      <a href="http://blog.dribbble.com"><img alt="Icon-team-tumblr" src="http://d13yacurqjgara.cloudfront.net/assets/icon-team-tumblr-bee52e5eed7c8fbfca812283c7420dcd.png" width="24"></a>
+    </p>
+  </div>
+</div>
+
+<div id="gotop"></div>
+<script type="text/javascript">
+$(document).ready(function(){
+  var  $goTop = $('#gotop');
+    $goTop.click(function() {$("html, body").animate({ scrollTop: 0 }, 300);});
+  $backToTopFun = function() {var st = $(document).scrollTop(), winh = $(window).height();(st > 200)? $goTop.fadeIn(300): $goTop.fadeOut(300);};
+    $(window).bind("scroll", $backToTopFun);
+    $backToTopFun();
+})
+</script>

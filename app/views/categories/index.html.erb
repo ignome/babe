@@ -1,0 +1,165 @@
+<%= content_for :styles do %>
+<style type="text/css">
+  .category {
+  background: #fff;
+  overflow: visible;
+  border: 1px solid #e8e6e5;
+  height: 368px;
+  }
+  .cate_list_wrap_v1 {
+  width: 598px;
+  height: 368px;
+  float: left;
+  position: relative;
+  }
+  .cate_list_wrap_v1 .li_shopping {
+  margin-bottom: -2px 9;
+  }
+  .cate_list_wrap_v1 .cate_li_v1 {
+  height: 51px;
+  }
+  .cate_list_wrap_v1 .cate_highlight .cate_show_v1 {
+  border-right: 0;
+  }
+  .cate_highlight .cate_show_v1 {
+  border-bottom: 1px solid #e8e6e5;
+  border-top: 1px solid #e8e6e5;
+  height: 49px;
+  width: 138px;
+  }
+  .cate_highlight .nav_link_v1 {
+  color: #ff5896;
+  }
+  .cate_highlight .c_top {
+  border-top: 0;
+  height: 50px;
+  }
+  .cate_show_v1 .nav_link_v1 {
+  font-size: 14px;
+  color: #444;
+  display: block;
+  margin-left: 10px;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  }
+  .cate_show_v1 .clothing {
+  background-position: 1px -46px;
+  }
+  .cate_show_v1 .nav_icon_v1 {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  background: url(/img/cate_nav_icon.png) no-repeat;
+  margin-right: 3px;
+  vertical-align: -3px;
+  _margin-top: 8px;
+  }
+  .cate_highlight .nav_link_v1 b {
+  top: 21px;
+  _top: 14px;
+  }
+  .cate_show_v1 b {
+  position: absolute;
+  display: block;
+  width: 5px;
+  height: 7px;
+  background: url(/img/icon-nav-bg.png) no-repeat 0 -260px;
+  right: 14px;
+  top: 21px;
+  _top: 14px;
+  }
+  .cate_highlight .cate_detail_v1 {
+  display: block;
+  }
+  .cate_detail_v1 {
+  display: none;
+  width: 435px;
+  height: 365px;
+  padding: 0 8px 0 5px;
+  border-right: 1px solid #e8e6e5;
+  position: absolute;
+  left: 137px;
+  top: 0;
+  overflow: hidden;
+  }
+  .c_d_list {
+  padding: 13px 0 15px;
+  background: url(/assets/dotted_bg.png) repeat-x top;
+  position: relative;
+  margin-top: -1px;
+  min-height: 64px;
+  _height: 64px;
+  }
+  .c_d_list .c_d_mod {
+  width: 49px;
+  margin: 0 6px;
+  text-align: center;
+  }
+  .fl {
+  float: left;
+  display: inline;
+  }
+  .c_d_list .c_d_mod .title {
+  color: #ff5896;
+  font-size: 16px;
+  font-weight: 700;
+  }
+  .c_d_list .c_d_mod .img {
+  width: 35px;
+  }
+  .c_d_words_box {
+  overflow: hidden;
+  zoom: 1;
+  }
+  .c_d_words_list {
+  margin-left: -3px;
+  padding-top: 5px;
+  }
+  .c_d_words_list a {
+  color: #666;
+  display: inline-block;
+  border-left: 1px solid #ddd;
+  line-height: 16px;
+  height: 14px;
+  margin: 3px 0 6px;
+  margin: 3px -1px 5px 0  9;
+  padding: 0 0 0 2px  9;
+  }
+  .c_d_words_list a span {
+  padding: 0 3px 1px;
+  }
+  .choose_more_box {
+  padding: 15px 15px 0;
+  float: left;
+  width: 330px;
+  overflow: hidden;
+  }
+  .cate_show_v1 .nav_link_v1 {
+  font-size: 14px;
+  color: #444;
+  display: block;
+  margin-left: 10px;
+  height: 50px;
+  line-height: 50px;
+  position: relative;
+  }
+  .cate_list_wrap_v1 .cate_show_v1 {
+  width: 137px;
+  height: 51px;
+  border-right: 1px solid #e8e6e5;
+  }
+</style>
+<% end %>
+
+<div class="container" id="main">
+  
+  <%= render 'nav' %>
+
+  <%= render 'filter', node: @current_selected %>
+
+  <ul class="items">
+    <%= render partial: 'items/item', collection: @items %>
+  </ul>
+
+</div>

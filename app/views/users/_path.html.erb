@@ -1,0 +1,24 @@
+<div class="row path ">
+  <div class="col-md-10">
+    <ul class="tabs clearfix">
+      <li class="items">
+        <%= link_to user_path(@user.login) do %>
+          <span class="meta"><%= t('item.name')%></span>
+          <span class="count"><%= @user.items_count %></span>
+        <% end %>
+      </li>
+      <li class="likes">
+        <%= link_to likes_user_path(@user.login) do %>
+          <span class="meta"><%=t('item.like')%></span>
+          <span class="count"><%= @user.likes_count%></span>
+        <% end %>
+      </li>
+      <li class="favourites">
+        <%= link_to topics_user_path(@user.login) do %>
+          <span class="meta"><%= t('topics.name')%></span>
+          <span class="count"><%= @user.topics_count %></span>
+        <% end %>
+      </li>
+    </ul>
+  </div>
+</div>

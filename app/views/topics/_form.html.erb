@@ -1,0 +1,92 @@
+<%= content_for :styles do %>
+
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="/jquery-file-uploader/css/jquery.fileupload.css">
+<% end %>
+
+<div class="container" id="main">
+    <div class="row new">
+        <div class="col-md-8 edit">
+        <%= simple_form_for @topic, html:{class: 'form-horizontal',role: "form"}  do |f| %>
+          <%= render "shared/error", :target => @topic %>
+            
+
+          <div class="form-group">
+            <label for="topic_node_id" class="col-sm-2 control-label">选择主题</label>
+            <div class="col-sm-10">
+              <%= render_topic_node_select_tag(@topic) %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="title" class="col-sm-2 control-label">标题</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="title" name="topic[title]" placeholder="标题">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="fileupload" class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+              <input type="file" class="form-control" id="fileupload" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="text" class="col-sm-2 control-label"></label>
+            <div class="col-sm-10">
+              <textarea name="topic[body]" id="text"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn btn-default">发表</button>
+            </div>
+          </div>
+           
+        <% end %>
+        </div>
+
+        <div class="col-md-4 sider">
+            <ul>
+                <li> user info </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<%= content_for :scripts do %>
+<script src="/jquery-file-uploader/js/vendor/jquery.ui.widget.js"></script>
+<script src="/jquery-file-uploader/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="/jquery-file-uploader/js/jquery.fileupload.js"></script>
+
+<script>
+$(function () {
+    'use strict';
+    // Change this to the location of your server-side upload handler:
+    var url =  '/photos';
+    $('#fileupload').fileupload({
+        url: url,
+        dataType: 'json',
+        done: function (e, data) {
+            $.each(data.result.files, function (index, file) {
+                //$('<p/>').text(file.name).appendTo('#files');
+                var html = '<dl><dt><img src="'+ file.url +'" width="100" /></dt>';
+                    html += '<dd><input type="hidden" name="topic[photo][id][]" value="'+ file.id +'" />'+ file.name +'</dd></dl>';
+                $('#files').append( html );
+            });
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+});
+</script>
+<% end %>

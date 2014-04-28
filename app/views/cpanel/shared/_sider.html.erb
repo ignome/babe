@@ -1,0 +1,90 @@
+<nav class="main-nav">
+  <ul class="main-menu">
+    <li >
+      <a href="<%= cpanel_root_path%>">
+        <i class="fa fa-dashboard fa-fw"></i>
+        <span class="menu-text"> 控制台 </span>
+      </a>
+    </li>
+
+    <li>
+      <a href="<%= cpanel_categories_path%>" class="js-sub-menu-toggle">
+        <i class="fa fa-puzzle-piece fa-fw"></i>
+        <span class="menu-text"> 分类 </span>
+        <i class="toggle-icon fa fa-angle-left"></i>
+      </a>
+      <ul class="sub-menu">
+        <li>
+          <a href="<%= cpanel_categories_path %>">
+            <i class="icon-double-angle-right"></i>
+            列表
+          </a>
+        </li>
+
+        <li>
+          <a href="<%= new_cpanel_category_path %>">
+            <i class="icon-double-angle-right"></i>
+            创建
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    
+    <li>
+      <a href="<%= cpanel_items_path %>" >
+        <i class="fa fa-shopping-cart activity-icon pull-left"></i>
+        <span class="menu-text"> 宝贝 </span>
+      </a>
+    </li>
+
+    <li>
+      <a href="<%= cpanel_topics_path%>" class="js-sub-menu-toggle">
+        <i class="fa fa-comments activity-icon pull-left "></i>
+        <span class="menu-text"> 社区 </span>
+        <i class="toggle-icon fa fa-angle-left"></i>
+      </a>
+      <ul class="sub-menu">
+        <li>
+          <a href="<%= cpanel_sections_path %>">
+            <i class="icon-double-angle-right"></i>
+            主题
+          </a>
+        </li>
+
+        <li>
+          <a href="<%= cpanel_nodes_path %>">
+            <i class="icon-double-angle-right"></i>
+            节点
+          </a>
+        </li>
+
+        <li>
+          <a href="<%= cpanel_topics_path %>">
+            <i class="icon-double-angle-right"></i>
+            话题
+          </a>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <a href="<%= cpanel_users_path %>" >
+        <i class="fa fa-group activity-icon pull-left"></i>
+        <span class="menu-text"> 用户 </span>
+      </a>
+    </li>
+
+    <li>
+      <a href="/sidekiq" target="_blank" >
+        <i class="fa fa-eye activity-icon pull-left"></i>
+        <span class="menu-text"> 采集任务 </span>
+      </a>
+    </li>
+
+  </ul>
+</nav>
+
+<div class="sidebar-minified js-toggle-minified">
+    <i class="fa fa-angle-left"></i>
+</div>

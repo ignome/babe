@@ -1,0 +1,11 @@
+<%= render_list class: 'nav nav-justified' do |li|
+  
+  Category.roots.each do |c|
+    li << link_to(c.name, explore_path(c.slug))
+  end
+
+  li << link_to(t('common.styles'), styles_path)
+  li << link_to(t('common.community'),  topics_path)
+  li << link_to(t('common.groupon'), '')
+end
+%>

@@ -1,0 +1,18 @@
+<li class="item round">
+  <div class="cover">
+    <%= link_to item_path(item) do %>
+    <%= image_tag item.cover %>
+    <% end %>
+    <span class="price round">&yen;<%= item.price %></span>
+  </div>
+  <div class="tools">
+    <span class="round-sm"><i class="glyphicon glyphicon-heart"></i>喜欢</span>
+    <span class="round-sm count"><%= item.likes_count%></span>
+    <span class="view">浏览(22)</span>
+  </div>
+  <div class="title"><%= link_to item.title.truncate(18), item_path(item.id) %></div>
+  <div class="comment">
+    对于两端对齐的导航，水平改变浏览器大小将引起绘制错误。
+    此bug可以在justified nav example页面得到重现。
+  </div>
+</li>

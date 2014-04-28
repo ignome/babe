@@ -1,0 +1,36 @@
+ <div class="primary_main">
+ <div class="primary_nav_wrap" id="primaryNav">
+    <!-- 类目导航 -->
+    <h4 class="primary_nav_t">潮流单品<i>Shopping</i></h4>
+
+    <ul class="primary_navlist">
+        <script id="template-nav" type="text/x-tmpl">
+        {% for(var i=0, e = o.tree.length; i < e; i++) { %}
+        <li class="primary_navlist_li nav_top" data-tag="{%= i +1 %}">
+            <div class="primary_navlist_wrap">
+                <a href="/explore/{%= o.tree[i].slug%}" target="_blank" class="primary_navlist_icon">
+                    <img src="http://s12.mogujie.cn/pic/140211/mea1_kqzgmokwkrbf6v2ugfjeg5sckzsew_50x50.jpg" alt="" width="50" height="50">
+                </a>
+                <h5 class="clearfix">
+                    <a href="/explore/{%=o.tree[i].slug%}" target="_blank" class="primary_navlist_h fl mr10">{%= o.tree[i]['name'] %}</a>
+                    <i class="primary_navtip fl">
+                        <a href="/explore/" target="_blank" class="primary_navtip">
+                        早春新品 限时折扣
+                        </a>
+                    </i>
+                </h5>
+                <ul class="primary_navsublist clearfix">
+                    {% for(var j=0, k=o.tree[i].child.length; j < k ; j++) { %}
+                    <li> <a href="/explore/{%=o.tree[i].slug%}/{%= o.tree[i].child[j].slug%}" target="_blank">{%= o.tree[i].child[j].name %}</a> </li>
+                    {% } %}
+                </ul>
+                <i class="primary_nav_arw"></i>
+            </div>
+            <i class="primary_nav_borderbtm"></i>
+            <i class="primary_nav_borderright"></i>
+        </li>
+        {% } %}
+        </script>
+    </ul>
+</div>
+</div>

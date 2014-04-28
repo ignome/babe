@@ -1,0 +1,44 @@
+<div id="signin">
+  <div class="container">
+    <div class="row">
+      <%= render "shared/error", :target => resource %>
+      <div class="col-md-7">
+        <img src="/signin.jpg">
+      </div>
+
+      <div class="col-md-5 box">
+        <%= simple_form_for(resource, url: session_path(resource_name) ) do |f| %>
+          <%= f.input :login, label: '用户名', input_html:{class: 'form-control'} %>
+          <%= f.input :password, label: '密码', input_html:{class: 'form-control'} %>
+          <%- if devise_mapping.rememberable? -%>
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+              <div class="checkbox">
+                <label>
+                  <%= f.check_box :remember_me %> <%= t("users.remember_me") %>
+                </label>
+              </div>
+            </div>
+          </div>
+          <%- end -%>
+          
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-9">
+                <%= f.submit t("users.signin"), :class => "btn btn-primary", 'data-disable-with' => t("users.signing") %>
+            </div>
+          </div>
+        <% end %>
+
+        <h5>还没有帐号？</h5>
+        <%= render :partial => "shared/links" %>
+
+        <h5>使用其它方式接入</h5>
+        <ul>
+          <li>新浪微博登录</li>
+          <li>QQ账号登录</li>
+        </ul>
+        
+      </div>
+    </div>
+  </div>
+</div>

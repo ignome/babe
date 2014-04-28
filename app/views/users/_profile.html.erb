@@ -1,0 +1,37 @@
+<div class="row profile">
+  <div class="col-md-10">
+      <div class="vcard group ">
+        <%= user_avatar_tag(@user, :big) %>
+        <h1><span class="fn edit"><a href=""><%= @user.name %></a></span></h1>
+        <div class="follow-prompt">
+          <%= follow_or_unfollow(@user) %>
+          加关注
+        </div>
+      </div>
+  </div>
+  <div class="col-md-2">
+    <div class="profile-actions group">
+      <ul class="profile-tabs">
+        <li class="works">
+          <%= link_to items_user_path(@user.login) do %>
+          <span class="count"><%= @user.items_count %></span>
+          <span class="meta"><%=t('item.name')%></span>
+          <% end %>    
+        </li>
+        <li class="followers">
+          <%= link_to followers_user_path(@user.login) do %>
+            <span class="count"><%=@user.followers_count%></span>
+            <span class="meta"><%=t('users.follower')%></span>
+          <% end %>
+        </li>
+          
+        <li class="following">
+         <%= link_to following_user_path(@user.login) do %>
+            <span class="count"><%=@user.following_count%></span>
+            <span class="meta"><%=t('users.following')%></span>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

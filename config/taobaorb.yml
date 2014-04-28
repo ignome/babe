@@ -1,0 +1,7 @@
+development: &default
+  public_key: '21744169'
+  private_key: 'e1274b605c5bf851f78871d2668e854a'
+test:
+  <<: *default
+production:
+  <<: *default
