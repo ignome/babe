@@ -1,38 +1,60 @@
-require 'bundler/capistrano'
-set :user, 'benyu'
-set :domain, 'kukudi.com'
-set :application, "babe"
-set :repository,  "https://github.com/benyu/babe.git"
+# config valid only for Capistrano 3.1
+lock '3.2.1'
 
-set :scm, :git
-set :branch, 'master'
-#set :deploy_va, :remote_cache
-set :use_sudo, false
-ssh_options[:forward_agent] = true
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
+set :application, 'babe'
+set :repo_url, 'https://github.com/benyu/babe.git'
+
+# Default branch is :master
+# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
+
+# Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/babe'
-role :web, "kukudi.com"                          # Your HTTP server, Apache/etc
-role :app, "kukudi.com"                          # This may be the same as your `Web` server
-role :db,  "kukudi.com", :primary => true # This is where Rails migrations will run
-#role :db,  "your slave db-server here"
+
+# Default value for :scm is :git
+ set :scm, :git
+
+# Default value for :format is :pretty
+# set :format, :pretty
+
+# Default value for :log_level is :debug
+# set :log_level, :debug
+
+# Default value for :pty is false
+ set :pty, true
+
+# Default value for :linked_files is []
+# set :linked_files, %w{config/database.yml config/initializers/secret_token.rb}
+
+# Default value for linked_dirs is []
+ set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/users}
+
+# Default value for default_env is {}
+# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+
+# Default value for keep_releases is 5
+# set :keep_releases, 5
 
 namespace :deploy do
+
+  desc 'Restart application'
   task :restart do
-    run "touch #{current_path}/tmp/restart.txt"
+    on roles(:app), in: :sequence, wait: 5 do
+      # Your restart mechanism here, for example:
+       execute :touch, release_path.join('tmp/restart.txt')
+    end
   end
+
+  after :publishing, :restart
+
+  after :finishing, 'deploy:cleanup'
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
+    end
+  end
+
 end
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
-
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end
