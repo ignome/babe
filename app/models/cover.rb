@@ -1,5 +1,5 @@
 #coding: utf-8
-require 'rmagick'
+require 'Rmagick'
 
 class Cover < ActiveRecord::Base
   # Share the same table with Photo, For easy saving cover from remote host
