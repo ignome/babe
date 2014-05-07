@@ -43,14 +43,15 @@ class ItemsController < ApplicationController
 
     # Published by supplied a URL nor a picture
     if url.blank? or not url.start_with?('http')
-      render :text => "Invalid URL!"
+      redirect_to new_item_path, notice: 'Invalid URL'
     else
       providers = ['taobao.com', 'tmall.com', 'jd.com']
       hostname  = URI(url).host
       supported = hostname.nil? ? false : providers.select{ |host| hostname.match(host) }.size
 
       if not supported
-        render :text => 'Not supported URL'
+        #render :text => 'Not supported URL'
+        redirect_to new_item_path, notice: 'Not supported URL'
       else
         case hostname.split('.')[1]
         when 'taobao'
@@ -94,13 +95,15 @@ class ItemsController < ApplicationController
     # Render the partial instead of status checking
     #render nothing: true , status: 201
     @item.likes_count += 1
-    render partial: 'likes'
+    render text: @item.likes_count
+    #render partial: 'likes'
   end
 
   def unlike
-    FansOfItem.where(user_id: current_user.id, item_id: params[:id]).destroy
+    FansOfItem.destroy_all(user_id: current_user.id, item_id: params[:id])
     @item.likes_count -= 1
-    render partial: 'likes'
+    #render partial: 'likes'
+    render text: @item.likes_count
   end
 
   protected

@@ -25,5 +25,7 @@ class CategoriesController < ApplicationController
 
   def find
     @category = Category.find_by(slug: params[:first])
+
+    render_404 unless @category
   end
 end

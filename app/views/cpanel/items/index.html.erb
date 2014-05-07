@@ -1,68 +1,63 @@
-<div class="row inbox">
-  <%= simple_form_for([:cpanel, Item.new], html:{ id: 'form' }) do %>
-  <table class="table-condensed message-table" width="100%" cellpadding="0" cellspacing="0">
-    <thead>
-      <tr>
-        <th width="30">
-          <div class="simple-checkbox">
-            <input type="checkbox" name="all" id="chkall">
-            <label for="chkall"></label>
-          </div>
-        </th>
-        <th width="64">小图</th>
-        <th>宝贝名称</th>
-        <th width="120">所属分类</th>
-        <th width="80">喜欢/浏览</th>
-        <th width="80">用户</th>
-        <th width="80">发布时间</th>
-        <th width="80" >状态</th>
-        <th width="120"></th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <% @items.each do |o| %>
-      <tr>
-        <td >
-          <div class="simple-checkbox">
-            <input type="checkbox" id="chk<%= o.id %>" name="id[]" value="<%=o.id %>">
-            <label for="chk<%= o.id %>">Simple Checkbox</label>
-          </div>
-        </td>
+<%= simple_form_for([:cpanel, Item.new], html:{ id: 'form' }) do %>
+<table class="table" width="100%" cellpadding="0" cellspacing="0">
+  <thead>
+    <tr>
+      <th width="30">
+        <input type="checkbox" name="all" id="chkall">
+      </th>
+      <th width="64">小图</th>
+      <th>宝贝名称</th>
+      <th width="120">所属分类</th>
+      <th width="80">喜欢/浏览</th>
+      <th width="80">用户</th>
+      <th width="100">发布时间</th>
+      <th width="80" >状态</th>
+      <th width="120"></th>
+    </tr>
+  </thead>
 
-        <td>
-          <%= image_tag o.cover, size: '50x50' %>
-        </td>
-        <td><%= o.title %></td>
-        <td data-toggle="modal" data-target="#category"><%= o.category.name if o.category %></td>
-        <td><%= o.likes_count %></td>
-        <td><%= o.user.login %></td>
-        <td><%= o.created_at %></td>
-        <td>Status</th>
-        <td>
-          <%= link_to '删除', cpanel_item_path(o.id), :method => :delete, :'data-confirm' => '确定要删除吗?', :class => "icon-remove" %>
-          推荐
-        </td>
-      </tr>
-      <% end %>
+  <tbody>
+    <% @items.each do |o| %>
+    <tr>
+      <td >
+        <input type="checkbox" id="chk<%= o.id %>" name="id[]" value="<%=o.id %>">
+      </td>
 
-      <tfoot>
-        <td colspan="9" class="control">
-          <select name="category" id="category" class="dropdown">
-          </select>
+      <td>
+        <%= image_tag o.cover, size: '50x50' %>
+      </td>
+      <td><%= link_to o.title, item_path(o.id) %></td>
+      <td data-toggle="modal" data-target="#category"><%= o.category.name if o.category %></td>
+      <td><%= o.likes_count %></td>
+      <td><%= o.user.login %></td>
+      <td><%= o.created_at.strftime("%Y-%m-%d") %></td>
+      <td>Status</th>
+      <td>
+        <%= link_to '删除', cpanel_item_path(o.id), :method => :delete, :'data-confirm' => '确定要删除吗?', :class => "icon-remove" %>
+        推荐
+      </td>
+    </tr>
+    <% end %>
 
-          <button type="button" class="btn"  onclick="post('./items/moveto');">移动分类</button>
-          <button type="button" class="btn"  onclick="post('./items/remove');">删除选中</button>
-          <button type="button" class="btn"  onclick="post('./band');">隐藏选中</button>
-          <button type="button" class="btn"  onclick="post('./free');">恢复选中</button>
+    <tfoot>
+      <td colspan="9">
+        <select name="category" id="category" class="dropdown">
+        </select>
+        <div class="btn-group btn-group-xs">
 
-        </td>
-      </tfoot>
-    </tbody>
-  </table>
-  <% end %>
-  <%= will_paginate @items%>
-</div>
+          <button type="button" class="btn btn-warning" onclick="post('./items/moveto');">移动分类</button>
+          <button type="button" class="btn btn-danger">删除选中</button>
+          <button type="button" class="btn btn-info">隐藏选中</button>
+          <button type="button" class="btn btn-success">恢复选中</button>          
+        </div>
+      </td>
+    </tfoot>
+  </tbody>
+</table>
+<% end %>
+<%= will_paginate @items%>
+
 
 <!-- Treeview -->
 <%= render 'cpanel/categories/treeview' %>

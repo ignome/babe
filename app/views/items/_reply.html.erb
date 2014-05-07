@@ -1,0 +1,6 @@
+<div class="reply">
+  <%= user_avatar_tag(reply.user, :small)%>
+  <span class="name"><%= reply.user.name %></span>
+  <p class="body"><%= reply.body %></p>
+  <p class="time"><%= time_ago_in_words(reply.created_at)%></p>
+</div>

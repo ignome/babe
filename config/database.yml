@@ -34,6 +34,6 @@ production:
   encoding: utf8
   database: babe
   pool: 5
-  username: benyu
-  password: 'benyu.uunn.com'
+  username: root
+  password: '123123'
   socket: /tmp/mysql.sock

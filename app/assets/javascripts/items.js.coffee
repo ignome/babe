@@ -1,21 +1,33 @@
 window.Item =
   Like :
     toggle : () ->
-      if $('.fav a.fav-toggle.processing').length == 0
-        $link = $('.fav a.fav-toggle')
+      self = $(this)
+      if self.hasClass('need-login')
+        window.location.href = '/account/sign_in'
+
+      if not self.hasClass('processing')
+        count = $(this).siblings('.social-count')
+        method = if self.hasClass('current-user-likes') then 'DELETE' else 'POST'
 
         $.ajax
-          type: if $link.hasClass('current-user-likes') then 'DELETE' else 'POST',
-          url: $link.attr('href'),
+          type: method,
+          url: self.attr('href'),
           data: {},
           beforeSend : () ->
-            $('.fav-toggle').addClass('processing')
-            $link.text('...')
+            self.addClass('processing')
+            count.text('...')
 
           success : (responseHtml) ->
-            $('.fav').replaceWith(responseHtml)
+            count.text(responseHtml)
+            self.removeClass('processing')
+            self.toggleClass('current-user-likes')
 
-        false
+      false
+
+  Favourite : ()->
+    self = $(this)
+    $('#pop').modal()
+    false
 
   Thumbnail :
     select : () ->
@@ -26,5 +38,6 @@ window.Item =
 
 
 # Like or unlike a item
-$(document).on 'click', '.fav a.fav-toggle', Item.Like.toggle
+$(document).on 'click', '.tools a.like', Item.Like.toggle
 $(document).on 'mouseover', '.thumb li', Item.Thumbnail.select
+$(document).on 'click', '.tools a.favourite', Item.Favourite

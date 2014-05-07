@@ -1,14 +1,14 @@
 <%= content_for :styles do %>
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<link rel="stylesheet" href="/jquery-file-uploader/css/jquery.fileupload.css">
-<link rel="stylesheet" href="/jquery-file-uploader/css/jquery.fileupload-ui.css">
+<link rel="stylesheet" href="/scripts/jquery-file-uploader/css/jquery.fileupload.css">
+<link rel="stylesheet" href="/scripts/jquery-file-uploader/css/jquery.fileupload-ui.css">
 <% end %>
-
+  <%= render "shared/error", :target => @style %>
 <div class="container" id="main">
+
+  
   <div class="row new">
-    <%= simple_form_for @style, html:{id: 'fileupload', class: 'form-horizontal'} do |f| %>
-    <%= render "shared/error", :target => @style %>
-    
+    <%= simple_form_for @style, html:{id: 'fileupload', class: 'form-horizontal'} do |f| %>  
     <div class="col-md-8 files">
       <ul id="files"></li>
     </div>
@@ -72,19 +72,19 @@
 </script>
 
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script src="/jquery-file-uploader/js/vendor/jquery.ui.widget.js"></script>
+<script src="/scripts/jquery-file-uploader/js/vendor/jquery.ui.widget.js"></script>
 <!-- The Templates plugin is included to render the upload/download listings -->
-<script src="/assets/tmpl.min.js"></script>
+<script src="/scripts/tmpl.min.js"></script>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="/assets/load-image.min.js"></script>
+<script src="/scripts/load-image.min.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="/jquery-file-uploader/js/jquery.iframe-transport.js"></script>
+<script src="/scripts/jquery-file-uploader/js/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
-<script src="/jquery-file-uploader/js/jquery.fileupload.js"></script>
+<script src="/scripts/jquery-file-uploader/js/jquery.fileupload.js"></script>
 <!-- The File Upload processing plugin -->
-<script src="/jquery-file-uploader/js/jquery.fileupload-process.js"></script>
+<script src="/scripts/jquery-file-uploader/js/jquery.fileupload-process.js"></script>
 <!-- The File Upload image preview & resize plugin -->
-<script src="/jquery-file-uploader/js/jquery.fileupload-image.js"></script>
+<script src="/scripts/jquery-file-uploader/js/jquery.fileupload-image.js"></script>
 
 <script type="text/javascript">
 $(function(){

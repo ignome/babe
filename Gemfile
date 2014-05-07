@@ -38,9 +38,6 @@ gem 'bcrypt'
 # Use unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
 # Use debugger
 gem 'debugger', group: [:development, :test]
 
@@ -51,7 +48,6 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-rvm'
-  #gem 'net-ssh', "~> 2.7.0"
 end
 
 group :test do
@@ -76,3 +72,5 @@ gem 'nokogiri'
 
 gem 'sidekiq'
 gem 'sinatra'
+
+gem 'social-share-button'

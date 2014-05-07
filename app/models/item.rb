@@ -15,4 +15,7 @@ class Item < ActiveRecord::Base
   scope :fields_in_list, -> { select(Item.attribute_names - ['body']) }
   scope :recent, Proc.new { |last| order('id desc').limit(last || 4) }
   
+  def who_liked user
+    self.fans.exists?(id: user)
+  end
 end

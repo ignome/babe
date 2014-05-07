@@ -10,24 +10,11 @@
     </div>
 
     <div class="col-md-5 info">
-      <div class="attention user">
-        <dl>
-          <dt><%= user_avatar_tag(@style.user) %></dt>
-          <dd>
-            <h5><%= @style.user.name %></h5>
-            <span class="round-sm"><i class="glyphicon glyphicon-plus"></i><%= link_to '加关注', user_follow_path(@style.user.login), class: "follow" %></span>
-            <em>
-              <%= link_to "#{@style.user.items_count} #{t('item.name')}", items_user_path(@style.user.login)%>
-              <%= link_to "#{@style.user.followers_count} #{t('users.follower')}", followers_user_path(@style.user.login) %>
-              <%= link_to "#{@style.user.following_count} #{t('users.following')}", following_user_path(@style.user.login) %>
-            </em>
-          </dd>
-        </dl>
-      </div>
+      <%= render 'items/user', target: @style.user %>
 
       <div class="summary">
         <p>
-          什么也没说.
+          <%= @style.body %>
         </p>
         <small class="pull-right"><i class="glyphicon glyphicon-time"></i>发布<%=time_ago_in_words(@style.created_at)%></small>
       </div>
@@ -59,41 +46,24 @@
 
       <!-- tools here -->
       <div class="tools ">
-        <ul class="pagehead-actions">
-          <li>
-            <a href="/" class="btn btn-default btn-xs with-count" rel="nofollow">
-              <span class="glyphicon glyphicon-heart"></span>喜欢
-            </a>
-
-            <a class="social-count" href="/plataformatec/simple_form/stargazers">
-              4,304
-            </a>
-
-          </li>
-
-          <li>
-            <a href="/" class="btn btn-default btn-xs with-count" rel="nofollow">
-              <span class="glyphicon glyphicon-star"></span>收藏
-            </a>
-            <a href="/plataformatec/simple_form/network" class="social-count">
-              698
-            </a>
-          </li>
-        </ul>
+        
       </div>
 
       <!-- comments here -->
-      <div class="comment">
+      <div class="comments">
         <%= render 'comments/comment', :target => @style %>
-
-        <% @style.comments.each do |comment| %>
-        <div class="">
-
-          <p><%= comment.body %> </p>
-        </div>
-        <% end %>
+        <%= render partial: 'items/reply', collection: @style.comments %>
       </div>
 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h5 class="hd">更多搭配</h5>
+      <ul class="items">
+        <%= render partial: 'item', collection: @styles %>
+      </ul>
     </div>
   </div>
 </div>

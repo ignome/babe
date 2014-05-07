@@ -15,8 +15,8 @@ a:hover{text-decoration: none}
 
 span.round-sm{background-color: rgb(111,190,45); font-size: 12px; font-weight: bold; color: #fff;padding: 3px 6px;}
 
-.user .follow{color: #fff;}
-.user dd a{padding: 0 20px;}
+.user .follow{}
+.user dd a{padding-right: 20px;}
 .tools a.with-count:hover,
 .with-count{
     border-top-right-radius: 0;
@@ -26,7 +26,7 @@ span.round-sm{background-color: rgb(111,190,45); font-size: 12px; font-weight: b
     background-color: rgb(111,190,45);
     color: #fff;
 }
-
+.social-share-button {height: 20px; padding: 2px;}
 .social-count { padding: 0 7px 0; font-size: 11px; font-weight: bold;line-height: 20px;
     float: left;vertical-align: middle; 
     background-color: #fff;
@@ -56,10 +56,15 @@ ul.items li.item:nth-child(5n){margin-right: 0}
 .tools em{padding: 2px 6px; border-color: rgb(111,190,45); color: rgb(111,190,45);}
 
 /* comment box style */
-.comment textarea {display: block;float: left; width:100%;height: 60px;line-height: 24px;padding-left: 5px;border: 1px solid #357ebd;resize: none;color: #333;}
-.comment .btn{height: 60px;padding: 10px 20px;}
-.comment .col-sm-9{width: 100%; padding: 0}
-.comment .avatar{width: 60px;}
+.comments textarea {display: block;float: left; width:100%;height: 60px;line-height: 24px;padding-left: 5px;border: 1px solid #357ebd;resize: none;color: #333;}
+.comments .btn{height: 60px;padding: 10px 20px;}
+.comments .col-sm-9{width: 100%; padding: 0}
+.comments .avatar{width: 60px;}
+.comments {padding: 5px;}
+.comments .reply{border-bottom: solid 1px #f1f1f1; padding: 15px 15px;}
+.comments .reply .name{padding-left: 10px;color: rgb(111,190,45); font-weight: bold;}
+.comments .reply .body{padding: 0 45px 0 38px;font-size: 14px;line-height: 18px;color: #666;}
+.comments .reply .time{color: #666; float: right; font-size: 9px}
 
 #wrap{padding-bottom: 45px;}
 #main{margin-top: 20px;}
@@ -111,7 +116,7 @@ ul.items li.item:nth-child(5n){margin-right: 0}
 ul.items {padding: 0; margin: 0}
 ul.items li {width: 215px; height: 425px; float:left; margin: 0 16px 15px 0px; background-color: #fff; border: solid 1px #ebebeb; overflow: hidden;}
 ul.items li .cover{height: 270px; overflow: hidden; position: relative;}
-ul.items li .cover img{height: 100%}
+ul.items li .cover img{height: 100%; width: 100%}
 ul.items li .price{position: absolute; right: 10px; bottom: 10px; background-color: rgb(111, 190, 45); color:#fff;padding: 3px 8px;font-size: 11px; border: none}
 ul.items li .title{padding: 5px; height: 25px; line-height: 25px; font-weight: bold;}
 ul.items li .tools{height: 32px;padding: 5px 8px;}
@@ -137,7 +142,7 @@ ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
 #styles ol li .plus {position: absolute; top: -1px; left: -14px; font-size: 7px; border:solid 1px #ebebeb; background-color: #fff; border-right: none; color:rgb(111,190,45);}
 
 #styles .items .item {width:225px; height: 360px; float: left; border: solid 1px #ebebeb;  margin: 0 10px 15px 0;}
-#styles .items .item .cover{width: 100%; height: 225px; overflow: hidden;}
+#styles .items .item .cover{height: 225px; overflow: hidden;}
 #styles .items .item .thumb{padding:0 0 0 1px; margin: 0; width: 224px;}
 #styles .items .item .thumb a{width: 55px;height: 55px;padding: 1px 1px 0 0;overflow: hidden;float: left; display: inline;}
 #styles .items .item .thumb a img{width: 100%; height: 100%}
@@ -187,13 +192,14 @@ ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
 #items .details .comment{border-top: 1px solid #ebebeb; height: 120px; padding: 30px;}
 #items .info .price{font-size:40px; line-height: 45px; color: red}
 #items .info .buy .url{float: right; font-size: 22px; line-height: 22px;padding: 10px 20px; cursor: pointer;}
-#items .info .buy .url a{color: rgb(111,190,45);}
+#items .info .buy .url a{color: rgb(252,118,35);}
 #items .info .tools {text-align: right;}
 #items .guess{margin-top: 30px;}
-#items .guess .box{height: 580px;}
+#items .guess .box{min-height: 580px;}
 
 /* category style */
 .user dl dt{float: left; margin-right: 20px;}
+.user .count{color: rgb(252,118,35); font-weight: bold;}
 
 /* comment style */
 dl.comment dt{float:left; width: 64px;}
@@ -222,7 +228,7 @@ dl.comment dt{float:left; width: 64px;}
 
 /* topics */
 .topics {background-color: #fff; padding: 0}
-.topics .list{border-right: solid 1px #ebebeb}
+.topics .list{border-right: solid 1px #ebebeb;min-height: 450px;}
 .topics .topic {border-bottom: solid 2px #ebebeb;}
 .topics .topic:last-child{border-bottom: none}
 .topics .topic h2{font-size: 16px;}

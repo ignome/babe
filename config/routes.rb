@@ -18,8 +18,6 @@ Babe::Application.routes.draw do
     :omniauth_callbacks => :oauths
   }
 
-
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -47,6 +45,7 @@ Babe::Application.routes.draw do
   resources :items do
     member do
       post 'like'
+      delete 'like' => 'items#unlike'
     end
 
     collection do

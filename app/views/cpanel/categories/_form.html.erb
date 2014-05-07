@@ -5,6 +5,7 @@
     <label class="string optional col-sm-3 control-label " for="category_name">上级分类</label>
     <div class="col-sm-9">
       <select name="category[parent]">
+        <option value="0">请选择上级分类</option>
       <%= raw render_tree_select(Category.all).join("\n") %>
       </select>
     </div>
@@ -14,6 +15,7 @@
   <%= f.input :sort, input_html:{class:'input-mini'},label: '显示顺序' %>
 
   <div class="form-actions">
+    <label class="string optional col-sm-3 control-label "></label>
     <%= f.submit t('common.submit'), :class => "btn btn-primary no-border", 'data-disable-with' => t("common.submitting") %>
     <%= link_to '返回', cpanel_categories_path, class: 'btn' %>
   </div>

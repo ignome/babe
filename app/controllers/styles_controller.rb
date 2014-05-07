@@ -8,6 +8,7 @@ class StylesController < ApplicationController
 
   def show
     @style = Style.find(params[:id])
+    @styles = @style.user.styles
   end
 
   def new
@@ -15,6 +16,7 @@ class StylesController < ApplicationController
   end
 
   def create
+
     @style = current_user.styles.new( style_params )
     if @style.save
       redirect_to style_path(@style.id), notice: 'success'

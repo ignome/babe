@@ -51,5 +51,6 @@ class UsersController < ApplicationController
   def find
     login = params[:id] || params[:user_id]
     @user = User.find_by(login: login)
+    render_404 unless @user
   end
 end

@@ -17,5 +17,6 @@
 
 /spec
 public/uploads
+public/assets
 public/users
 config/deploy

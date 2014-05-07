@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140423061433) do
+ActiveRecord::Schema.define(version: 20140506031347) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
-    t.integer  "parent"
+    t.integer  "parent", default: 0
     t.integer  "sort"
     t.string   "slug"
     t.datetime "created_at"
@@ -63,11 +63,13 @@ ActiveRecord::Schema.define(version: 20140423061433) do
     t.string   "title"
     t.string   "url"
     t.string   "cover"
-    t.decimal  "price",       precision: 10, scale: 0
+    t.decimal  "price",          precision: 10, scale: 0
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "likes_count",                          default: 0
+    t.integer  "likes_count",                             default: 0
+    t.integer  "comments_count",                          default: 0
+    t.integer  "views_count",                             default: 0
   end
 
   create_table "items_of_styles", force: true do |t|

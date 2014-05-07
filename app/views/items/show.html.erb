@@ -18,18 +18,8 @@
     </div>
 
     <div class="col-md-5 info">
-      <div class="user">
-        <dl>
-          <dt><%= user_avatar_tag(@item.user) %></dt>
-          <dd>
-            <h5><%= @item.user.name %></h5>
-            <span class="round-sm"><i class="glyphicon glyphicon-plus"></i><%= link_to '加关注', user_follow_path(@item.user.login), class: "follow" %></span>
-            <%= link_to "#{@item.user.items_count} #{t('item.name')}", user_path(@item.user.login) %>
-            <%= link_to "#{@item.user.followers_count} #{t('users.follower')}", followers_user_path(@item.user.login) %>
-            <%= link_to "#{@item.user.following_count} #{t('users.following')}", following_user_path(@item.user.login) %>
-          </dd>
-        </dl>
-      </div>
+      
+      <%= render 'user', target: @item.user %>
 
       <div class="buy">
         <span class="price">&yen;<b><%= @item.price %></b></span>
@@ -40,40 +30,12 @@
       </div>
 
       <div class="tools ">
-        <ul class="pagehead-actions">
-          <li>
-            <a href="/" class="btn btn-default btn-xs with-count" rel="nofollow">
-              <span class="glyphicon glyphicon-heart-empty"></span>喜欢
-            </a>
-
-            <a class="social-count" href="/plataformatec/simple_form/stargazers">
-              4,304
-            </a>
-
-          </li>
-
-          <li>
-            <a href="/" class="btn btn-default btn-xs with-count" rel="nofollow">
-              <span class="glyphicon glyphicon-star"></span>收藏
-            </a>
-            <a href="/plataformatec/simple_form/network" class="social-count">
-              698
-            </a>
-          </li>
-
-          <li>
-            <a href="/" class="btn btn-default btn-xs with-count" rel="nofollow">
-              <span class="glyphicon glyphicon-share"></span>分享到
-            </a>
-            <a href="/plataformatec/simple_form/network" class="social-count">
-              微博 微信 QQ空间
-            </a>
-          </li>
-        </ul>
+        <%= render 'tools', target: @item %>
       </div>
 
       <div class="comments">
-        <h4 class="title"><i class="glyphicon glyphicon-comment"></i>辣妈们说</h4>
+        <h5 class="title"><i class="glyphicon glyphicon-comment"></i>相关评论</h5>
+        <%= render partial: 'reply', collection: @item.comments %>
       </div>
     </div>
   </div>
@@ -81,10 +43,31 @@
   <div class="row guess">
     <h4> 猜你喜欢 </h4>
     <div class="col-md-12 box">
+      <% @item.body.to_s.split(';').each do |img| %>
+      <%= image_tag img %>
+      <% end %>
     </div>
   </div>
 </div>
 
+<div class="modal fade" id="pop">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">我的收藏架</h4>
+      </div>
+      <div class="modal-body">
+        <p>One fine body&hellip;</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary">完成</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <%- content_for :scripts do -%>
-<%= javascript_include_tag "items", "data-turbolinks-track" => true %>
+<%= javascript_include_tag "items" %>
 <%- end -%>

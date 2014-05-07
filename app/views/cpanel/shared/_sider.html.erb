@@ -1,90 +1,53 @@
-<nav class="main-nav">
-  <ul class="main-menu">
-    <li >
-      <a href="<%= cpanel_root_path%>">
-        <i class="fa fa-dashboard fa-fw"></i>
-        <span class="menu-text"> 控制台 </span>
-      </a>
-    </li>
-
-    <li>
-      <a href="<%= cpanel_categories_path%>" class="js-sub-menu-toggle">
-        <i class="fa fa-puzzle-piece fa-fw"></i>
-        <span class="menu-text"> 分类 </span>
-        <i class="toggle-icon fa fa-angle-left"></i>
-      </a>
-      <ul class="sub-menu">
-        <li>
-          <a href="<%= cpanel_categories_path %>">
-            <i class="icon-double-angle-right"></i>
-            列表
-          </a>
-        </li>
-
-        <li>
-          <a href="<%= new_cpanel_category_path %>">
-            <i class="icon-double-angle-right"></i>
-            创建
-          </a>
-        </li>
-      </ul>
-    </li>
-
+<div class="bs-sidebar hidden-print affix" role="complementary">
+  <ul class="nav bs-sidenav">
     
     <li>
-      <a href="<%= cpanel_items_path %>" >
-        <i class="fa fa-shopping-cart activity-icon pull-left"></i>
-        <span class="menu-text"> 宝贝 </span>
-      </a>
+      <a href="/cpanel/"><i class="glyphicon glyphicon-dashboard"></i>控制面板</a>
     </li>
 
-    <li>
-      <a href="<%= cpanel_topics_path%>" class="js-sub-menu-toggle">
-        <i class="fa fa-comments activity-icon pull-left "></i>
-        <span class="menu-text"> 社区 </span>
-        <i class="toggle-icon fa fa-angle-left"></i>
-      </a>
-      <ul class="sub-menu">
-        <li>
-          <a href="<%= cpanel_sections_path %>">
-            <i class="icon-double-angle-right"></i>
-            主题
-          </a>
-        </li>
-
-        <li>
-          <a href="<%= cpanel_nodes_path %>">
-            <i class="icon-double-angle-right"></i>
-            节点
-          </a>
-        </li>
-
-        <li>
-          <a href="<%= cpanel_topics_path %>">
-            <i class="icon-double-angle-right"></i>
-            话题
-          </a>
-        </li>
+    <li >
+      <a href="#dropdowns"><i class="glyphicon glyphicon-shopping-cart"></i>商品管理</a>
+      <ul class="nav">
+        <li><a href="/cpanel/items">单品</a></li>
+        <li><a href="/cpanel/styles">搭配</a></li>
+        <li><a href="#dropdowns-headers">下架商品</a></li>
       </ul>
     </li>
 
-    <li>
-      <a href="<%= cpanel_users_path %>" >
-        <i class="fa fa-group activity-icon pull-left"></i>
-        <span class="menu-text"> 用户 </span>
-      </a>
+    <li >
+      <a href="#dropdowns"><i class="glyphicon glyphicon-user"></i>用户管理</a>
+      <ul class="nav">
+        <li><a href="/cpanel/users">注册用户</a></li>
+        <li><a href="#dropdowns-alignment">无效用户</a></li>
+        <li><a href="#dropdowns-headers">达人</a></li>
+      </ul>
     </li>
 
-    <li>
-      <a href="/sidekiq" target="_blank" >
-        <i class="fa fa-eye activity-icon pull-left"></i>
-        <span class="menu-text"> 采集任务 </span>
-      </a>
+    <li >
+      <a href="#dropdowns"><i class="glyphicon glyphicon-list"></i>类别管理</a>
+      <ul class="nav">
+        <li><a href="/cpanel/category">商品分类</a></li>
+        <li><a href="/cpanel/category/new">添加分类</a></li>
+      </ul>
     </li>
 
+    <li >
+      <a href="#dropdowns"><i class="glyphicon glyphicon-th"></i>社区内容管理</a>
+      <ul class="nav">
+        <li><a href="/cpanel/sections">内容分类</a></li>
+        <li><a href="/cpanel/nodes">二级节点</a></li>
+        <li><a href="/cpanel/topics">内容</a></li>
+      </ul>
+    </li>
+
+    <li >
+      <a href="#dropdowns"><i class="glyphicon glyphicon-cog"></i>系统设置</a>
+      <ul class="nav">
+        <li><a href="#dropdowns-example">案例</a></li>
+        <li><a href="#dropdowns-alignment">对齐选项</a></li>
+        <li><a href="#dropdowns-headers">标题</a></li>
+        <li><a href="#dropdowns-disabled">禁用的菜单项</a></li>
+      </ul>
+    </li>
   </ul>
-</nav>
-
-<div class="sidebar-minified js-toggle-minified">
-    <i class="fa fa-angle-left"></i>
 </div>

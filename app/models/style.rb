@@ -9,6 +9,9 @@ class Style < ActiveRecord::Base
 
   belongs_to :user
 
+  validates_presence_of :photo
+  validates_presence_of :body
+
   scope :last, ->{order('id desc')} 
 
   after_create :binding_photos_to_this
@@ -27,4 +30,6 @@ class Style < ActiveRecord::Base
     end
   end
 
+  def who_liked user
+  end
 end
