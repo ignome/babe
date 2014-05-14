@@ -8,8 +8,10 @@
       <%= simple_form_for(@user, :url => account_avatar_path, :html => {:enctype =>  "multipart/form-data"}) do |f| %>
       <%= image_tag @user.avatar.url if @user.avatar %>
       <%= f.input_field :avatar %>
-      <div class="form-btns">
-        <%= f.submit '更新头像', class: 'form-sub' %>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <%= f.submit "更新", :class => "btn btn-warning btn-xs", 'data-disable-with' => t("common.submitting") %>
+        </div>
       </div>
       <% end %>
     </div>

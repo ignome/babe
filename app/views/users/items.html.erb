@@ -1,6 +1,13 @@
-<%= render 'profile' %>
-<%= render 'path' %>
+<div class="container" id="main">
 
-<ul class="item-list">
-  <%= render partial: 'items/item', collection: @items %>
-</ul>
+  <%= render 'profile' %>
+  <%= render 'path' %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <ul class="items">
+        <%= render partial: 'items/item', collection: @items %>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 <ul class="pagehead-actions">
   <li>
-    <%= link_to like_item_path(target), rel: 'nofollow', class: "#{who_liked_this?} btn like btn-xs with-count" do %>
+    <%= link_to like_item_path(target), rel: 'nofollow', class: "#{who_liked_this? target} btn like btn-xs with-count" do %>
     <span class="glyphicon glyphicon-heart"></span>喜欢
     <% end %>
     <span class="social-count"><%= target.likes_count %></span>

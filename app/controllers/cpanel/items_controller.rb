@@ -5,6 +5,10 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
     @items = Item.all(:include => [:user, :category], order: 'id desc').paginate(per_page: 15, page: params[:page])
   end
 
+  def links
+    @tasks = TaskLinks.all(order: 'id desc').paginate(per_page: 15, page: params[:page])
+  end
+
   def destroy
     Item.find(params[:id]).destroy
 

@@ -29,7 +29,6 @@ Babe::Application.routes.draw do
   resources :photos
   resources :topics
   resources :comments
-  resources :styles
 
   # Why made /first/second?third=value ?
   get 'explore/:first(/:second(/:third))' => "categories#index", as: 'explore'
@@ -42,6 +41,13 @@ Babe::Application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
+
+  resources :styles do
+    member do
+      post 'like'
+    end
+  end
+
   resources :items do
     member do
       post 'like'
@@ -54,22 +60,25 @@ Babe::Application.routes.draw do
   end
 
   namespace :cpanel do
+    
     root :to => "home#index"
+    
     resources :categories, path: 'category'
 
     resources :users
     resources :sections
     resources :nodes
     resources :topics
+    resources :styles
 
     resources :items do
       collection do
+        get 'links'
         post 'remove'
         post 'moveto'
         post 'free'
         post 'band'
       end
-
     end
   end
 

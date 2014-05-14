@@ -8,7 +8,8 @@ class StylesController < ApplicationController
 
   def show
     @style = Style.find(params[:id])
-    @styles = @style.user.styles
+    @comments = Comment.where(['subject_type=? and subject_id=?', 'Style', @style.id])
+    @styles = @style.user.styles.includes(:items)
   end
 
   def new

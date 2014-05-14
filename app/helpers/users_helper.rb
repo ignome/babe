@@ -30,12 +30,16 @@ module UsersHelper
   end
 
   def follow_or_unfollow user
-    return if current_user && current_user.id == user.id
+    return content_tag(:span, '自己') if current_user && current_user.id == user.id
     
     if current_user && current_user.followed(user)
-      link_to content_tag(:span, t('users.unfollow')), user_follow_path(user.login), method: 'DELETE'
+      link_to user_follow_path(user.login), class: 'follow followed-by-current-user', method: 'DELETE' do
+        content_tag(:span, t('users.unfollow'))
+      end
     else
-      link_to content_tag(:span, t('users.follow')), user_follow_path(user.login)
+      link_to user_follow_path(user.login), class: 'follow' do
+        content_tag(:span, t('users.follow'))
+      end
     end
   end
 

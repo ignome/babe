@@ -9,12 +9,16 @@ class ProfileController < ApplicationController
 
   def update
     @user = User.find(current_user.id)
-    #if params[:password] !== params[:confirm_password]
-    if @user.update_with_password(params.require(:user).permit(:password, :current_password, :password_confirmation))
-      sign_in @user, :bypass => true
-      redirect_to account_password_path, notice: 'password had been changed'
-    else
+    if params[:password].to_s.length < 5 || params[:password] != params[:confirm_password]
+      @user.errors.add(:password, '两次密码不同')
       render 'account/password'
+    else
+      if @user.update_with_password(params.require(:user).permit(:password, :current_password, :password_confirmation))
+        sign_in @user, :bypass => true
+        redirect_to account_password_path, notice: 'password had been changed'
+      else
+        render 'account/password'
+      end
     end
   end
 

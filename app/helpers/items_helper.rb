@@ -1,7 +1,7 @@
 module ItemsHelper
-  def who_liked_this?
+  def who_liked_this?(target)
     if current_user 
-      @item.who_liked(current_user.id) ? 'current-user-likes' : 'current-user-liked'
+      target.who_liked(current_user.id) ? 'current-user-likes' : 'current-user-liked'
     else
       'need-login'
     end

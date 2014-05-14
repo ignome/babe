@@ -1,0 +1,72 @@
+
+<%= simple_form_for([:cpanel, Item.new], html:{ id: 'form' }) do %>
+<table class="table" width="100%" cellpadding="0" cellspacing="0">
+  <thead>
+    <tr>
+      <th width="30">
+        <input type="checkbox" name="all" id="chkall">
+      </th>
+      <th width="64">小图</th>
+      <th>商品名称</th>
+      <th width="100">生成时间</th>
+      <th width="80" >状态</th>
+      <th width="120"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |o| %>
+    <tr>
+      <td >
+        <input type="checkbox" id="chk<%= o.id %>" name="id[]" value="<%=o.id %>">
+      </td>
+
+      <td>
+        <%= image_tag o.cover, size: '50x50' %>
+      </td>
+      <td><%= link_to o.title, item_path(o.url) %></td>
+      <td></td>
+      <td>Status</th>
+      <td>
+        <%= link_to '删除', links_cpanel_items_path(o.id), :method => :delete, :'data-confirm' => '确定要删除吗?', :class => "icon-remove" %>
+        <a href="<%= o.url %>" class="download">下载</a>
+      </td>
+    </tr>
+    <% end %>
+
+    <tfoot>
+      <td colspan="9">
+        <select name="category" id="category" class="dropdown">
+        </select>
+        <div class="btn-group btn-group-xs">
+          <button type="button" class="btn btn-warning" onclick="post('./items/moveto');">移动分类</button>
+          <button type="button" class="btn btn-danger">删除选中</button>
+          <button type="button" class="btn btn-info">隐藏选中</button>
+          <button type="button" class="btn btn-success">恢复选中</button>          
+        </div>
+      </td>
+    </tfoot>
+  </tbody>
+</table>
+<% end %>
+<%= will_paginate @tasks%>
+
+<%= content_for :scripts do %>
+<script type="text/javascript">
+$(document).on('click', 'a.download', function(){
+  var self = $(this);
+  $.ajax({
+    type : 'POST',
+    url : '/items',
+    data : { url: self.attr('href')},
+    beforeSend : function(){
+      self.removeClass('download');
+    },
+    success : function(){
+      self.remove();
+    }
+  });
+  return false;
+});
+</script>
+<% end %>

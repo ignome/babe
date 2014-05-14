@@ -1,15 +1,14 @@
 <div class="row profile">
-  <div class="col-md-10">
-      <div class="vcard group ">
+  <div class="col-md-8">
+      <div class="user group ">
         <%= user_avatar_tag(@user, :big) %>
-        <h1><span class="fn edit"><a href=""><%= @user.name %></a></span></h1>
+        <h4><%= @user.name %></h4>
         <div class="follow-prompt">
           <%= follow_or_unfollow(@user) %>
-          加关注
         </div>
       </div>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-4">
     <div class="profile-actions group">
       <ul class="profile-tabs">
         <li class="works">

@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506031347) do
+ActiveRecord::Schema.define(version: 20140513054928) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
-    t.integer  "parent", default: 0
+    t.integer  "parent"
     t.integer  "sort"
     t.string   "slug"
     t.datetime "created_at"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20140506031347) do
     t.string   "title"
     t.string   "url"
     t.string   "cover"
-    t.decimal  "price",          precision: 10, scale: 0
+    t.decimal  "price",          precision: 10, scale: 2
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -120,6 +120,22 @@ ActiveRecord::Schema.define(version: 20140506031347) do
     t.string   "body"
     t.string   "title"
   end
+
+  create_table "task_links", force: true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "cover"
+    t.integer  "status",     limit: 1, default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "task_pages", force: true do |t|
+    t.string  "url"
+    t.integer "status", limit: 1, default: 0
+  end
+
+  add_index "task_pages", ["url"], name: "url_UNIQUE", unique: true, using: :btree
 
   create_table "topics", force: true do |t|
     t.string   "title"

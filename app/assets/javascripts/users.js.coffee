@@ -1,11 +1,8 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
 window.User=
   Follow : 
     toggle : () ->
       $link = $('.user a.follow')
-      method = if $link.hasClass('followed-by-current-user') then 'POST' else 'DELETE'
+      method = if $link.hasClass('followed-by-current-user') then 'DELETE' else 'POST'
 
       $.ajax 
         type : method,
@@ -15,9 +12,11 @@ window.User=
           $link.addClass('processing')
         success : () ->
           $link.toggleClass('followed-by-current-user')
+          label = if 'POST' == method then '取消关注' else '加关注'
+          $link.find('span').html(label)
         always : () ->
           $link.removeClass('processing')
 
       false
 
-$('document').on 'click', '.user a.follow', User.Follow.toggle
+$(document).on 'click', '.user a.follow', User.Follow.toggle

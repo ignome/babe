@@ -14,7 +14,7 @@
     signout: '退出'
     signing: '正在登录中...'
     signup: '注册'
-    follow: '关注'
+    follow: '加关注'
     unfollow: '取消关注'
     register_user: '用户注册'
     remember_me : '记住我登录状态(两周)'
@@ -30,6 +30,9 @@
     have_published_successfully: '发布宝贝成功!'
     like: '喜欢'
     name: '宝贝'
+  will_paginate:
+    next_label: '下一页'
+    previous_label: '上一页'
   date:
     abbr_day_names:
     - 日

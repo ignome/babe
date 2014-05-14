@@ -1,15 +1,15 @@
 <%= content_for :styles do %>
 
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-<link rel="stylesheet" href="/jquery-file-uploader/css/jquery.fileupload.css">
+<link rel="stylesheet" href="/scripts/jquery-file-uploader/css/jquery.fileupload.css">
 <% end %>
 
 <div class="container" id="main">
     <div class="row new">
         <div class="col-md-8 edit">
-        <%= simple_form_for @topic, html:{class: 'form-horizontal',role: "form"}  do |f| %>
-          <%= render "shared/error", :target => @topic %>
-            
+        <%= simple_form_for @topic, html:{id: "fileupload", class: 'form-horizontal',role: "form"}  do |f| %>
+          
+          <%= render "shared/error", :target => @topic %>  
 
           <div class="form-group">
             <label for="topic_node_id" class="col-sm-2 control-label">选择主题</label>
@@ -26,9 +26,16 @@
           </div>
 
           <div class="form-group">
+            <label for="title" class="col-sm-2 control-label"></label>
+            <div class="col-sm-10" id="files">
+              
+            </div>
+          </div>
+
+          <div class="form-group">
             <label for="fileupload" class="col-sm-2 control-label"></label>
             <div class="col-sm-10">
-              <input type="file" class="form-control" id="fileupload" />
+              <input type="file" class="form-control" name="files[]"  />
             </div>
           </div>
 
@@ -57,10 +64,10 @@
 </div>
 
 <%= content_for :scripts do %>
-<script src="/jquery-file-uploader/js/vendor/jquery.ui.widget.js"></script>
-<script src="/jquery-file-uploader/js/jquery.iframe-transport.js"></script>
+<script src="/scripts/jquery-file-uploader/js/vendor/jquery.ui.widget.js"></script>
+<script src="/scripts/jquery-file-uploader/js/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
-<script src="/jquery-file-uploader/js/jquery.fileupload.js"></script>
+<script src="/scripts/jquery-file-uploader/js/jquery.fileupload.js"></script>
 
 <script>
 $(function () {

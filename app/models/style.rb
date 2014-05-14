@@ -6,6 +6,8 @@ class Style < ActiveRecord::Base
   has_many :items, :through => :items_of_style
   has_many :photos, :as => :subject
   has_many :comments, :as => :subject
+  #has_many :fans_of_items
+  #has_many :fans, :through => :fans_of_items, source: :user
 
   belongs_to :user
 
@@ -31,5 +33,6 @@ class Style < ActiveRecord::Base
   end
 
   def who_liked user
+    self.fans.exists?(id: user)
   end
 end

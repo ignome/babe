@@ -3,7 +3,7 @@
     <div class="col-md-7 photo">
       <h4><%= @item.title %></h4>
       <div class="zoom">
-        <%= image_tag @item.covers.first.file.url %>
+        <%= image_tag @item.covers.first.file.url if @item.covers.first %>
       </div>
       <div class="thumb clearfix center-block">
         <ul>
@@ -12,8 +12,14 @@
           <% end %>
         </ul>
       </div>
-      <div class="comment">
-        <%= render 'comments/comment', :target => @item %>
+
+      <div id="more">
+        <p class="center-block"><span class="caret"></span>展开</p>
+        <div class="hidden">
+        <% @item.body.to_s.split(';').each do |img| %>
+        <%= image_tag img %>
+        <% end %>
+        </div>
       </div>
     </div>
 
@@ -22,7 +28,7 @@
       <%= render 'user', target: @item.user %>
 
       <div class="buy">
-        <span class="price">&yen;<b><%= @item.price %></b></span>
+        <span class="price">&yen;<b><%= sprintf("%.2f", @item.price) %></b></span>
         <span class="round url">
           <%= link_to @item.url, target: '_blank' do %>
           <i class="glyphicon glyphicon-shopping-cart"></i> 去购买 </a>
@@ -34,18 +40,21 @@
       </div>
 
       <div class="comments">
-        <h5 class="title"><i class="glyphicon glyphicon-comment"></i>相关评论</h5>
-        <%= render partial: 'reply', collection: @item.comments %>
+        <div class="comment">
+          <%= render 'comments/comment', :target => @item %>
+        </div>
+
+        <%= render partial: 'reply', collection: @comments %>
       </div>
     </div>
   </div>
 
   <div class="row guess">
     <h4> 猜你喜欢 </h4>
-    <div class="col-md-12 box">
-      <% @item.body.to_s.split(';').each do |img| %>
-      <%= image_tag img %>
-      <% end %>
+    <div class="col-md-12">
+      <ul class="items">
+        <%= render partial: 'items/item', collection: @items %>
+      </ul>
     </div>
   </div>
 </div>
@@ -69,5 +78,9 @@
 </div><!-- /.modal -->
 
 <%- content_for :scripts do -%>
-<%= javascript_include_tag "items" %>
+<script type="text/javascript">
+$(document).on('click', 'p', function(){
+  $('#more div').toggleClass('hidden');
+});
+</script>
 <%- end -%>

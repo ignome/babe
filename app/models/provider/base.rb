@@ -6,6 +6,8 @@ class Provider::Base
   include Sidekiq::Worker
 
   def perform(urls, id)
+    #Sidekiq::Logging.logger.info('*' * 80)
+    #Sidekiq::Logging.logger.info(Rails.env)
     it = Item.find(id)
     if it
         urls.each do |url|

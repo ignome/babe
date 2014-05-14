@@ -1,2 +1,37 @@
-<h1>Cpanel::Home#index</h1>
-<p>Find me in app/views/cpanel/home/index.html.erb</p>
+<table class="table table-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th>单品</th>
+            <th>搭配</th>
+            <th>用户</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>总计</td>
+            <td><%= Item.count %></td>
+            <td><%= Style.count%></td>
+            <td><%= User.count %></td>
+          </tr>
+
+          <tr>
+            <td>今天</td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+          </tr>
+          <tr>
+            <td>本周</td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+          </tr>
+          <tr>
+            <td>本月</td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+          </tr>
+        </tbody>
+      </table>

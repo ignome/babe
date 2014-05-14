@@ -3,7 +3,7 @@
 class ItemsController < ApplicationController
 
   before_action :find, only: [:show, :like, :unlike]
-  before_action :authenticate_user!, only: [:like, :unlike, :new, :create, :edit]
+  #before_action :authenticate_user!, only: [:like, :unlike, :new, :create, :edit]
 
   def new
     @item = Item.new
@@ -11,6 +11,10 @@ class ItemsController < ApplicationController
 
   def show
     # Recommend by : same color and same category
+    @comments = Comment.where(subject_type: 'Item', subject_id: @item.id)
+    Item.increment_counter("views_count", @item.id) # if current_user && current_user.id != item.user_id
+    # Guess what's the user liked?
+    @items = @item.user.items;
   end
 
   def create_test

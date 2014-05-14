@@ -30,7 +30,7 @@
           <div class="input-group">
             <input type="text" name="url" id="url" class="form-control" placeholder="http://">
             <span class="input-group-btn">
-              <button class="btn btn-default" id="add" type="submit">添加单品</button>
+              <button class="btn btn-default" id="add" type="button">添加单品</button>
             </span>
           </div>
         </li>
@@ -115,6 +115,7 @@ $(function(){
         $('#items').append(tmpl('template-item', data));
       }
     });
+    return false;
   });
 
 });

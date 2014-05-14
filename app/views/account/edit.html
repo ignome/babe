@@ -5,25 +5,20 @@
     </div>
 
     <div class="col-md-8 main">
-      <h1 class="alt"><em> <a href="/account">账户</a><span class="step">/</span> </em>个人信息</h1>
-      <p>编辑 名字、头像、个人介绍等.</p>
+      <%= render "shared/error", :target => resource if params[:by].blank? %>
 
-        <div class="session-form alt">  
+      <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put,  class: 'form-horizontal', size: '30' } ) do |f| %>
+      
+        <%= f.input :name, label: '显示名字' %>
+        
+        <%= f.input :email, label: '邮件地址', :input_html => {:disabled => (!resource.email.blank?) } %>
 
-          <%= render "shared/error", :target => resource if params[:by].blank? %>
-
-          <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put,  class: 'form-horizontal', size: '30' } ) do |f| %>
-          
-            <%= f.input :name, label: '显示名字' %>
-            
-            <%= f.input :email, label: '邮件地址', :input_html => {:disabled => (!resource.email.blank?) } %>
-            
-
-            <div class="form-btns">
-                <%= f.submit "更新资料", :class => "form-sub", 'data-disable-with' => t("common.submitting") %>
-            </div>
-          <% end %>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-9">
+            <%= f.submit "更新资料", :class => "btn btn-xs btn-primary", 'data-disable-with' => t("common.submitting") %>
+          </div>
         </div>
+      <% end %>
     </div>
 
   </div>

@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   def followed user
-    Followership.where(follower_id: self.id, following_id: user.id)
+    Followership.exists?(follower_id: self.id, following_id: user.id)
   end
 
 end

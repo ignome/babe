@@ -1,12 +1,18 @@
-<%= render 'profile' %>
-<%= render 'path' %>
+<div class="container" id="main">
+  <%= render 'profile' %>
+  <%= render 'path' %>
 
-<ul >
-  <% @topics.each do |topic| %>
-  <li>
-    <%=topic.node.name %>
-    <%=link_to topic.title, topic_path(topic.id) %>
-    <%=topic.created_at.to_s(:short)%>
-  </li>
-  <% end %>
-</ul>
+  <div class="row">
+    <div class="col-md-12">
+      <ul >
+        <% @topics.each do |topic| %>
+        <li>
+          <%=topic.node.name %>
+          <%=link_to topic.title, topic_path(topic.id) %>
+          <%=topic.created_at.to_s(:short)%>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

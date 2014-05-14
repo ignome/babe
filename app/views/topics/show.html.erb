@@ -6,6 +6,9 @@
 
         <div class="context">
           <%= @topic.body %>
+          <% @topic.photos.each do |photo| %>
+          <%= image_tag photo.file.url %>
+          <% end %>
         </div>
 
         <div class="comment">

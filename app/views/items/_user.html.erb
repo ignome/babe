@@ -1,10 +1,13 @@
 <div class="user">
-  <dl>
-    <dt><%= user_avatar_tag(target) %></dt>
-    <dd>
-      <h5><%= target.name %>
-      <i class="glyphicon glyphicon-plus"></i> <%= link_to '加关注', user_follow_path(target.login), class: "follow" %>
-    </h5>
+
+  <%= user_avatar_tag(target) %>
+
+  <div class="">
+    <%= link_to target.name, user_path(target.login), class: 'name' %>
+    <p>
+     <%= follow_or_unfollow(target) %>
+    </p>
+    <p class="links">
       <%= link_to user_path(target.login) do %>
       <span class="count"><%= target.items_count %></span>
       宝贝
@@ -19,6 +22,6 @@
       <span class="count"><%= target.following_count %></span>
       粉丝
       <% end %>
-    </dd>
-  </dl>
+    </p>
+  </div>
 </div>

@@ -1,5 +1,6 @@
 body{padding-top: 30px;}
-a:hover{text-decoration: none}
+a{color:#333;}
+a:hover{text-decoration: none; color: rgb(111,190,45)}
 /* common style */
 .round{ border: solid 1px #ebebeb;
         -webkit-border-radius: 5px;
@@ -15,10 +16,8 @@ a:hover{text-decoration: none}
 
 span.round-sm{background-color: rgb(111,190,45); font-size: 12px; font-weight: bold; color: #fff;padding: 3px 6px;}
 
-.user .follow{}
-.user dd a{padding-right: 20px;}
-.tools a.with-count:hover,
-.with-count{
+.with-count,
+a.with-count:hover{
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     float: left;
@@ -37,8 +36,7 @@ span.round-sm{background-color: rgb(111,190,45); font-size: 12px; font-weight: b
     border-bottom-right-radius: 3px;
 }
 ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
-.pagehead-actions>li {list-style-type: none;font-size: 11px;color: #333;margin: 0 10px 0 0;float: left;
-}
+.pagehead-actions>li {list-style-type: none;font-size: 11px;color: #333;margin: 0 10px 0 0;float: left;}
 
 .box {border: 1px solid #ebebeb; background-color: #fff;}
 .user .photo, .url .photo{border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%}
@@ -54,6 +52,13 @@ ul.items li.item:nth-child(5n){margin-right: 0}
 
 .tools {height: 50px; padding: 15px 0}
 .tools em{padding: 2px 6px; border-color: rgb(111,190,45); color: rgb(111,190,45);}
+
+/* item and style show page */
+.user .photo{float: left;}
+.user .name{font-weight: bold; color: rgb(111,190,45)}
+.user div{margin-left: 64px;}
+.user div p{margin: 0; padding: 3px 0px;}
+.user .links a{margin-right: 15px;}
 
 /* comment box style */
 .comments textarea {display: block;float: left; width:100%;height: 60px;line-height: 24px;padding-left: 5px;border: 1px solid #357ebd;resize: none;color: #333;}
@@ -118,7 +123,7 @@ ul.items li {width: 215px; height: 425px; float:left; margin: 0 16px 15px 0px; b
 ul.items li .cover{height: 270px; overflow: hidden; position: relative;}
 ul.items li .cover img{height: 100%; width: 100%}
 ul.items li .price{position: absolute; right: 10px; bottom: 10px; background-color: rgb(111, 190, 45); color:#fff;padding: 3px 8px;font-size: 11px; border: none}
-ul.items li .title{padding: 5px; height: 25px; line-height: 25px; font-weight: bold;}
+ul.items li .title{padding: 5px; height: 25px; line-height: 25px; font-weight: bold; overflow: hidden;}
 ul.items li .tools{height: 32px;padding: 5px 8px;}
 ul.items li .tools span i{padding-right: 15px;}
 ul.items li .tools span.count{border: 1px solid rgb(111,190,45); background-color:#fff; color: rgb(111,190,45); padding: 2px 6px;}
@@ -126,16 +131,18 @@ ul.items li .tools span.view{float: right; color:rgb(111,190,45);}
 ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
 
 /* style details */
+
+
 #styles .filter, #styles .list {margin: 0; padding: 0}
 
-#styles div.round{padding:0px; background-color: #fff; }
+#styles div.round{background-color: #fff; }
 #styles div.photo{border-right: solid 1px #ebebeb; padding: 15px;}
 #styles div.photo img{width: 100%; margin-bottom: 20px;}
 #styles div.info{padding: 15px;}
 #styles h4.title{color:rgb(111,190,45); font-size: 13px;}
-#styles ol li {position: relative;}
+#styles ol li {position: relative; margin-top: 10px;}
 #styles ol li .cover{width: 100px; float:left; padding: 10px; border-right: solid 1px #ebebeb;}
-#styles ol li .item {height: 100px; margin-left: 100px;}
+#styles ol li .item {height: 100px; margin-left: 100px; }
 #styles ol li .title {padding: 10px;}
 #styles ol li .buy{border-top: solid 1px #ebebeb;padding: 10px; color: rgb(111,190,45)}
 #styles ol li .buy span{float: right;}
@@ -151,7 +158,6 @@ ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
 #styles .items .item .title{margin-bottom: 9px; padding: 0; color: #aaa;line-height: 18px;height: 18px;overflow: hidden; font-size: 12px; font-weight: normal;}
 #styles .items .item:nth-child(5n){margin-right: 0}
 
-
 #styles .filter .tabs li{ width: 150px; border-right: solid 1px #ebebeb; border-bottom: solid 1px #ebebeb; cursor: pointer; position: relative;}
 #styles .filter .tabs li.active{border-right: none}
 #styles .filter .tabs li.active a{color: rgb(111,190,45);}
@@ -164,6 +170,16 @@ ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
 #styles .actions textarea{width: 100%; height: 68px;}
 #styles .tools {margin-top: 20px;}
 #styles .comment {padding: 15px 0; border-top: solid 1px #ebebeb; margin-top: 30px}
+
+#styles .more .hd{padding-top: 20px; color: rgb(110,190,45); font-size: 18px;}
+#styles .style{background-color: #fff; padding: 15px 0px; margin-bottom: 30px;}
+#styles .style .cover img{width: 100%;}
+#styles .links ul li{position: relative; height: 66px; padding: 5px 0px; border-top: 1px dashed #eee; line-height: 66px}
+#styles .links ul li .cover{float: left; width: 50px; height: 50px; border: solid 1px #eee; display: inline; padding:  1px; margin-right: 5px; overflow: hidden;}
+#styles .links ul li .cover img{width: 100%; height: 100%; display: block;}
+#styles .links ul li .title{float: left; width: 50%; overflow: hidden; color: #999; white-space: nowrap;}
+#styles .links ul li .price{position: absolute; right: 70px; font-size: 24px; font-weight: bold; color: red; float: right; }
+#styles .links ul li .buy{float: right;}
 
 /* item details */
 #items .details .photo{border-right: 1px solid #ebebeb; padding: 0}
@@ -187,15 +203,15 @@ ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
 }
 
 #items .details .zoom img{max-width: 100%}
+#items #more img{width: 100%;}
 #items .details .thumb li{float: left; width: 64px; margin-right: 5px;}
 #items .details .thumb .active{border:2px solid #f40;}
-#items .details .comment{border-top: 1px solid #ebebeb; height: 120px; padding: 30px;}
+#items .details .comment{ height: 120px; }
 #items .info .price{font-size:40px; line-height: 45px; color: red}
 #items .info .buy .url{float: right; font-size: 22px; line-height: 22px;padding: 10px 20px; cursor: pointer;}
 #items .info .buy .url a{color: rgb(252,118,35);}
 #items .info .tools {text-align: right;}
 #items .guess{margin-top: 30px;}
-#items .guess .box{min-height: 580px;}
 
 /* category style */
 .user dl dt{float: left; margin-right: 20px;}
@@ -210,21 +226,16 @@ dl.comment dt{float:left; width: 64px;}
 
 
 /* user homepage */
-#users .vcard h1{margin: 0; padding: 0}
+#users .path{height: 60px; padding: 15px 0px}
 #users .profile .photo{float: left;display: block;position: relative;margin: 0 10px 0 0;}
-#users .profile-tabs li{float: left; margin-right: 10px;}
-#users ul.tabs {
-    margin: -2px 0 15px 0;
-    padding: 0;
-    font-size: 14px;
-    line-height: 1;
-    border-bottom: 1px solid #ddd;
-}
+#users .profile-tabs li{float: left; margin-right: 20px;}
+#users .profile .profile-actions{height: 100px; line-height: 100px;}
+#users .profile .profile-actions a{font-size: 18px; font-weight: bold;}
+#users ul.tabs{border-bottom: 1px solid #ddd;}
 #users .tabs {border-bottom: none; background: url(/assets/border-2px.gif) repeat-x bottom left;}
-#users .tabs li{position: relative;float: left;margin: 0 20px 0 0;line-height: 1;color: #bbb;}
-#users .tabs li a, #users .tabs li span.empty {padding-bottom: 8px;display: block;padding: 0 0 18px 0;}
-#users ul.items li.item {margin-right: 27px;}
-#users ul.items li.item:nth-child(4n) {margin-right: 0;}
+#users .tabs li{position: relative;float: left;margin-right:20px;height: 32px; line-height: 32px;}
+#users .tabs a{font-weight: bold; font-size: 16px}
+#users ul.items li.item:nth-child(5n) {margin-right: 0;}
 
 /* topics */
 .topics {background-color: #fff; padding: 0}
