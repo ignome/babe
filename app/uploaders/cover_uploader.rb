@@ -15,5 +15,4 @@ class CoverUploader < BaseUploader
     process :resize_to_fill => [150,200]
   end
 
-  #process :pick_colors_up
 end

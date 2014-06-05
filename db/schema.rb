@@ -11,7 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513054928) do
+ActiveRecord::Schema.define(version: 20140525022512) do
+
+  create_table "ads", force: true do |t|
+    t.string   "title"
+    t.integer  "position_id"
+    t.integer  "user_id"
+    t.string   "description"
+    t.string   "url"
+    t.string   "cover"
+    t.boolean  "available",   default: true
+    t.integer  "start_on"
+    t.integer  "expires_on"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "catalogs", force: true do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "parent_id",  default: 0
+    t.string   "slug"
+    t.integer  "sort"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "childs",     default: 0
+  end
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -63,13 +88,15 @@ ActiveRecord::Schema.define(version: 20140513054928) do
     t.string   "title"
     t.string   "url"
     t.string   "cover"
-    t.decimal  "price",          precision: 10, scale: 2
+    t.decimal  "price",                     precision: 10, scale: 2
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "likes_count",                             default: 0
-    t.integer  "comments_count",                          default: 0
-    t.integer  "views_count",                             default: 0
+    t.integer  "likes_count",                                        default: 0
+    t.integer  "comments_count",                                     default: 0
+    t.integer  "views_count",                                        default: 0
+    t.string   "catalog",        limit: 32
+    t.decimal  "mprice",                    precision: 10, scale: 2
   end
 
   create_table "items_of_styles", force: true do |t|
@@ -89,6 +116,20 @@ ActiveRecord::Schema.define(version: 20140513054928) do
     t.datetime "updated_at"
   end
 
+  create_table "pages", force: true do |t|
+    t.integer  "catalog_id"
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "slug"
+    t.string   "keywords"
+    t.string   "description"
+    t.integer  "sort"
+    t.text     "body"
+    t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "photos", force: true do |t|
     t.integer  "user_id"
     t.integer  "subject_id"
@@ -99,6 +140,28 @@ ActiveRecord::Schema.define(version: 20140513054928) do
     t.datetime "updated_at"
     t.string   "subject_type", limit: 32
     t.string   "colors",       limit: 64
+  end
+
+  create_table "positions", force: true do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "promotions", force: true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "cover"
+    t.string   "provider"
+    t.decimal  "price",                precision: 10, scale: 2
+    t.decimal  "mprice",               precision: 10, scale: 2
+    t.integer  "status",     limit: 2,                          default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sections", force: true do |t|
@@ -123,19 +186,20 @@ ActiveRecord::Schema.define(version: 20140513054928) do
 
   create_table "task_links", force: true do |t|
     t.string   "title"
-    t.string   "url"
     t.string   "cover"
-    t.integer  "status",     limit: 1, default: 0
+    t.string   "url"
+    t.decimal  "price",      precision: 10, scale: 2
+    t.integer  "status",                              default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "task_pages", force: true do |t|
-    t.string  "url"
-    t.integer "status", limit: 1, default: 0
+    t.string   "url"
+    t.integer  "status",     default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "task_pages", ["url"], name: "url_UNIQUE", unique: true, using: :btree
 
   create_table "topics", force: true do |t|
     t.string   "title"

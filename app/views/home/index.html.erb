@@ -1,29 +1,32 @@
-<div class="slider">
-    <ul class="banner">
-      <li style="background-image: url('/1.jpg');">
-        <div class="inner">
-          <h1>The jQuery slider that just slides.</h1>
-        </div>
-      </li>
+<div id="slider" class="carousel slide slider" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#slider" data-slide-to="0" class="active"></li>
+    <li data-target="#slider" data-slide-to="1"></li>
+    <li data-target="#slider" data-slide-to="2"></li>
+  </ol>
 
-      <li style="background-image: url('/2.jpg');">
-        <div class="inner">
-          <h1>Fluid, flexible, fantastically minimal.</h1>
-        </div>
-      </li>
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <% @slider.each_with_index do |ad,index| %>
+    <div class="item <%= 0 == index ? 'active': ''%>">
+      <%= link_to ad.url do %>
+      <%= image_tag ad.cover.default.url %>
+      <% end %>
+      <div class="carousel-caption">
+        <%= link_to ad.title,ad.url %>
+      </div>
+    </div>
+    <% end %>
+  </div>
 
-      <li style="background-image: url('/3.jpg');">
-        <div class="inner">
-
-          <a class="btn" href="//github.com/idiot/unslider">参与</a>
-        </div>
-      </li>
-
-      <li style="background-image: url('/4.jpg');">
-        <div class="inner">
-        </div>
-      </li>
-    </ul>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#slider" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+  <a class="right carousel-control" href="#slider" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
 </div>
 
 <div class="cat box">
@@ -32,30 +35,32 @@
   </div>
 </div>
 
-<div style="height:120px;"></div>
+<div id="special">
+  <ul>
+    <li><img src="/images/promotion.png" height="110" /></li>
+  </ul>
+</div>
 
-<div id="groupon">
+<div id="promotion">
   <div class="container">
     <div class="row">
-      <div class="hd clearfix"><h2> 人气团购 </h2></div>
-      <div class="col-md-6 item">        
+      <div class="col-md-12">
+        <div class="hd clearfix"><h2> 值得购买 </h2></div>
+        <ul>
+          <%= render partial: 'item', collection: @promotions %>
+        </ul>
       </div>
-      <div class="col-md-6 item"></div>
     </div>
   </div>
 </div>
 
-<div class="recommend">
+<div id="recommend">
   <div class="container">
+    <div class="row">
+      <div class="hd clearfix"><h2>推荐 搭配</h2></div>
+    </div>
     <div class="row ">
-      <div class="col-md-12">
-        <div class="hd clearfix"><h2>推荐 搭配</h2></div>
-        <div id="styles">
-          <ul class="items">
-            <%= render partial: 'styles/item', collection: @styles %>
-          </ul>
-        </div>
-      </div>
+      <%= render 'style' %>
     </div>
   </div>
 </div>
@@ -105,24 +110,15 @@
 {% } %}
 </script>
 
-<script src="//unslider.com/unslider.js"></script>
 <script src="/scripts/category.json"></script>
 <script src="/scripts/tmpl.min.js"></script>
 <script type="text/javascript">
-$(function() {
-  $('.slider').unslider({
-    speed: 500,               //  The speed to animate each slide (in milliseconds)
-    delay: 6000,              //  The delay between slide animations (in milliseconds)
-    complete: function() {},  //  A function that gets called after every slide animation
-    keys: true,               //  Enable keyboard (left, right) arrow shortcuts
-    dots: true,               //  Display dot navigation
-    fluid: false              //  Support responsive design. May break non-responsive designs
-  });
-});
 
 $(document).ready(function(){
   var $nav = $('.sub ul');
       $nav.append( tmpl('template-nav', tree) );
+
+  $('.fit').hover(function(){$(this).addClass('hover');},function(){$(this).removeClass('hover');})
 });
 
 </script>

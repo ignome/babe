@@ -73,4 +73,5 @@ gem 'nokogiri'
 gem 'sidekiq'
 gem 'sinatra'
 
+gem 'ruby-hmac'
 gem 'social-share-button'

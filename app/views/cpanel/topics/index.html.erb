@@ -1,15 +1,14 @@
-
-<table class="table table-bordered table-striped table-condensed">
-  <tr class="head">
+<table class="table table-hover" width="100%" cellpadding="0" cellspacing="0">
+  <thead>
     <td class="first">ID</td>
-    <td style="width:300px">Title</td>
-    <td>Node</td>
-    <td>User</td>
-    <td>Replies</td>
-    <td>at</td>
+    <td style="width:300px">标题</td>
+    <td>节点</td>
+    <td>用户</td>
+    <td>回复</td>
+    <td>发布时间</td>
     <td style="width:100px"></td>
   </tr>
-
+<tbody>
 <% @topics.each do |topic| %>
   <tr >
     <td class="first"><%= topic.id %></td>
@@ -19,18 +18,17 @@
     <td><%= topic.node.name if topic.node %></td>
     <td><%= topic.user.login if topic.user %></td>
     <td>0</td>
+    <td><%= topic.created_at.strftime("%Y-%m-%d")%></td>
     <td>
       
-    </td>
-    <td>
-      
-      <%= link_to "", edit_cpanel_topic_path(topic), :class => "icon small_edit" %>
-    
-        <%= link_to "", cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %>
+      <%= link_to "编辑", edit_cpanel_topic_path(topic), :class => "icon small_edit" %>
+      <%= link_to "删除", cpanel_topic_path(topic), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %>
      
     </td>
 
   </tr>
 <% end %>
+</tbody>
 </table>
+
 <%= will_paginate @topics %>

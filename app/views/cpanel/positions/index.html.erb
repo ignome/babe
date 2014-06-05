@@ -1,0 +1,26 @@
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <td class="first">Id</td>
+    <td>名称</td>
+    <td>调用标识</td>
+    <td>宽/高</td>
+    <td></td>
+  </tr>
+
+<% @positions.each do |position| %>
+  <tr>
+    <td class="first"><%= position.id %></td>
+    <td><%= position.title %></td>
+    <td><%= position.slug %></td>
+    <td><%= "#{position.width}x#{position.height}" %></td>
+    <td>
+      <%= link_to '编辑', edit_cpanel_position_path(position) , :class => "icon small_edit" %>
+      <%= link_to '删除', cpanel_position_path(position), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '创建新位置', new_cpanel_position_path %>

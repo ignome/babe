@@ -20,13 +20,13 @@
           $limit  = 10;
           $page   = isset($_GET['page']) ? intval($_GET['page']) : 1;
           $offset = ($page - 1) * $limit;
-          $result = mysql_query("select count(*) as total from task_pages where status=0");
+          $result = mysql_query("select count(*) as total from task_pages where status=0") or die(mysql_error());
           $total  = mysql_fetch_array($result);
 
           $params = array(
                 'total_rows'=> $total[0],
                 'method'    =>'html',
-                'parameter' =>'./page-to-item.php?page=[?]',
+                'parameter' =>'./links.php?page=[?]',
                 'now_page'  => $page,
                 'list_rows' => $limit);
 

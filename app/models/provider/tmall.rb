@@ -11,7 +11,7 @@ class Provider::Tmall < Provider::Base
     it = Item.new
     it.title = page.css('h3[data-spm]').text.strip
     it.price = page.css('.J_originalPrice').text.strip
-    
+    it.mprice = page.css('span.tm-price').text.strip
     images = page.css('li.tb-s60 img')
     it.urls = images.reverse.map{ |img| img.attr('src')[0..-14] }
     it.body = page.css('div#description img').map{ |img| img.attr('src') }.join(';')

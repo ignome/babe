@@ -1,13 +1,14 @@
-<script type="text/javascript" src="/category.json"></script>
+<script type="text/javascript" src="/scripts/category.json"></script>
 <script type="text/javascript">
 window.Treeview = {
   tree : [],
+  multiValue : 0,
 
   render : function(nodes, target ){
     target = arguments.length > 2 ? target : 'category';
-
-    Treeview.loop(nodes, 0, 0);
-    Treeview.tree[0] = '<option value="0"> Choice ...</option>';
+    
+    Treeview.tree[0] = '<option value="0"> 选择上线分类 ...</option>';
+    Treeview.loop(nodes, '', 0);
 
     $('#' + target).append( Treeview.tree.join("\n") );
   },
@@ -19,9 +20,14 @@ window.Treeview = {
       for(var k=0; k < depth; k++){
         label += '-';
       }
+      
+      if( Treeview.multiValue) id = '' == parent ? node['id'] : parent + ',' + node['id'];
+      else id = node['id'];
 
-      Treeview.tree[Treeview.tree.length] = '<option value="'+ node['id'] +'">'+ label + node['name'] +'</option>';
-      if ( node.child.length > 0 ) Treeview.loop(node['child'], node['id'], depth + 1);
+      pp = '' == parent ? node['id'] : parent + ',' + node['id'];
+
+      Treeview.tree[Treeview.tree.length] = '<option value="'+ id +'">'+ label + node['name'] +'</option>';
+      if ( node.child.length > 0 ) Treeview.loop(node['child'], pp , depth + 1);
     }
   }
 }

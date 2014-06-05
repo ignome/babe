@@ -14,7 +14,6 @@ class Cpanel::CategoriesController < Cpanel::ApplicationController
   end
 
   def update
-    
     if @category.update_attributes(category_params)
       redirect_to cpanel_categories_path, notice: "#{@category.name} have been updated successfully"
     else

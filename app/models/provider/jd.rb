@@ -11,7 +11,7 @@ class Provider::JD < Provider::Base
     it = Item.new
     it.title = page.css('div#name h1').text.strip
     it.price = page.css('strong#jd-price').text.strip[1..-1]
-
+    it.mprice = page.css('del#page_maprice').sub! /\D+/, ''
     images = page.css('div.spec-items ul.lh img')
     # Real 350px image
     host = images[0].attr('src').split('/')[2]

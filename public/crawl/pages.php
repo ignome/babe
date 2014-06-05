@@ -22,14 +22,14 @@ if ( !empty($_POST['url']) ){
   // s=n, n = page * 60
   }elseif ( 'tmall' == $provider ){
     for($page = $start; $page <= $end; $page++){
-      $pages = 60 * $page -1;
+      $pages = ($page -1) * 60;
       $values[] = preg_replace("/s=\d+/", "s=$pages", $url);
     }
 
   // s=n, n = page * 96
   }elseif ( 'taobao' == $provider ){
     for($page = $start; $page <= $end; $page++){
-      $pages = 96 * $page -1;
+      $pages = ($page -1) * 96;
       $values[] = preg_replace("/s=\d+/", "s=$pages", $url);
     }
   }else{

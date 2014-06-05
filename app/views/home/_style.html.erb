@@ -1,0 +1,26 @@
+<div class="zoom col-md-3">
+  <% first = @styles.first %>
+  <%= image_tag first.photos.first.file.url , size: '310x485' %>
+</div>
+<div class="fitness col-md-9">
+  <div class="hot">
+    <% Style.all.limit(5).each do |style|%>
+    <div class="fit">
+      <%= link_to style_path(style.id) do %>
+        <%= image_tag style.photos.first.file.url, size: '120x360' %>
+        <p class="ft">某系</p>
+        <p class="user">某人</p>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+
+  <div >
+    <div class="hd"></div>
+    <div class="bd">
+      <% 3.times do %>
+        <div class="place">场合推荐</div>
+      <% end %>
+    </div>
+  </div>
+</div>

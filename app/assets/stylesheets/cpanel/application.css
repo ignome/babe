@@ -16,6 +16,7 @@ body{position: relative;padding-top: 50px;}
 
 #sider{background-color:rgb(243,243,243) ;}
 #main{min-height: 500px; padding-top:10px;border-left: solid 1px #ebebeb;}
+#main .nav{padding-left: 30px;margin-bottom: 15px;}
 
 .pagination{float: right;}
 .pagination ul {
@@ -117,3 +118,8 @@ body{position: relative;padding-top: 50px;}
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px
 }
+/* tab */
+.tabs{border-bottom: 1px solid #ddd;margin-bottom: 15px;}
+.tabs li{float: left;}
+.tabs li a{padding: 10px 15px;color: #555;}
+.tabs .active a{border: 1px solid #ddd; margin-bottom: -1px;}

@@ -5,10 +5,6 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
     @items = Item.all(:include => [:user, :category], order: 'id desc').paginate(per_page: 15, page: params[:page])
   end
 
-  def links
-    @tasks = TaskLinks.all(order: 'id desc').paginate(per_page: 15, page: params[:page])
-  end
-
   def destroy
     Item.find(params[:id]).destroy
 
@@ -20,7 +16,8 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
   end
 
   def moveto
-    Item.where(id: params[:id]).update_all(category_id: params[:category])
+    category = params['catalog'].split(',')[-1]
+    Item.where(id: params[:id]).update_all(catalog: params[:catalog], category_id: category)
     redirect_to cpanel_items_path, notice: 'Moved class'
   end
 

@@ -20,8 +20,6 @@ class TopicsController < ApplicationController
     @topic.user_id = current_user.id
     @topic.node_id = params[:node] || topic_params[:node_id]
     #@topic.photo = params[:photo] || topic_params[:photo]
-    logger.info '*' * 80
-    logger.info @topic
 
     if @topic.save
       redirect_to(topic_path(@topic.id), :notice => t("topics.create_topic_success"))

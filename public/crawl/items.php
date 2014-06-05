@@ -27,7 +27,7 @@
           $params = array(
                 'total_rows'=> $total[0],
                 'method'    =>'html',
-                'parameter' =>'./list.php?page=[?]',
+                'parameter' =>'./items.php?page=[?]',
                 'now_page'  => $page,
                 'list_rows' => $limit);
 

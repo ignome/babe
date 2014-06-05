@@ -1,0 +1,27 @@
+<div class="container" id="main">
+  <div class="row">
+    <div class="col-md-3" id="sider">
+      <% Catalog.roots.each do |cat| %>
+      <dl>
+        <dt><%= link_to cat.name, help_path(cat) %></dt>          
+        
+        <% cat.child.each do |sub| %>
+        <dd><%= link_to sub.name, help_path(sub) %></dd>
+        <% end %>
+      </dl>
+      <% end %>
+    </div>
+
+    <div class="col-md-9" id="view">
+      <ul>
+      <% @pages.each do |page| %>
+        <li>
+          <p class="title"><%= link_to page.title, '' %></p>
+          <div class="description"><%= page.body %></div>
+          <p class="time"><%= page.updated_at.strftime("%Y-%m-%d %H:%M:%S")%></p>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

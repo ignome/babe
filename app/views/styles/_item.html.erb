@@ -1,20 +1,27 @@
-<li class="item box round">
+<li class="item">
+
   <div class="cover">
-    <%= link_to style_path(item.id) do %>
-    <%= image_tag item.photos.first.file.url %>
-    <% end %>
-  </div>
-  <div class="thumb">
-    <% item.photos.recent.each do |photo| %>
+    <div class="zoom">
       <%= link_to style_path(item.id) do %>
-      <%= image_tag photo.file.default.url %>
+      <%= image_tag item.photos.first.file.url %>
       <% end %>
-    <% end %>
+    </div>
+    
+    
+      <% item.photos.recent.each_with_index do |photo,index| %>
+        <div class="thumb <%= 'last' if index == 3%> ">
+        <%= link_to style_path(item.id) do %>
+        <%= image_tag photo.file.default.url %>
+        <% end %>
+        </div>
+      <% end %>
+
   </div>
   <div class="text">
-    <%=link_to style_path item.id do %>
-    <h5 class="user"><%= item.user.name %></h5>
-    <p class="title">这里什么着落显示在这里好像有点放不下的样子</p>
-    <% end %>
+    
+    <p>
+    佟丽娅，一个美丽的锡伯族姑娘。身为纯正的新疆女孩，身上散发出一股浓郁的异域风情。但是...
+    </p>
+    <h3> <%=user_avatar_tag(item.user, :small, text: true )%></h3>
   </div>
 </li>

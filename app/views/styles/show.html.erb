@@ -23,25 +23,18 @@
       <h4 class="title"><i class="glyphicon glyphicon-shopping-cart"></i>搭配单品</h4>
 
       <div class="links">
-        <ol>
-          <% @style.items.each do |item| %>
-          <li class="round">
-            <span class="plus round-sm"><i class="glyphicon glyphicon-plus"></i></span>
-            <div class="cover">
-              <%= image_tag item.cover, size: '80x80' %>
-            </div>
-            <div class="item">
-              <div class="title">
-                <%= link_to item.title, item.url %>
-              </div>
-              <div class="buy">
-                <em>&yen;<%= item.price %></em>
-                <span><i class="glyphicon glyphicon-shopping-cart"></i>去购买</span>
-              </div>
-            </div>
+        <ul>
+          <% @style.items.each do |item|%>
+          <li class="clearfix">
+            <%= link_to item.url do %>
+              <span class="pic"><%= image_tag item.cover, size: '27x27' %></span>
+              <span class="title"><%= item.title %></span>
+              <span class="price">&yen;<%= item.price %></span>
+              <span class="buy">马上购买</span>
+            <% end %>
           </li>
           <% end %>
-        </ol>
+        </ul>
       </div>
 
       <!-- tools here -->
@@ -84,56 +77,34 @@
 
 <div class="container more">
   <h5 class="hd">更多搭配</h5>
-
-  <% @styles.each do |style| %>
-  <div class="row round style">
-    <div class="col-md-7">
-      <div class="cover">
-        <%= link_to style_path style do %>
-        <%= image_tag style.photos.first.file.url %>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="col-md-5">
-      <div class="info">
-        <div class="summary">
-          <h4> 介绍 </h4>
-          <p class="body"><%= style.body %></p>
-        </div>
-
-        <div class="links">
-          <ul>
-          <% style.items.each do |item| %>
-            <li>
-              <span class="cover"><%= link_to style_path(style) do %> <%= image_tag item.cover %><% end %></span>
-              <span class="title"><%= link_to item.title,style_path(style) %></span>
-              <span class="buy"><%= link_to '去购买', item.url, class: 'btn btn-xs'%></span>
-              <span class="price">&yen;<%= item.price %></span>
-            </li>
-          <% end %>
-          </ul>
-        </div>
-
-        <div class="tools">
-          <ul class="pagehead-actions">
-            <li>
-              <%= link_to like_style_path(@style), rel: 'nofollow', class: "btn like btn-xs with-count" do %>
-              <span class="glyphicon glyphicon-heart"></span>喜欢
+  <div class="row">
+    <div class="col-md-12">
+      <ul>
+      <% @styles.each do |style| %>
+        <li class="style">
+          <div class="bd">
+            <div class="cover">
+              <%= image_tag style.photos.first.file.default.url %>
+            </div>
+            <div class="thumb">
+              <% style.photos.limit(4).each do |pic| %>
+              <%= image_tag pic.file.default.url %>
               <% end %>
-              <span class="social-count"><%= @style.likes_count || 0 %></span>
-            </li>
-
-            <li>
-              <a href="/" class="btn btn-xs with-count favourite" rel="nofollow">
-                <span class="glyphicon glyphicon-star"></span>收藏
-              </a>
-              <span class="social-count">0</span>
-            </li>
-          </ul>
-        </div>
-      </div>
+            </div>
+          </div>
+        </li>
+      <% end %>
+      </ul>
     </div>
   </div>
-  <% end %>
 </div>
+
+<% content_for :scripts do %>
+<script type="text/javascript">
+$('.links li').hover(function(){
+    $(this).addClass('hover');
+  },function(){
+    $(this).removeClass('hover');
+  });
+</script>
+<% end %>

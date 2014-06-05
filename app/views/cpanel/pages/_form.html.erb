@@ -1,0 +1,17 @@
+<%= simple_form_for [:cpanel, @post], html:{class: 'form-horizontal'}  do |f| %>
+  <%= render 'shared/error', :target => @post %>
+    <select name="page[catalog_id]">
+      <% Catalog.all.each do |node| %>
+        
+          <option value="<%=node.id%>"><%= node.name %></option>
+
+      <% end %>
+    </select>
+    <%= f.input :title %>
+    <%= f.input :slug %>
+    <%= f.input :keywords %>
+    <%= f.input :description, as: 'text' %>
+    <%= f.input :body, as: 'text' %>
+    <%= f.submit t("common.submit"), :class => "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+
+<% end %>

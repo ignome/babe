@@ -1,15 +1,20 @@
 <div class="container" id="main">
   <div class="row">
-    <div class="col-md-8">
-      <%= simple_form_for @item do |f| %>
-        <%= render "shared/error", :target => @item %>
-        <div class="input-group">
-          <input type="text" class="form-control" name="url" placeholder="http://">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit">发布!</button>
-          </span>
-        </div><!-- /input-group -->
-      <% end %>
+      
+    <div class="col-md-8" id="item">
+
+      <div class="alert alert-warning hide fade in">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <p>请输入正确的网址</p>
+      </div>
+
+      <div class="input-group">
+        <input type="text" class="form-control" name="url" placeholder="http://">
+        <span class="input-group-btn">
+          <button class="btn btn-default" id="fetch" type="button">获取宝贝信息!</button>
+        </span>
+      </div>
+
 
       <h5>目前支持网站</h5>
       <ul class="sites">
@@ -24,3 +29,29 @@
     </div>
   </div>
 </div>
+<% content_for :scripts do %>
+<script type="text/javascript">
+$(document).on('click', '#fetch', function(){
+  var url = $('input[name="url"]').val();
+  if( url.length < 12 ){
+    $('.alert').removeClass('hide').addClass('show');//.alert();
+    return false;
+  }
+
+  $.ajax({
+    type : 'GET',
+    url : '/items/fetch',
+    data : {url: url},
+    dataType : 'HTML',
+    success : function(html, status, xhr){
+      if ( 201 == xhr.status ){
+        $('#item').html(html);
+      }else{
+        $('.alert').removeClass('hide').addClass('show').find('p').html(html);
+        //$('.alert').alert();
+      }
+    }
+  });
+});
+</script>
+<% end %>

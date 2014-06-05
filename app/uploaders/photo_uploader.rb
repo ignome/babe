@@ -12,7 +12,17 @@ class PhotoUploader < BaseUploader
   end
 
   version :default do
-    process :resize_to_fill => [150,200]
+    process :resize_to_size
   end
-
+  
+  def resize_to_size
+    manipulate! do |img|
+      if model.instance_of? Ad
+        img.resize!(model.position.width, model.position.height)
+      else
+        img.resize_to_fill!(150,200)
+      end
+      img
+    end
+  end
 end

@@ -1,0 +1,15 @@
+<%= simple_form_for([:cpanel,@ad], html:{class: 'form-horizontal',:multipart => true}) do |f| %>
+  <%= render 'shared/error', :target => @ad %>
+
+    <%= f.input :title %>
+    <%= f.association :position %>
+    <%= f.input :url, as: 'url' %>
+    <%= f.input :cover, as: 'file' %>
+
+
+    <%= f.input :description, as: 'text' %>
+
+    <%= f.submit t("common.submit"), :class => "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+     
+
+<% end %>

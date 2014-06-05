@@ -153,13 +153,19 @@
 <% end %>
 
 <div class="container" id="main">
-  
-  <%= render 'nav' %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'nav' %>
+    </div>
+  </div>
 
-  <%= render 'filter', node: @current_selected %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'filter', node: @current_selected %>
 
-  <ul class="items">
-    <%= render partial: 'items/item', collection: @items %>
-  </ul>
-
+      <ul class="items">
+        <%= render partial: 'items/item', collection: @items %>
+      </ul>
+    </div>
+  </div>
 </div>

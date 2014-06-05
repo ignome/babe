@@ -1,0 +1,45 @@
+<div >
+<%= render 'cpanel/shared/tabs_of_task'  %>
+
+<%= simple_form_for TaskLink.new, :url => '/cpanel/tasks/', :method => 'post' do %>
+  
+  <p></p>
+
+  <div class="form-group string required category_slug">
+    <label class=" col-sm-3 control-label" >网站</label>
+    <div class="col-sm-9">
+      <label for="jd"><input type="radio" name="provider" id="jd" value="jd" >京东</label>
+      <label for="tm"><input type="radio" name="provider" id="tm" value="tmall" >天猫</label>
+      <label for="tb"><input type="radio" name="provider" id="tb" value="taobao" >淘宝</label>
+    </div>
+  </div>
+
+  <div class="form-group string required ">
+    <label class="string required col-sm-3 control-label" for="url">网址</label>
+    <div class="col-sm-9">
+      <input type="text" name="url" class="form-control" id="url" placeholder="http://" >
+    </div>
+  </div>
+
+  <div class="form-group string required ">
+    <label class="string required col-sm-3 control-label" for="start">开始页码</label>
+    <div class="col-sm-9">
+      <input type="text" name="start" class="form-control" id="start" placeholder="开始页码" value="1">
+    </div>
+  </div>
+
+  <div class="form-group string required">
+    <label class="string required col-sm-3 control-label" for="end">结束页码</label>
+    <div class="col-sm-9">
+      <input type="text" name="end" class="form-control" id="end" placeholder="结束页码">
+    </div>
+  </div>
+  
+  <div class="form-group pull-right">
+    <label class="string required col-sm-3 control-label" ></label>
+    <div class="col-sm-9">
+      <button type="submit" class="btn btn-default" id="password-change">下一步</button>
+    </div>
+  </div>
+<% end %>
+</div>

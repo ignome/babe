@@ -11,8 +11,7 @@ class Style < ActiveRecord::Base
 
   belongs_to :user
 
-  validates_presence_of :photo
-  validates_presence_of :body
+  validates_presence_of :photo, :body
 
   scope :last, ->{order('id desc')} 
 

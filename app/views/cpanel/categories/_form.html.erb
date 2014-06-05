@@ -4,9 +4,8 @@
   <div class="form-group string optional category_name">
     <label class="string optional col-sm-3 control-label " for="category_name">上级分类</label>
     <div class="col-sm-9">
-      <select name="category[parent]">
+      <select name="category[parent]" id="category">
         <option value="0">请选择上级分类</option>
-      <%= raw render_tree_select(Category.all).join("\n") %>
       </select>
     </div>
   </div>
@@ -19,4 +18,12 @@
     <%= f.submit t('common.submit'), :class => "btn btn-primary no-border", 'data-disable-with' => t("common.submitting") %>
     <%= link_to '返回', cpanel_categories_path, class: 'btn' %>
   </div>
+<% end %>
+
+<%= render 'cpanel/categories/treeview' %>
+
+<% content_for :scripts do %>
+<script type="text/javascript">
+Treeview.render(tree['tree'], 'category');
+</script>
 <% end %>

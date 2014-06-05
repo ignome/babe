@@ -4,7 +4,6 @@ Babe::Application.routes.draw do
   
   mount Sidekiq::Web => '/sidekiq'
 
-  get "comments/create"
   get "account/avatar" => "profile#avatar"
   patch "account/avatar" => "profile#upload"
   get "account/password" => "profile#edit"
@@ -24,11 +23,14 @@ Babe::Application.routes.draw do
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
   root 'home#index'
-  get '/test' => 'home#test'
+
+  get '/about/:slug' => 'help#about', as: 'about'
+  get '/help/:slug(/:page)' => 'help#view', as: 'help'
 
   resources :photos
   resources :topics
   resources :comments
+  #resources :help
 
   # Why made /first/second?third=value ?
   get 'explore/:first(/:second(/:third))' => "categories#index", as: 'explore'
@@ -55,6 +57,7 @@ Babe::Application.routes.draw do
     end
 
     collection do
+      get 'fetch'
       get 'fans'
     end
   end
@@ -65,15 +68,38 @@ Babe::Application.routes.draw do
     
     resources :categories, path: 'category'
 
-    resources :users
     resources :sections
     resources :nodes
     resources :topics
-    resources :styles
+    resources :styles do
+      collection do
+        post 'cancel'
+        post 'remove'
+        post 'recommend'
+      end
+    end
+    resources :positions
+    resources :ads
+    resources :catalogs
+    resources :pages
+
+    resources :users do
+      collection do
+        get 'admin'
+      end
+    end
+    
+    resources :tasks do
+      collection do
+        post 'link2items'
+        get 'pages'
+        get 'promotion'
+        get 'todaypromo'
+      end
+    end
 
     resources :items do
       collection do
-        get 'links'
         post 'remove'
         post 'moveto'
         post 'free'
@@ -92,18 +118,10 @@ Babe::Application.routes.draw do
       get :followers
       get :following
       get :topics
-      #get :buckets
-    end
-
-    collection do 
-      post 'suspend'
-      post 'free'
     end
 
     post "follow" => :follow
     delete "follow" => :unfollow
-
-    #resources :buckets
   end
   # Example resource route with options:
   #   resources :products do

@@ -1,0 +1,30 @@
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <td class="first">Id</td>
+    <td>名称</td>
+    <td>显示位置</td>
+    <td>网址</td>
+    <td>有效时间</td>
+    <td>状态</td>
+    <td></td>
+  </tr>
+
+<% @ads.each do |ad| %>
+  <tr>
+    <td class="first"><%= ad.id %></td>
+    <td><%= ad.title %></td>
+    <td><%= ad.position.title %></td>
+    <td><%= ad.url %></td>
+    <td><%= "#{ad.start_on} - #{ad.expires_on}" %></td>
+    <td><%= ad.available ? '有效' : '无效' %></td>
+    <td>
+      <%= link_to '编辑', edit_cpanel_ad_path(ad) , :class => "icon small_edit" %>
+      <%= link_to '删除', cpanel_ad_path(ad), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '创建新广告内容', new_cpanel_ad_path %>

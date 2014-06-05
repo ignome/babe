@@ -1,0 +1,17 @@
+<li>
+  <div class="cover">
+  <%= link_to item.url, target: '_blank' do %>
+  <%= image_tag item.cover %>
+  <% end %>
+  </div>
+  <div class="title"><%= link_to item.title, item.url, target: '_blank' %></div>
+  <div class="price">
+
+    <em class="yen">&yen;</em>
+    <span ><del><%= item.mprice %></del></span>
+    <span class="free"><%= sprintf("%2.1f", item.price / item.mprice * 10) %>折</span>
+    <strong><%= item.price %></strong>
+    <span class="free">包邮</span>
+
+  </div>
+</li>

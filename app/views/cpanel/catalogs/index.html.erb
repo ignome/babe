@@ -1,0 +1,44 @@
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <td class="first">Id</td>
+    <td colspan="2">名称</td>
+    <td>上级分类</td>
+    <td>访问路径</td>
+    <td>排序</td>
+    <td></td>
+  </tr>
+
+<% @catalogs.each do |cat| %>
+  <tr>
+    <td class="first"><%= cat.id %></td>
+    <td colspan="2"><%= cat.name %></td>
+    <td>--</td>
+    <td><%= cat.slug %></td>
+    <td><%= cat.sort %></td>
+    <td>
+      <%= link_to '编辑', edit_cpanel_catalog_path(cat) , :class => "icon small_edit" %>
+      <%= link_to '删除', cpanel_catalog_path(cat), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %>
+    </td>
+  </tr>
+  <% if cat.childs > 0 %>
+  <% cat.child.each do |sub| %>
+  <tr>
+    <td class="first"><%= sub.id %></td>
+    <td width="50"></td>
+    <td><%= sub.name %></td>
+    <td><%= cat.name %></td>
+    <td><%= sub.slug %></td>
+    <td><%= sub.sort %></td>
+    <td>
+      <%= link_to '编辑', edit_cpanel_catalog_path(cat) , :class => "icon small_edit" %>
+      <%= link_to '删除', cpanel_catalog_path(cat), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %>
+    </td>
+  </tr>
+  <% end %>
+  <% end %>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '创建新内容分类', new_cpanel_catalog_path %>

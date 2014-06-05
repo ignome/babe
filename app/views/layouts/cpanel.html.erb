@@ -6,6 +6,10 @@
   <title>CPanel Console</title>
   <%= stylesheet_link_tag "cpanel/application", media: "all"%>
   <%= javascript_include_tag "cpanel" %>
+  <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.3.0/respond.min.js"></script>
+  <![endif]-->
   <%= yield :styles %>
   <%= csrf_meta_tags %>
 </head>

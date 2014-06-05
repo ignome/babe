@@ -10,9 +10,6 @@
     <span class="round-sm count"><%= item.likes_count%></span>
     <span class="view">浏览(<%= item.views_count%>)</span>
   </div>
-  <div class="title"><%= link_to item.title, item_path(item.id) %></div>
-  <div class="comment">
-    对于两端对齐的导航，水平改变浏览器大小将引起绘制错误。
-    此bug可以在justified nav example页面得到重现。
-  </div>
+  <div class="title"><%= link_to item.title, item_path(item.id), title: item.title %></div>
+  <div class="comment"><%= item.comments.last && item.comments.last.body %></div>
 </li>

@@ -1,5 +1,16 @@
 <div id="signin">
   <div class="container">
+
+    <% if not flash.empty? %>
+    <p></p>
+    <div class="alert alert-danger alert-dismissable">
+      <a class="close" data-dismiss='alert' href="#">×</a>
+      <% flash.each do |type, message| %>
+      <%= content_tag(:div, message) %>
+      <% end %>
+    </div>
+    <% end %>
+    
     <div class="row">
       <%= render "shared/error", :target => resource %>
       <div class="col-md-7">

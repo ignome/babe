@@ -2,6 +2,7 @@ class Category < ActiveRecord::Base
   
   has_many :items
   has_many :child, foreign_key: 'parent', class_name: 'Category'
+  #belongs_to :parent, foreign_key: 'parent', class_name: 'Category'
 
   scope :roots, -> { where(parent: 0).order('sort asc') }
 

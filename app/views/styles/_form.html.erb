@@ -36,7 +36,7 @@
         </li>
 
         <li>
-          <textarea name="style[body]"></textarea>
+          <textarea name="style[body]" class="form-control" rows="3" placeholder="介绍此搭配"></textarea>
           <br/>
           <small>(140个字以内描述搭配风格)</small>
         </li>
@@ -96,23 +96,23 @@ $(function(){
     dataType: 'json',
     ///*
     done: function (e, data) {
-      console.log(data.result.files);
-
       $('#files').append( tmpl('template-download', data.result) );
-      
     }
     //*/
   });
 
   $('#add').on('click', function(){
     $.ajax({
-      url: '/items',
-      method: 'POST',
+      url: '/items/fetch',
       dataType: 'json',
-      data: {url: $('#url').val()},
-      success: function(data){
+      data: {url: $('#url').val(), style: 1},
+      success: function(data, status, xhr){
         console.log(data);
-        $('#items').append(tmpl('template-item', data));
+        if(data[0] == 0){
+          $('#items').append(tmpl('template-item', data[1]));
+        }else{
+          //modal show error?
+        }
       }
     });
     return false;
