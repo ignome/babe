@@ -56,9 +56,6 @@
 
 <div id="recommend">
   <div class="container">
-    <div class="row">
-      <div class="hd clearfix"><h2>推荐 搭配</h2></div>
-    </div>
     <div class="row ">
       <%= render 'style' %>
     </div>
@@ -69,23 +66,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="hd clearfix">
-          <h2>最新 单品 </h2>
-          <ul class="pagination">
-            <li><a href="#">全部</a></li>
-            <li><a href="#">0-80</a></li>
-            <li><a href="#">80-300</a></li>
-            <li><a href="#">更高</a></li>
-            <li>
-              <span>
-              <input type="text" />
-              -
-              <input type="text" />
-              </span>
-            </li>
-          </ul>
-        </div>
-
+        
         <ul class="items">
           <%= render partial: 'items/item', collection: @items %>
         </ul>

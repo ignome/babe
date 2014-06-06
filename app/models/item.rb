@@ -49,6 +49,7 @@ class Item < ActiveRecord::Base
     response = Net::HTTP.post_form(URI('http://localhost:8088'), {'url' => url})
     page = Nokogiri::HTML(response.body, nil, 'GBK')
     item = Item.new
+    item.url = url
 
     if /jd\.com/.match url
       item.title = page.css('div#name h1').text.strip
