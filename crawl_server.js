@@ -16,7 +16,7 @@ service = server.listen(port, function(request, response){
   
   if ( request.method == 'POST'){
     var target = request.post.url;
-    //console.log('Request crawl ' + new Date() + ': ' + target );
+    console.log('Request crawl : ' + target );
     var page = webpage.create();
         page.onLoadFinished = page.close;
         page.open(target, function(status){

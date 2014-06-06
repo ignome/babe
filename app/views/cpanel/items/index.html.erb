@@ -30,7 +30,7 @@
       <td><%= link_to o.title, item_path(o.id) %></td>
       <td><%= o.category.name if o.category %></td>
       <td><%= o.likes_count %></td>
-      <td><%= o.user.login %></td>
+      <td><%= o.user.try(:login) %></td>
       <td><%= o.created_at.strftime("%Y-%m-%d") %></td>
       <td>Status</th>
       <td>

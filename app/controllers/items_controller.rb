@@ -1,7 +1,7 @@
 #coding: utf-8
 require 'open-uri'
 require 'net/http'
-require 'nokogiri'
+
 require 'hmac-md5'
 
 class ItemsController < ApplicationController
@@ -45,55 +45,12 @@ class ItemsController < ApplicationController
       if 0 == supported
         render json: [-1, 'not supported provider']
       else
-        response = Net::HTTP.post_form(URI('http://localhost:8088'), {'url' => url})
-        page = Nokogiri::HTML(response.body, nil, 'GBK')
-        @item  = current_user.items.new
+        
+        @item  = Item.parse(url)
         @item.url = url;
-        Rails.logger.info '-'*80
-        Rails.logger.info url
-        
-        if /jd\.com/.match hostname
-          @item.title = page.css('div#name h1').text.strip
-          @item.price = page.css('strong#jd-price').text.strip[1..-1]
-          @item.mprice = page.css('del#page_maprice').text.sub! /\D+/, ''
-          images = page.css('div.spec-items ul.lh img')
-          # Real 350px image
-          host = images[0].attr('src').split('/')[2]
-          # Reverse to keep the original order!
-          @item.urls = images.map{|img| "http://#{host}/n1/#{img.attr('data-url')}"}
-          # Should get all pictures of description.
-          @item.body = page.css('div.detail-content img').map{|img| img.attr('data-lazyload')}.join(';')
-        
-        
-        elsif /taobao\.com/.match hostname
-          # Fuck the long long url, cover to htt://taobao.com/item.html?id=id
-          if @item.url.length > 128
-            id = @item.url.match(/(id=\d+)/)[0]
-            @item.url = @item.url.split('?')[0] << '?' << id
-          end
-          @item.title = page.css('#J_Title h3').text.strip
-          @item.price = page.css('em.tb-rmb-num').text.strip
-          images = page.css('ul.tb-thumb img')
-          @item.urls = images.map{ |img| img.attr('src')[0..-11] }
-          @item.body = page.css('div#description img').map{ |img| img.attr('src') }.join(';')
-        
+        @item.user_id = current_user.id
 
-        elsif /tmall\.com/.match hostname
-          @item.title = page.css('h3[data-spm]').text.strip
-          @item.price = page.css('.J_originalPrice').text.strip
-          @item.mprice = page.css('span.tm-price').text.strip
-          images = page.css('li.tb-s60 img')
-          @item.urls = images.map{ |img| img.attr('src')[0..-14] }
-          @item.body = page.css('div#description img').map{ |img| img.attr('src') }.join(';')
-        
-        # No more yet
-        else
-        end
-
-        Rails.logger.info '*' * 80
-        Rails.logger.info 'done'
-
-        if params[:style]
+        if params[:save]
           @item.save
 
           render json: [0, {id: @item.id, title: @item.title, url: @item.url, price: @item.price, cover: @item.cover} ].to_json

@@ -91,7 +91,7 @@ Babe::Application.routes.draw do
     
     resources :tasks do
       collection do
-        post 'link2items'
+        post 'fetch'
         get 'pages'
         get 'promotion'
         get 'todaypromo'

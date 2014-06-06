@@ -38,10 +38,8 @@
     <tfoot>
       <td colspan="9">
         <div class="btn-group btn-group-xs">
-          <button type="button" class="btn btn-warning" onclick="post('./items/moveto');">移动分类</button>
-          <button type="button" class="btn btn-danger">删除选中</button>
-          <button type="button" class="btn btn-info">隐藏选中</button>
-          <button type="button" class="btn btn-success">恢复选中</button>          
+          <button type="button" class="btn btn-danger" onclick="post('./tasks/remove');">删除选中</button>
+          <button type="button" class="btn btn-success" onclick="post('./items/moveto');">下载选中</button>          
         </div>
 
         <%= will_paginate @items%>
@@ -57,9 +55,8 @@
 $(document).on('click', 'a.download', function(){
   var self = $(this);
   $.ajax({
-    type : 'POST',
-    url : '/items',
-    data : { url: self.attr('href')},
+    url : '/items/fetch',
+    data : { 'url': self.attr('href'), 'save': 1},
     beforeSend : function(){
       self.removeClass('download');
     },
