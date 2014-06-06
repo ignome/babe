@@ -3,15 +3,31 @@ class Cpanel::UsersController < Cpanel::ApplicationController
     @users = User.order('id desc').paginate(per_page:20, page: params[:page])
   end
 
-  def free
+  def edit
+    @user = User.find(params[:id])
   end
 
-  def admin
-    if current_user.admin
-      User.find(id: params[:id]).update_column(:admin, !params[:admin] )
-      render nothing: true, status: 201
+  def update
+  end
+
+  def update
+    @user = User.find(params[:id])
+    @user.email = params[:user][:email]
+    @user.login = params[:user][:login]
+    #@user.state = params[:user][:state]
+    #@user.verified = params[:user][:verified]
+
+    if @user.update_attributes(params[:user].permit!)
+      redirect_to(edit_cpanel_user_path(@user.id), :notice => 'User was successfully updated.')
     else
-      render text: 'failure'
+      render :action => "edit"
     end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    #@user.soft_delete
+
+    redirect_to(cpanel_users_url)
   end
 end

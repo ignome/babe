@@ -118,13 +118,27 @@ class Cpanel::TasksController < Cpanel::ApplicationController
           item << a
         end
       else
-        page.css('div.m-items li.item').each do |li|
-          a = Hash.new
-          a['url'] = li.css('a.J_AtpLog').attr('href').value
-          a['cover'] = li.css('img.J_ItemMainImg').attr('src').value
-          a['title'] = li.css('li.title a.J_AtpLog').children[0].text
-          a['price'] = li.css('li.price strong').text
-          item << a
+        slug = link.url.split('.')[0][7..-1]
+        if "s" == slug
+          page.css('div.tb-content .item').each do |div|
+            a = Hash.new
+            a['url'] = div.css('h3.summary a').attr('href').value
+            img = div.css('p.pic-box img')
+            cover = img.attr('data-ks-lazyload') || img.attr('src')
+            a['cover'] = cover.value
+            a['title'] = div.css('h3.summary a').attr('title').value
+            a['price'] = div.css('div.price').text[1..-1]
+            item << a
+          end
+        else
+          page.css('div.m-items li.item').each do |li|
+            a = Hash.new
+            a['url'] = li.css('a.J_AtpLog').attr('href').value
+            a['cover'] = li.css('img.J_ItemMainImg').attr('src').value
+            a['title'] = li.css('li.title a.J_AtpLog').children[0].text
+            a['price'] = li.css('li.price strong').text
+            item << a
+          end
         end
       end
 

@@ -90,7 +90,8 @@ ul.items li.item:nth-child(5n){margin-right: 0}
 
 /* search bar */
 .search{height: 80px; background-color: #fff}
-#search input{width: 300px;float: right;}
+#search {padding:20px;}
+#search input{width: 300px;float: right; }
 
 .menu {background-color: rgb(111,190,45); height: 25px; line-height: 25px;}
 .menu .home{text-align: center;}
@@ -312,14 +313,33 @@ dl.comment dt{float:left; width: 64px;}
 
 /* topics */
 .topics {background-color: #fff; padding: 0}
-.topics .list{border-right: solid 1px #ebebeb;min-height: 450px;}
-.topics .topic {border-bottom: solid 2px #ebebeb;}
-.topics .topic:last-child{border-bottom: none}
-.topics .topic h2{font-size: 16px;}
-.topics .topic .time{width:100%;float: right;text-align: right; color: #999}
-.topics .topic .text{padding: 20px 0px;}
-.topics .topic .thumb li{float: left; margin-right: 15px}
-.topics .topic .more{width: 100%; text-align: right; padding: 14px;}
+.topics .list{border-right: solid 1px #ebebeb;min-height: 450px; padding: 20px 0px}
+.topics .topic {border-bottom: solid 1px #ebebeb;}
+.topics {
+    .topic {
+        margin-top:15px;
+        .reply{
+            float: left;width: 50px;height: 50px;background: #f2f2f2;text-align: center; margin-left:10px;
+            .count{font-size:18px; color:#666}
+            .name{font-size:12px; color:#999}
+        }
+
+        .summary{
+            margin-left: 75px;
+            .user{
+                color: #999;
+                font-size: 14px;
+                .time{float:right;padding-right:10px;}
+            }
+            h3{font-size: 18px;margin:5px 0px; font-family: Microsoft YaHei,Arial;}
+        }
+        .thumb{
+            margin-top: 20px;
+            li{float: left; width:200px; img{width:190px;}}
+        }
+        .options{float:right; a{padding:10px;color:#999;}}
+    }
+}
 .topics .sider {padding: 0}
 .topics .sider .new, 
 .topics .sider .recommend,

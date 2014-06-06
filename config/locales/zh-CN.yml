@@ -2,6 +2,7 @@
   common:
     home: '首页'
     my_home: '我的主页'
+    cpanel: '管理后台'
     community: '社区'
     styles: '搭配'
     groupon: '团购'

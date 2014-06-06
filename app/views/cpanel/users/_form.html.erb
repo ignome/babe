@@ -1,0 +1,31 @@
+<%= simple_form_for([:cpanel,@user]) do |f| %>
+  <%= render 'shared/error', :target => @user %>
+  <%= f.input :login %>
+  <%= f.input :name %>
+  <%= f.input :email, :as => :email, :input_html => { :class => "xxlarge" } %>
+  <%= f.input :avatar %>
+
+  <div class="form-group">
+    <label class="col-sm-3 control-label" for="av">avatar</label>
+    <div class="col-sm-9">
+      <%= user_avatar_tag(@user, :larger)%>
+    </div>
+  </div>
+
+  <%= f.input :admin %>
+
+  <%= f.input :sign_in_count, :readonly => true %>
+  <%= f.input :last_sign_in_at, :readonly => true %>
+  <%= f.input :current_sign_in_at, :readonly => true %>
+  <%= f.input :last_sign_in_ip, :readonly => true %>
+  <%= f.input :current_sign_in_ip, :readonly => true %>
+  
+  <div class="form-group">
+    <label class="col-sm-3 control-label" ></label>
+    <div class="col-sm-9">
+    <%= f.submit t("common.submit"), :class => "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+    或者
+    <%= link_to 'Back', cpanel_users_path %>
+    </div>
+  </div>
+<% end %>

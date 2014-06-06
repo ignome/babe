@@ -16,25 +16,24 @@
   </thead>
 
   <tbody>
-    <% @users.each do |o| %>
+    <% @users.each do |user| %>
     <tr>
       <td class="center">
-        <input type="checkbox" name="id[]" value="<%=o.id%>" class="ace">
+        <input type="checkbox" name="id[]" value="<%=user.id%>" class="ace">
       </td>
 
       <td>
-        <%= image_tag o.avatar, size: '32x32', class: 'nav-user-photo' %>
+        <%= image_tag user.avatar, size: '32x32', class: 'nav-user-photo' %>
       </td>
-      <td><%= o.name %>
-      <td><%= o.items_count %></td>
-      <td><%= "#{o.followers_count}/#{o.followers_count}" %></td>
-      <td><%= o.created_at.strftime("%Y-%m-%d")%></td>
-      <td><%= o.last_sign_in_ip%></td>
+      <td><%= user.name %>
+      <td><%= user.items_count %></td>
+      <td><%= "#{user.followers_count}/#{user.followers_count}" %></td>
+      <td><%= user.created_at.strftime("%Y-%m-%d")%></td>
+      <td><%= user.last_sign_in_ip%></td>
       <td class="hidden-480">Status</th>
       <td>
-      删除
-      无效
-      达人
+        <%= link_to '', edit_cpanel_user_path(user), :class => "glyphicon glyphicon-edit" %>
+        <%= link_to '', cpanel_user_path(user), 'data-confirm' => '警告！此动作无法撤销，确定要删除么?', :method => :delete, :class => "glyphicon glyphicon-trash"  %>
       </td>
     </tr>
     <% end %>

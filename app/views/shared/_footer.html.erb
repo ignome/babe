@@ -1,10 +1,10 @@
 <div id="footer">
-  <div id="footer-inner">
-    <div class="group">
-      <div class="footer-links">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3">
         <p class="logo"></p>
       </div>
-      <div class="footer-links">
+      <div class="col-md-3">
         <h3>公司</h3>
         <ul>
           <% Catalog.about.child.limit(4).each do |about| %>
@@ -13,7 +13,7 @@
         </ul>
       </div>
 
-      <div class="footer-links">
+      <div class="col-md-3">
         <h3>社区</h3>
         <ul>
           <li><a href="#">问答</a></li>
@@ -22,7 +22,7 @@
         </ul>
       </div>
 
-      <div class="footer-links">
+      <div class="col-md-3">
         <h3>帮助</h3>
         <ul>
           <li><a href="#">进入社区讨论</a></li>
@@ -35,10 +35,11 @@
     </div>
 
 
-    <p>Copyright © 2011–2014 Quick Fish LLC. 所有内容版权归属各作者所有 未经授权不得转载.</p>
-
-    <p class="follow">
-    </p>
+    <div class="row">
+      <div class="col-md-12">
+        <p>Copyright © 2011–2014 快鱼信息技术有限公司版权所有. 所有内容版权归属各作者所有 未经授权不得转载.</p>
+      </div>
+    </div>
   </div>
 </div>
 

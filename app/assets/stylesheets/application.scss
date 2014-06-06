@@ -1,0 +1,26 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require bootstrap
+ *= require default
+ *= require social-share-button
+ *= require_self
+ */
+
+body{background: rgb(243,243,243) image_url('body-bg.png') no-repeat;}
+ol,ul {list-style: none; padding: 0; margin: 0}
+
+/* footer style */
+#footer {border-top: 1px solid #ddd}
+#footer .container{padding: 30px 10px 20px 10px;font-size: 12px;color: #999;}
+#footer h3{font-size: 16px;}
+#footer a {font-weight: bold;color: #777}
+#footer a:hover {text-decoration: none; color: #ea4c89}
+#footer p {clear:left;margin:0 15px 10px 0;line-height: 1.6}

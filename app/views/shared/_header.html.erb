@@ -15,8 +15,9 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.name%><b class="caret"></b></a>
           <%= render_list :class => "dropdown-menu" do |li|
               li << link_to(t("common.my_home"), user_path(current_user.login) )
-              unless params[:controller].match(/cpanel/)
-                li << link_to(t("common.edit_account"), edit_user_registration_path)
+              li << link_to(t("common.edit_account"), edit_user_registration_path)
+              if current_user and current_user.try(:admin)
+              li << link_to(t('common.cpanel'), cpanel_root_path) 
               end
               li << link_to(t("users.signout"), destroy_user_session_path, method: "delete" )
             end %>
