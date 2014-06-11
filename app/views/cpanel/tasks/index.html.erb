@@ -1,70 +1,71 @@
+<%= content_for :styles do %>
+<style type="text/css">
+.toolong {width: 799px;}
+.toolong a{width:100%; overflow: hidden}
+</style>
+<% end %>
 <%= render 'cpanel/shared/tabs_of_task' %>
-
-<%= simple_form_for([:cpanel, Item.new], html:{ id: 'form' }) do %>
+<%= simple_form_for TaskLink.new, :url => fetch_cpanel_tasks_path, :method => 'post' do %>
 <table class="table" width="100%" cellpadding="0" cellspacing="0">
   <thead>
     <tr>
-      <th width="30">
+      <th >
         <input type="checkbox" name="all" id="chkall">
       </th>
-      <th width="64">小图</th>
-      <th>商品名称</th>
-      <th width="100">生成时间</th>
-      <th width="100" >价格</th>
-      <th width="120"></th>
+      <th >链接</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @items.each do |o| %>
+    <% @pages.each do |page| %>
     <tr>
-      <td >
-        <input type="checkbox" id="chk<%= o.id %>" name="id[]" value="<%=o.id %>">
+      <td width="15">
+        <input type="checkbox" id="chk<%= page.id %>" name="id[]" value="<%=page.id %>">
       </td>
 
-      <td>
-        <%= image_tag o.cover, size: '50x50' %>
-      </td>
-      <td><%=link_to o.title, o.url, target: '_blank' %></td>
-      <td><%= o.created_at.strftime("%m-%d %H:%M:S")%></td>
-      <td><%= o.price %></th>
-      <td>
-        <%= link_to '删除', cpanel_task_path(o.id), :method => :delete, :'data-confirm' => '确定要删除吗?', :class => "icon-remove" %>
-        <a href="<%= o.url %>" class="download">下载</a>
+      <td class="toolong"><%= link_to page.url, page.url, title: page.url, target: '_blank' %></td>
+
+      <td width="80">
+        <%= link_to '删除', cpanel_task_path(page.id), :method => :delete, :'data-confirm' => '确定要删除吗?', :class => "icon-remove" %>
+        <a href="###" class="crawl" id="<%= page.id%>">采集</a>
       </td>
     </tr>
     <% end %>
 
     <tfoot>
       <td colspan="9">
-        <div class="btn-group btn-group-xs">
-          <button type="button" class="btn btn-danger" onclick="post('./tasks/remove');">删除选中</button>
-          <button type="button" class="btn btn-success" onclick="post('./items/moveto');">下载选中</button>          
-        </div>
-
-        <%= will_paginate @items%>
-
+          <button type="button" class="btn btn-danger btn-xs">删除选中项</button> 
+          <button type="submit" class="btn btn-warning btn-xs">采集选中项</button>
+          <%= will_paginate @pages%>
       </td>
     </tfoot>
   </tbody>
 </table>
 <% end %>
 
-<%= content_for :scripts do %>
+<% content_for :scripts do %>
 <script type="text/javascript">
-$(document).on('click', 'a.download', function(){
-  var self = $(this);
-  $.ajax({
-    url : '/items/fetch',
-    data : { 'url': self.attr('href'), 'save': 1},
-    beforeSend : function(){
-      self.removeClass('download');
-    },
-    success : function(){
-      self.remove();
-    }
+$(document).ready(function(){
+  $(document).on('click', '.crawl', function(){
+    var self = $(this);
+    if (self.hasClass('processing')) return false;
+    $.ajax({
+      type : 'POST',
+      url : "<%= fetch_cpanel_tasks_path%>",
+      data : {'id[]': self.attr('id')},
+      beforeSend : function(){
+        self.html('正在采集');
+      },
+      success : function(data){
+        self.html('已经采集');
+      },
+      error : function(xhr, status, error){
+        self.html('采集失败:' + error);
+      }
+    });
+    return false;
   });
-  return false;
 });
 </script>
 <% end %>

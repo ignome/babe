@@ -1,6 +1,7 @@
 require 'nokogiri'
 
 class Item < ActiveRecord::Base
+  HOST = /^http:\/\/\w+\.(jd|tmall|taobao)\.com/
   # For keeping the URL to download by sidekiq in backen!
   attr_accessor :urls, :comment
 
@@ -46,8 +47,15 @@ class Item < ActiveRecord::Base
   end
 
   def self.parse url
-    response = Net::HTTP.post_form(URI('http://localhost:8088'), {'url' => url})
-    page = Nokogiri::HTML(response.body, nil, 'GBK')
+    uri = URI('http://localhost:8088/')
+    req = Net::HTTP::Post.new(uri.path)
+    req.set_form_data('url' => url)
+    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+      http.read_timeout = 10 * 60 * 60
+      http.request(req)
+    end
+
+    page = Nokogiri::HTML(res.body, nil, 'GBK')
     item = Item.new
     item.url = url
 
