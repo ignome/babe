@@ -47,7 +47,8 @@ class Cpanel::TasksController < Cpanel::ApplicationController
       TaskPage.create news
     end
 
-    redirect_to pages_cpanel_tasks_path, notice: 'Genereated page success'
+    redirect_to cpanel_tasks_path, notice: 'Genereated page success'
+
   end
 
   def promotion
@@ -145,7 +146,8 @@ class Cpanel::TasksController < Cpanel::ApplicationController
         #response = Net::HTTP.post_form(URI('http://localhost:8088'), {'url' => url['url']})
         item  = Item.parse(url['url'])
         # A random user, id > 1,000 and < 10,000
-        item.user_id = rand(900) + 100
+        #rand(900) + 100
+        item.user_id = 1
         item.save
       end
 

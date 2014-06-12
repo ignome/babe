@@ -23,8 +23,15 @@ class Item < ActiveRecord::Base
 
   def download_images_from_urls
     self.urls.each do |url|
+      begin
       cover = self.covers.new
       cover.file.download! url
+      rescue Exception => e
+        Rails.logger.info '*' * 80
+        Rails.logger.info e.message
+        Rails.logger.info url
+        next
+      end
       cover.user_id = self.user_id
       cover.save
       # Change the cover too!
@@ -58,6 +65,7 @@ class Item < ActiveRecord::Base
     page = Nokogiri::HTML(res.body, nil, 'GBK')
     item = Item.new
     item.url = url
+    item.urls = []
 
     if /jd\.com/.match url
       item.title = page.css('div#name h1').text.strip
@@ -79,18 +87,30 @@ class Item < ActiveRecord::Base
         item.url = item.url.split('?')[0] << '?' << id
       end
       item.title = page.css('#J_Title h3').text.strip
-      item.price = page.css('em.tb-rmb-num').text.strip
-      images = page.css('ul.tb-thumb img')
-      item.urls = images.map{ |img| img.attr('src')[0..-11] }
+      item.price = page.css('li#J_StrPriceModBox .tb-rmb-num').text.strip.to_f
+      item.mprice = page.css('li#J_PromoPrice .tb-rmb-num').text.strip.to_f
+      page.css('ul.tb-thumb img').each do |img|
+        src = img.attr('data-src').split('.')
+        # remove jpg_50x50
+        ext = src.delete_at(-2)
+        # sometimes xx.png_WWxHH.jpg will 404
+        src[-1] = ext.split('_')[0]
+        item.urls << src.join('.')
+      end
       item.body = page.css('div#description img').map{ |img| img.attr('src') }.join(';')
     
 
     elsif /tmall\.com/.match url
       item.title = page.css('h3[data-spm]').text.strip
-      item.price = page.css('.J_originalPrice').text.strip
-      item.mprice = page.css('span.tm-price').text.strip
-      images = page.css('li.tb-s60 img')
-      item.urls = images.map{ |img| img.attr('src')[0..-14] }
+      item.price = page.css('li#J_StrPriceModBox .tm-price').text.strip.to_f
+      item.mprice = page.css('li#J_PromoPrice .tm-price').text.strip.to_f
+      page.css('li.tb-s60 img').each do |img|
+        src = img.attr('src').split('.')
+        ext = src.delete_at(-2)
+        # sometimes xx.png_WWxHH.jpg will 404
+        src[-1] = ext.split('_')[0]
+        item.urls << src.join('.')
+      end
       item.body = page.css('div#description img').map{ |img| img.attr('src') }.join(';')
     
     # No more yet
