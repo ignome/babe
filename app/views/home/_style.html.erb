@@ -4,7 +4,7 @@
 </div>
 <div class="fitness col-md-9">
   <div class="hot">
-    <% Style.all.limit(5).each do |style|%>
+    <% @styles.each do |style|%>
     <div class="fit">
       <%= link_to style_path(style.id) do %>
         <%= image_tag style.photos.first.file.url, size: '120x360' %>

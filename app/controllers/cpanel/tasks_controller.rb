@@ -154,7 +154,8 @@ class Cpanel::TasksController < Cpanel::ApplicationController
       # Set as finished
       TaskPage.update_all("status=1", ["id in (?)", params[:id]])
 
-      render text: 'done'
+      #render text: 'done'
+      redirect_to cpanel_tasks_path, notice: '采完了'
     end
   end
 

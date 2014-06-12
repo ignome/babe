@@ -44,27 +44,31 @@
 </table>
 <% end %>
 
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">你知道吗?</h4>
+      </div>
+      <div class="modal-body">
+        <p>正在努力采集中....</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <% content_for :scripts do %>
 <script type="text/javascript">
 $(document).ready(function(){
   $(document).on('click', '.crawl', function(){
-    var self = $(this);
-    if (self.hasClass('processing')) return false;
-    $.ajax({
-      type : 'POST',
-      url : "<%= fetch_cpanel_tasks_path%>",
-      data : {'id[]': self.attr('id')},
-      beforeSend : function(){
-        self.html('正在采集');
-      },
-      success : function(data){
-        self.html('已经采集');
-      },
-      error : function(xhr, status, error){
-        self.html('采集失败:' + error);
-      }
-    });
-    return false;
+    var id = '#chk'+ $(this).attr('id');
+    $(id).prop('checked', true);
+    $('.modal').modal();
+    $('#new_task_link').submit();
   });
 });
 </script>

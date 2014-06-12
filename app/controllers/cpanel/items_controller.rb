@@ -23,7 +23,7 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
 
   def remove
     Item.destroy_all(id: params[:id])
-    redirect_to cpanel_items_path, notice: 'remove success'
+    redirect_to cpanel_items_path(page: params[:page] || 1), notice: 'remove success'
   end
 
 end

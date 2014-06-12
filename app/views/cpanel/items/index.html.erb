@@ -1,5 +1,6 @@
 
 <%= simple_form_for([:cpanel, Item.new], html:{ id: 'form' }) do %>
+<input type="hidden" name="page" value="<%= params[:page];%>" />
 <table class="table" width="100%" cellpadding="0" cellspacing="0">
   <thead>
     <tr>
@@ -47,7 +48,7 @@
         <div class="btn-group btn-group-xs">
 
           <button type="button" class="btn btn-warning" onclick="post('./items/moveto');">移动分类</button>
-          <button type="button" class="btn btn-danger">删除选中</button>
+          <button type="button" class="btn btn-danger" onclick="post('./items/remove');">删除选中</button>
           <button type="button" class="btn btn-info">隐藏选中</button>
           <button type="button" class="btn btn-success">恢复选中</button>          
         </div>
@@ -56,12 +57,11 @@
   </tbody>
 </table>
 <% end %>
-<%= will_paginate @items%>
 
+<%= will_paginate @items%>
 
 <!-- Treeview -->
 <%= render 'cpanel/categories/treeview' %>
-
 
 <%= content_for :scripts do %>
 <script type="text/javascript">
