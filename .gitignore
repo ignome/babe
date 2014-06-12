@@ -19,4 +19,5 @@
 public/uploads
 public/assets
 public/users
+public/scripts/category.json
 config/deploy

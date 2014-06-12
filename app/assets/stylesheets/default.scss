@@ -312,26 +312,36 @@ dl.comment dt{float:left; width: 64px;}
 #users ul.items li.item:nth-child(5n) {margin-right: 0;}
 
 /* topics */
-.topics {background-color: #fff; padding: 0}
-.topics .list{border-right: solid 1px #ebebeb;min-height: 450px; padding: 20px 0px}
-.topics .topic {border-bottom: solid 1px #ebebeb;}
-.topics {
+#topics .toolbar{
+    background: #fff;height: 40px;line-height: 26px;padding: 7px 15px;
+    .sparator{margin: 0 5px;color: #999;}
+    a{font-size:12px; color:#999;}
+}
+#topics {
+    .topics {background-color: #fff; padding: 10px 0px; margin-top:10px;}
     .topic {
-        margin-top:15px;
-        .reply{
-            float: left;width: 50px;height: 50px;background: #f2f2f2;text-align: center; margin-left:10px;
-            .count{font-size:18px; color:#666}
-            .name{font-size:12px; color:#999}
+        margin-top:15px;border-bottom: solid 1px #ebebeb;
+        .node{
+            float: left;width: 50px;margin-left:10px;
+            .reply{
+                height: 50px;background: #f2f2f2;text-align: center; 
+                .count{font-size:18px; color:#666}
+                .name{font-size:12px; color:#999}
+            }
+            .type{background-color:#1bcb66;margin-bottom: 10px;display: block;height: 20px;line-height: 20px;text-align: center;color: #fff;}
         }
+        
 
         .summary{
             margin-left: 75px;
             .user{
+                margin-top:10px;
                 color: #999;
-                font-size: 14px;
-                .time{float:right;padding-right:10px;}
+                font-size: 12px;
+                a{color:#999;}
             }
-            h3{font-size: 18px;margin:5px 0px; font-family: Microsoft YaHei,Arial;}
+            h3{font-size: 14px;margin:5px 0px; color:#333;}
+            .text{margin-top: 10px;line-height: 24px;font-size:12px; color:#666;}
         }
         .thumb{
             margin-top: 20px;

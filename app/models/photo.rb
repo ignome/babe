@@ -19,7 +19,7 @@ class Photo < ActiveRecord::Base
     {
       "id"    => self.id,
       "name"  => self.name,
-      "url"   => self.file.url,
+      "link"   => self.file.url,
       "thumbnail_url" => self.file.default.url
       #"size"  => self.size,
       #"delete_url"  => photo_path(:id => id),

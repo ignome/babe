@@ -2,6 +2,8 @@
 
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="/scripts/jquery-file-uploader/css/jquery.fileupload.css">
+<link href="/scripts/editor/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="/scripts/editor/css/froala_editor.min.css" rel="stylesheet" type="text/css">
 <% end %>
 
 <div class="container" id="main">
@@ -68,7 +70,8 @@
 <script src="/scripts/jquery-file-uploader/js/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
 <script src="/scripts/jquery-file-uploader/js/jquery.fileupload.js"></script>
-
+<script src="/scripts/editor/js/froala_editor.min.js"></script>
+<script src="/scripts/editor/js/langs/zh_cn.js"></script>
 <script>
 $(function () {
     'use strict';
@@ -94,6 +97,48 @@ $(function () {
         }
     }).prop('disabled', !$.support.fileInput)
         .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+    //editor
+    $.Editable.prototype.parseImageResponse = function(d){
+      var json = $.parseJSON(d);
+      try{
+        this.writeImage(json.link);
+        var html = '<dl><dt><img src="'+ json.thumbnail_url +'" width="100" /></dt>';
+            html += '<dd><input type="hidden" name="topic[photo][id][]" value="'+ json.id +'" />'+ json.name +'</dd></dl>';
+            $('#files').append( html );
+      }catch (d) {
+        this.throwImageError(4)
+      }
+    }
+
+    $('#text').editable({inlineMode: false, 
+      language: 'zh_cn',
+      placeholder: '开始输入...',
+      minHeight: 150,
+      mediaManager: false,
+      maxImageSize: 1024 * 1024 * 3,
+      imageUploadParam: 'files[]',
+      imageUploadParams: {authenticity_token: $('input[name="authenticity_token"]').val()},
+      imageDeleteURL: 'http://example.com/delete_image',
+      imageUploadURL: "<%= photos_path %>",
+      borderColor: '#ccc',
+      buttons: ['bold', 'fontSize', 'color', 'item', 'insertImage', 'insertVideo'], 
+      blockTags: ['p'],
+      
+      customButtons: {
+        item: {
+          title: '宝贝',
+          icon: {
+            type: 'font',
+            value: 'fa fa-shopping-cart'
+          },
+          callback: function (editor){
+            alert ('Hello!')
+          }
+        }
+      }
+    });
+
 });
 </script>
 <% end %>

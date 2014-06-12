@@ -1,17 +1,19 @@
 <div class="topic clearfix">
-  <div class="reply">
-    <div class="count">250</div>
-    <div class="name">回复</div>
+  <div class="node">
+    <div class="type round-sm">问答</div>
+    
+    <div class="reply">
+      <div class="count">250</div>
+      <div class="name">回复</div>
+    </div>    
   </div>
 
   <div class="summary">
     <h3><%=link_to topic.title, topic_path(topic) %></h3>
     <div class="user">
-      <%= user_avatar_tag(topic.user, :small, text: true) %>
-      <a href="">浏览1233</a> 
-      <a href="">喜欢1233</a>
-      <a href="">回复1233</a>
-      <span class="time"><%= topic.created_at.strftime("%H:%M:%S") %>
+      <%= link_to topic.user.name, user_path(topic.user.login) %>
+      发表于 <span class="time"><%= topic.created_at.strftime("%H:%M:%S") %>
+      浏览1233 / 喜欢1233
     </div>
     <div class="text"><%= truncate(topic.body, length: 140) %></div>
     <ul class="thumb clearfix">

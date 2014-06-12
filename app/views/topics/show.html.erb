@@ -5,7 +5,7 @@
         <h1><%= @topic.title %></h1>
 
         <div class="context">
-          <%= @topic.body %>
+          <%= raw @topic.body %>
           <% @topic.photos.each do |photo| %>
           <%= image_tag photo.file.url %>
           <% end %>

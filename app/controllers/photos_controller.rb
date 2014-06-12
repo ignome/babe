@@ -7,19 +7,19 @@ class PhotosController < ApplicationController
   end
 
   def create
-    result  = {files: []}
+    #result  = {files: []}
 
-    params[:files].each do |file|
-      @photo = current_user.photos.new(file: file)
+    #params[:files].each do |file|
+      @photo = current_user.photos.new(file: params[:files][0])
       
       if @photo.save
         #render :json => {'files' => [@photo.to_jq_upload]}.to_json
-        result[:files] << @photo.to_jq_upload
+        result = @photo.to_jq_upload
       else
         #render :json => [{:error => 'Upload failure'}], :status => 304
-        result[:files] << {:error => @photo.errors.full_messages}
+        result = {:error => @photo.errors.full_messages}
       end
-    end
+    #end
     render :json => result.to_json
   end
 

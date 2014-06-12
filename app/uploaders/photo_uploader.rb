@@ -20,7 +20,7 @@ class PhotoUploader < BaseUploader
       if model.instance_of? Ad
         img.resize!(model.position.width, model.position.height)
       else
-        img.resize_to_fill!(150,200)
+        img.resize_to_fill(150,200)
       end
       img
     end
