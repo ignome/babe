@@ -31,7 +31,10 @@
       <%= render 'user', target: @item.user %>
 
       <div class="buy">
-        <span class="price">&yen;<b><%= sprintf("%.2f", @item.price) %></b></span>
+        <span class="price">
+          <em class="yen">&yen;</em>
+          <b><%= sprintf("%.2f", @item.mprice || @item.price) %></b>
+        </span>
         <span class="round url">
           <%= render_buy_tag @item.url %>
         </span>
