@@ -22,10 +22,10 @@ class Item < ActiveRecord::Base
   after_create :new_first_comment
 
   def download_images_from_urls
-    self.urls.each do |url|
+    self.urls.each_with_index do |url, index|
       begin
-      cover = self.covers.new
-      cover.file.download! url
+        cover = self.covers.new
+        cover.file.download! url
       rescue Exception => e
         Rails.logger.info '*' * 80
         Rails.logger.info e.message
@@ -35,7 +35,7 @@ class Item < ActiveRecord::Base
       cover.user_id = self.user_id
       cover.save
       # Change the cover too!
-      self.cover = cover.file.default.url
+      self.cover = cover.file.default.url if 0 == index
     end
     self.save
   end
@@ -69,13 +69,14 @@ class Item < ActiveRecord::Base
 
     if /jd\.com/.match url
       item.title = page.css('div#name h1').text.strip
-      item.price = page.css('strong#jd-price').text.strip[1..-1]
-      item.mprice = page.css('del#page_maprice').text.sub! /\D+/, ''
-      images = page.css('div.spec-items ul.lh img')
-      # Real 350px image
-      host = images[0].attr('src').split('/')[2]
-      # Reverse to keep the original order!
-      item.urls = images.map{|img| "http://#{host}/n1/#{img.attr('data-url')}"}
+      item.mprice = page.css('li#summary-price #jd-price').text.sub! /\D+/, ''
+      item.price = page.css('li#summary-market #page_maprice').text.sub! /\D+/, ''
+      page.css('div.spec-items ul.lh img').each do |img|
+        # Real 350px image
+        host = images[0].attr('src').split('/')[2]
+        item.urls <<  "http://#{host}/n1/#{img.attr('data-url')}"
+      end
+      
       # Should get all pictures of description.
       item.body = page.css('div.detail-content img').map{|img| img.attr('data-lazyload')}.join(';')
     

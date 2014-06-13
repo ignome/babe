@@ -28,7 +28,7 @@ class Cpanel::TasksController < Cpanel::ApplicationController
 
     if /tmall\.com/.match(url)
       while first < last do
-        s = (first - 1) * 60
+        s = (first - 1) * 30
         pages << (url.sub /s=\d+/, "s=#{s}")
         first += 1
       end
@@ -36,7 +36,7 @@ class Cpanel::TasksController < Cpanel::ApplicationController
 
     if /taobao\.com/.match(url)
       for page in first..last do
-        s = (page -1) * 96
+        s = (page -1) * 30
         pages << (url.sub /&s=\d+/, "&s=#{s}")
       end
     end

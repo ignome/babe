@@ -5,6 +5,8 @@ class TopicsController < ApplicationController
 
   def index
     @topics = Topic.all.includes(:photos).order('id desc')
+    @sections = Section.includes(:nodes).order('sort asc')
+    @users = User.order('topics_count desc').limit(10)
   end
 
   def new

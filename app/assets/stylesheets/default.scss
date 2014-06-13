@@ -48,7 +48,7 @@ ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
 .user .photo, .url .photo{border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%}
 
 #item .price {height: 35px; line-height: 35px; color: #fa3725;}
-#item .price .yen{font-weight: 400; font-size: 13px}
+#item .price .yen{font-weight: 400; font-size: 13px; color: #fa3725;}
 #item .price strong{font-weight: 800; font-size: 20px; padding-left: 5px;}
 ul.items li.item:nth-child(5n){margin-right: 0}
 
@@ -112,11 +112,12 @@ ul.items li.item:nth-child(5n){margin-right: 0}
 #home .cat ul li .title{font-size: 16px; font-weight: bold;}
 #home .cat ol.secondary li{float: left; padding: 10px; border-bottom: none;}
 
-#home #special{height: 110px; margin-left: 320px; margin-top: 5px;}
-#home #special ul li{float: left; height: 110px; overflow: hidden;}
+#home #special{height: 110px; margin-left: 310px; margin-top: 5px;}
+#home #special ul li{float: left; height: 110px; overflow: hidden;width:260px;overflow:hidden; border:solid 1px #ccc;margin-left:10px;}
+
 #home #promotion ul li{background-color: #fff; float: left; margin: 0 -1px -1px 0; padding: 18px 8px; border: 1px solid #e4e3e5;}
 #home #promotion .title{font-size: 13px; height: 35px; line-height: 35px; margin-top: 15px}
-#home #promotion .price em{color: #fa3725}
+#home #promotion .price .yen{color:#fa3725}
 #home #promotion .price strong{color: #fa3725; font-weight: 800; font-size: 20px;}
 #home #promotion .price del{font-size: 18px; font-weight: 500}
 #home #promotion .price .free{color: #989898; padding: 0px 5px; font-size: 11px}
@@ -359,6 +360,31 @@ dl.comment dt{float:left; width: 64px;}
 .topics .topic .context{ line-height: 28px;}
 #topics #main .new{background-color: #fff}
 #topics #main .new .edit{padding: 15px; border-right: solid 1px #ebebeb}
+
+#topics{
+    .category{
+        .section{
+
+            float:left;  width:100%; margin: 10px 0px;
+
+            li{
+                font-size:14px; font-weight: 300;
+
+                .node{
+                    margin: 10px 0 10px 15px;
+
+                    li{float:left; margin-left: 8px; height:26px; line-height:26px; font-size:12px}
+                }
+            }
+        }
+    }
+
+    .users {
+        ul {
+            li{float:left; margin-right: 10px;}
+        }
+    }
+}
 
 /* user help */
 #help #main{background-color: #fff;}

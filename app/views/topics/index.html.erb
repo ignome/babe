@@ -26,11 +26,33 @@
         <%= link_to new_topic_path do %>
         <span class="round box"><i class="glyphicon glyphicon-edit"></i>发表新话题</span>
         <% end %>
+        <a href="">
+          <span class="round box"><i class="glyphicon glyphicon-edit"></i>申请新主题</span>
+        </a>
+      </div>
+
+      <div class="category">
+        <% @sections.each do |section| %>
+        <ul class="section">
+          <li>
+            <%= link_to section.name, '' %>
+            <ol class="node">
+            <% section.nodes.each do |node| %>
+              <li><%= link_to node.name, ''%></li>
+            <% end %>
+            </ol>
+          </li>
+        </ul>
+        <% end %>
       </div>
 
       <div class="users">
-        <div class="hd"><h5>最活跃用户</h5></div>
-        
+        <div class="hd"><h5>活跃用户</h5></div>
+        <ul>
+          <% @users.each do |user| %>
+          <li><%=user_avatar_tag(user, :normal) %></li>
+          <% end %>
+        </ul>
       </div>
     </div>
   </div>

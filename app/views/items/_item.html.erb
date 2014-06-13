@@ -3,7 +3,7 @@
     <%= link_to item_path(item) do %>
     <%= image_tag item.cover %>
     <% end %>
-    <span class="price round">&yen;<%= sprintf("%.2f", item.mprice || item.price ) %></span>
+    <span class="price round">&yen;<%= sprintf("%.2f", item.mprice ? item.mprice : item.price ) %></span>
   </div>
   <div class="tools">
     <span class="round-sm"><i class="glyphicon glyphicon-heart"></i>喜欢</span>
