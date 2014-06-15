@@ -22,7 +22,7 @@ class ItemsController < ApplicationController
     
     url = params[:url].to_s.strip
 
-    if HOST.match url
+    if /(jd|tmall|taobao|)\.com/.match url
       @item  = Item.parse(url)
       @item.user_id = current_user.id
       

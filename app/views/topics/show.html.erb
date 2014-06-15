@@ -6,15 +6,10 @@
 
         <div class="context">
           <%= raw @topic.body %>
-          <% @topic.photos.each do |photo| %>
-          <%= image_tag photo.file.url %>
-          <% end %>
         </div>
 
         <div class="comment">
-          
           <%= render 'comments/comment', target: @topic  %>
-
         </div>
       </div>
     </div>
@@ -26,16 +21,20 @@
         <% end %>
       </div>
 
-      <div class="user">
-        作者信息
-      </div>
+     
+      <%= render 'items/user', target: @topic.user %>
 
-      <div class="recommend">
-        推荐主题
+      <div class="recommend clearfix">
+        <div class="hd">相关</div>
+        <ul class="">
+          <% @links.each do |link| %>
+          <li><%= link_to link.title, topic_topics_path(link) %></li>
+          <% end %>
+        </ul>
       </div>
 
       <div class="follow">
-        推荐关注
+        
       </div>
     </div>
   </div>

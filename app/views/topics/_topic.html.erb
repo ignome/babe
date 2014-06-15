@@ -9,7 +9,7 @@
   </div>
 
   <div class="summary">
-    <h3><%=link_to topic.title, topic_path(topic) %></h3>
+    <h3><%=link_to topic.title, topic_topics_path(topic) %></h3>
     <div class="user">
       <%= link_to topic.user.name, user_path(topic.user.login) %>
       发表于 <span class="time"><%= topic.created_at.strftime("%H:%M:%S") %>

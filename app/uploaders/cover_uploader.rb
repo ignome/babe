@@ -12,7 +12,17 @@ class CoverUploader < BaseUploader
   end
 
   version :default do
-    process :resize_to_fill => [150,200]
+    #process :resize_to_fill => [215,200]
+    process :resize_by_width
+  end
+
+  def resize_by_width
+    manipulate! do |img|
+      w = 215
+      r = w / img[:width]
+      h = r * h
+      img.resize! "#{width}x#{height}"
+    end
   end
 
 end

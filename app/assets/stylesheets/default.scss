@@ -1,7 +1,8 @@
 body{padding-top: 30px;}
 a{color:#333;}
 a:hover{text-decoration: none; color: rgb(111,190,45)}
-
+.container{width:980px;}
+#home .container, #categories .container{width:1170px}
 .logo{ background: image_url('logo.gif'); width:206px; height:36px;  }
 
 .carousel-inner .item a img{height: 100%; max-height: none; max-width: none}
@@ -50,7 +51,7 @@ ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
 #item .price {height: 35px; line-height: 35px; color: #fa3725;}
 #item .price .yen{font-weight: 400; font-size: 13px; color: #fa3725;}
 #item .price strong{font-weight: 800; font-size: 20px; padding-left: 5px;}
-ul.items li.item:nth-child(5n){margin-right: 0}
+
 
 .hd {position: relative; margin-bottom: 15px;}
 .hd .pagination{position: absolute; right: 0}
@@ -139,9 +140,9 @@ ul.items li.item:nth-child(5n){margin-right: 0}
 
 .list .header{float: left; width: 100%}
 ul.items {padding: 0; margin: 0}
-ul.items li {width: 215px; height: 425px; float:left; margin: 0 16px 15px 0px; background-color: #fff; border: solid 1px #ebebeb; overflow: hidden;}
-ul.items li .cover{height: 270px; overflow: hidden; position: relative;}
-ul.items li .cover img{height: 100%; width: 100%}
+ul.items li {width: 215px;  float:left; margin: 0 16px 15px 0px; background-color: #fff; border: solid 1px #ebebeb; overflow: hidden;}
+ul.items li .cover{ overflow: hidden; position: relative;}
+ul.items li .cover img{width:215px;}
 ul.items li .price{position: absolute; right: 10px; bottom: 10px; background-color: rgb(111, 190, 45); color:#fff;padding: 3px 8px;font-size: 11px; border: none}
 ul.items li .title{padding: 5px; height: 25px; line-height: 25px; font-weight: bold; overflow: hidden;}
 ul.items li .tools{height: 32px;padding: 5px 8px;}
@@ -321,9 +322,11 @@ dl.comment dt{float:left; width: 64px;}
 #topics {
     .topics {background-color: #fff; padding: 10px 0px; margin-top:10px;}
     .topic {
-        margin-top:15px;border-bottom: solid 1px #ebebeb;
+        img{max-width: 100%;}
+        h1{font-weight:800; font-size:18px}
+        margin-top:15px;border-bottom: solid 1px #ebebeb; padding:10px;
         .node{
-            float: left;width: 50px;margin-left:10px;
+            float: left;width: 50px;
             .reply{
                 height: 50px;background: #f2f2f2;text-align: center; 
                 .count{font-size:18px; color:#666}
@@ -334,7 +337,7 @@ dl.comment dt{float:left; width: 64px;}
         
 
         .summary{
-            margin-left: 75px;
+            margin-left: 65px;
             .user{
                 margin-top:10px;
                 color: #999;
@@ -351,7 +354,6 @@ dl.comment dt{float:left; width: 64px;}
         .options{float:right; a{padding:10px;color:#999;}}
     }
 }
-.topics .sider {padding: 0}
 .topics .sider .new, 
 .topics .sider .recommend,
 .topics .sider .follow,
@@ -362,13 +364,14 @@ dl.comment dt{float:left; width: 64px;}
 #topics #main .new .edit{padding: 15px; border-right: solid 1px #ebebeb}
 
 #topics{
+    .sider {background-color:#fff}
     .category{
         .section{
 
-            float:left;  width:100%; margin: 10px 0px;
+            float:left;  width:100%; margin: 10px 0px; border-bottom: dashed 1px #ccc;
 
             li{
-                font-size:14px; font-weight: 300;
+                font-size:14px; font-weight: 300; 
 
                 .node{
                     margin: 10px 0 10px 15px;
@@ -383,6 +386,9 @@ dl.comment dt{float:left; width: 64px;}
         ul {
             li{float:left; margin-right: 10px;}
         }
+    }
+    .recommend {
+        li{height:32px; line-height:32px;border-bottom: dotted 1px #ccc;}
     }
 }
 

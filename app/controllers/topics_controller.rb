@@ -9,11 +9,21 @@ class TopicsController < ApplicationController
     @users = User.order('topics_count desc').limit(10)
   end
 
+  def node
+    @node = Node.find(params[:id])
+    @section = @node.section
+    @nodes = @section.nodes
+    @sections = Section.includes(:nodes).order('sort asc')
+    @topics = @node.topics
+    @users = []
+  end
+
   def new
     @topic = Topic.new
   end
 
   def show
+    @links = Topic.where(node_id: @topic.node_id).order('created_at desc').limit(10)
   end
 
   def create

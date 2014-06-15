@@ -23,11 +23,13 @@ class Item < ActiveRecord::Base
 
   def download_images_from_urls
     self.urls.each_with_index do |url, index|
+      Rails.logger.info '*' * 80
+      Rails.logger.info url
       begin
         cover = self.covers.new
         cover.file.download! url
       rescue Exception => e
-        Rails.logger.info '*' * 80
+        
         Rails.logger.info e.message
         Rails.logger.info url
         next
@@ -35,7 +37,7 @@ class Item < ActiveRecord::Base
       cover.user_id = self.user_id
       cover.save
       # Change the cover too!
-      self.cover = cover.file.default.url if 0 == index
+      self.cover = cover.file.url if 0 == index
     end
     self.save
   end
@@ -73,7 +75,7 @@ class Item < ActiveRecord::Base
       item.price = page.css('li#summary-market #page_maprice').text.sub! /\D+/, ''
       page.css('div.spec-items ul.lh img').each do |img|
         # Real 350px image
-        host = images[0].attr('src').split('/')[2]
+        host = img.attr('src').split('/')[2]
         item.urls <<  "http://#{host}/n1/#{img.attr('data-url')}"
       end
       

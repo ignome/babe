@@ -1,8 +1,8 @@
-require 'sidekiq/web'
+#require 'sidekiq/web'
 
 Babe::Application.routes.draw do
   
-  mount Sidekiq::Web => '/sidekiq'
+  #mount Sidekiq::Web => '/sidekiq'
 
   get "account/avatar" => "profile#avatar"
   patch "account/avatar" => "profile#upload"
@@ -28,7 +28,6 @@ Babe::Application.routes.draw do
   get '/help/:slug(/:page)' => 'help#view', as: 'help'
 
   resources :photos
-  resources :topics
   resources :comments
   #resources :help
 
@@ -59,6 +58,13 @@ Babe::Application.routes.draw do
     collection do
       get 'fetch'
       get 'fans'
+    end
+  end
+
+  resources :topics, :path => 'forum' do
+    collection do
+      get 'node/:id' => 'topics#node', as: 'node'
+      get 'topic/:id' => 'topics#show', as: 'topic'
     end
   end
 

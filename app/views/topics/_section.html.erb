@@ -1,0 +1,10 @@
+<ul class="section">
+  <li>
+    <%= link_to section.name, '' %>
+    <ol class="node">
+    <% section.nodes.each do |node| %>
+      <li><%= link_to node.name, node_topics_path(node)%></li>
+    <% end %>
+    </ol>
+  </li>
+</ul>

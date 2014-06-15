@@ -94,7 +94,33 @@ $(document).ready(function(){
   var $nav = $('.sub ul');
       $nav.append( tmpl('template-nav', tree) );
 
-  $('.fit').hover(function(){$(this).addClass('hover');},function(){$(this).removeClass('hover');})
+  //$('.fit').hover(function(){$(this).addClass('hover');},function(){$(this).removeClass('hover');})
+
+  var cases = $(".items li");
+var case_h = [[],[],[],[]];
+var sum = [0,0,0,0];
+$.each(cases, function(i){
+  var m = i%4;
+  var step = Math.floor(i/4);
+  cases.eq(i).css("left", 215*m+"px");
+  case_h[m].push(cases.eq(i).height());
+  if(!step){
+    cases.eq(i).css("top", "0");
+  }else{
+    var num = 0;
+    for(var n=0; n<step; n++){
+      num += case_h[m][n] + 20;
+    }
+    cases.eq(i).css("top", num+"px");
+  }
+});
+$(case_h).each(function(i){
+  $(case_h[i]).each(function(j){
+    sum[i] += case_h[i][j];
+  });
+});
+cases.parent().css("height", sum.sort(function(a,b){return a<b?a:-1})[0]+100+"px");
+
 });
 
 </script>
