@@ -20,9 +20,11 @@ class PhotoUploader < BaseUploader
       if model.instance_of? Ad
         img.resize!(model.position.width, model.position.height)
       else
-        img.resize_to_fill(150,200)
+        w = 215
+        r = w / img[:width]
+        h = r * h
+        img.resize! "#{width}x#{height}"
       end
-      img
     end
   end
 end

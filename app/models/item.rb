@@ -1,7 +1,7 @@
 require 'nokogiri'
 
 class Item < ActiveRecord::Base
-  HOST = /^http:\/\/\w+\.(jd|tmall|taobao)\.com/
+
   # For keeping the URL to download by sidekiq in backen!
   attr_accessor :urls, :comment
 
@@ -9,11 +9,12 @@ class Item < ActiveRecord::Base
   belongs_to :category
   
   has_many :fans_of_items
-  has_many :fans, :through => :fans_of_items, source: :user
-  has_many :comments, as: :subject
-  has_many :covers, as: :subject
+  has_many :fans, :through => :fans_of_items, :source => :user
+  has_many :comments, :as => :subject
+  has_many :photos, :as => :subject
 
-  #mount_uploader :cover, CoverUploader
+  #has_many :covers, :as => :subject
+  mount_uploader :cover, CoverUploader
 
   scope :fields_in_list, -> { select(Item.attribute_names - ['body']) }
   scope :recent, Proc.new { |last| order('id desc').limit(last || 4) }
@@ -29,16 +30,47 @@ class Item < ActiveRecord::Base
         cover = self.covers.new
         cover.file.download! url
       rescue Exception => e
-        
         Rails.logger.info e.message
         Rails.logger.info url
         next
       end
       cover.user_id = self.user_id
       cover.save
-      # Change the cover too!
-      self.cover = cover.file.url if 0 == index
+      # Changed once
+      self.set_cover cover if self.cover.empty?
     end
+  end
+
+  def set_cover photo
+    begin
+      img = Magick::Image.read(photo.path).first.quantize(8)
+      # memory warning!!!
+      his = img.color_histogram()
+      # sort by times appeared in image
+      pixels = 0
+      sorted = his.sort_by{ |k,v| pixels += v; v }
+      colors = []
+      news   = []
+      pixels = pixels.to_f
+
+      sorted.reverse.each do |pixel|
+        r = pixel[0].red    >> 8
+        g = pixel[0].green  >> 8
+        b = pixel[0].blue   >> 8
+        p = (pixel[1] / pixels).round(2)
+        h = "%02X%02X%02X" % [ r, g , g ]
+        colors << h
+        next unless p < 0.1
+        news << {photo_id: photo.id, hex: h, r: r, g: r, b: b, percent: p}
+      end
+
+      photo.update_column('colors', colors.join(';'))
+      Color.create news
+    rescue Exception => e
+      Rails.logger.info '*'*80
+      Rails.logger.info e.message
+    end
+    self.cover = photo.file.url
     self.save
   end
 
@@ -104,10 +136,10 @@ class Item < ActiveRecord::Base
     
 
     elsif /tmall\.com/.match url
-      item.title = page.css('h3[data-spm]').text.strip
+      item.title = page.css('div.tb-detail-hd h3').text.strip
       item.price = page.css('li#J_StrPriceModBox .tm-price').text.strip.to_f
       item.mprice = page.css('li#J_PromoPrice .tm-price').text.strip.to_f
-      page.css('li.tb-s60 img').each do |img|
+      page.css('ul#J_UlThumb img').each do |img|
         src = img.attr('src').split('.')
         ext = src.delete_at(-2)
         # sometimes xx.png_WWxHH.jpg will 404
