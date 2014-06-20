@@ -18,9 +18,7 @@ service = server.listen(port, function(request, response){
     var target = request.post.url;
     console.log('Request crawl : ' + target );
     var page = webpage.create();
-        page.onLoadFinished = function(st){
-          page.close();
-        }
+        page.onLoadFinished = page.close;
         page.open(target, function(status){
           
           if ('success' == status){

@@ -91,10 +91,13 @@ class Cpanel::TasksController < Cpanel::ApplicationController
 
   def fetch
     links = TaskPage.where(['id in (?)', params[:id] ])
+    Rails.logger.info '*'
     begin
       links.each do |link|
+        Rails.logger.info link.url
         response = Net::HTTP.post_form(URI('http://localhost:8088'), {'url' => link.url})
-        page = Nokogiri::HTML(response.body, nil, 'GBK')
+        html = response.body.force_encoding('GBK')
+        page = Nokogiri::HTML(html, nil, 'utf-8')
         urls = []
 
         if /jd\.com/.match link.url
@@ -142,9 +145,12 @@ class Cpanel::TasksController < Cpanel::ApplicationController
         end
 
         # Get the item from url
+        Rails.logger.info '#' * 80
+
         urls.each do |url|
           #response = Net::HTTP.post_form(URI('http://localhost:8088'), {'url' => url['url']})
           item  = Item.parse(url['url'])
+          Rails.logger.info url['url']
           # A random user, id > 1,000 and < 10,000
           #rand(900) + 100
           item.user_id = 1

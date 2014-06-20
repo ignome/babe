@@ -11,7 +11,7 @@ class Item < ActiveRecord::Base
   has_many :fans_of_items
   has_many :fans, :through => :fans_of_items, :source => :user
   has_many :comments, :as => :subject
-  has_many :photos, :as => :subject
+  has_many :photos, :as => :subject, :dependent => :destroy
 
   #has_many :covers, :as => :subject
   mount_uploader :cover, CoverUploader
@@ -103,7 +103,7 @@ class Item < ActiveRecord::Base
 
     html = res.body.force_encoding('GBK')
     #html.encode!('utf-8')
-    page = Nokogiri::HTML(res.body, nil, 'UTF-8')
+    page = Nokogiri::HTML(html, nil, 'UTF-8')
     item = Item.new
     # Fuck the long long url, cover to htt://taobao.com/item.html?id=id
     if url.length > 128

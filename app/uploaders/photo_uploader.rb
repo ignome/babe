@@ -11,4 +11,10 @@ class PhotoUploader < BaseUploader
     end
   end
 
+  after :remove, :delete_store_dir
+
+  def delete_store_dir
+    FileUtils.rmdir store_dir
+  end
+
 end

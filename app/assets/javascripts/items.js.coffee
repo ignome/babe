@@ -36,7 +36,6 @@ window.Item =
       $(this).addClass('active')
       $(this).siblings('.active').removeClass('active')
 
-
 # Like or unlike a item
 $(document).on 'click', '.tools a.like', Item.Like.toggle
 $(document).on 'mouseover', '.thumb li', Item.Thumbnail.select
