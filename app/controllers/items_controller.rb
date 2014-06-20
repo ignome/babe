@@ -18,6 +18,12 @@ class ItemsController < ApplicationController
     @comments = @item.comments.includes(:user)
   end
 
+  # For Ajax loading more items
+  def more
+    @items = Item.order('id desc').paginate(per_page: 20, page: params[:page])
+    render partial: 'item', collection: @items
+  end
+
   def fetch
     
     url = params[:url].to_s.strip

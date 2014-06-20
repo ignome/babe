@@ -15,7 +15,7 @@ module UsersHelper
     #klass = opts[:class] || 'author-avatar-link'
     width = user_avatar_width_for_size(size)
 
-    src = user[:avatar].blank? ?  "/images/avatar-default.gif" : user.avatar.url
+    src = user[:avatar].blank? ?  user.avatar.url(size) : user.avatar.url
     img = image_tag(src, alt: user[:name], class: "photo", size: "#{width}x#{width}")
     
     if opts[:text] 

@@ -24,7 +24,7 @@ class AvatarUploader < BaseUploader
   end
 
   def default_url
-    "avatar/#{version_name}.jpg"
+    "avatar/#{version_name}.gif"
   end
   
   def filename

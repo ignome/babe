@@ -144,7 +144,8 @@ ul.items li {position:absolute;width: 215px;  float:left; margin: 0 16px 15px 0p
 ul.items li .cover{ overflow: hidden; position: relative;}
 ul.items li .cover img{width:215px;}
 ul.items li .price{position: absolute; right: 10px; bottom: 10px; background-color: rgb(111, 190, 45); color:#fff;padding: 3px 8px;font-size: 11px; border: none}
-ul.items li .title{padding: 5px; height: 25px; line-height: 25px; font-weight: bold; overflow: hidden;}
+ul.items li .title{padding: 5px 8px; height: 80px; line-height: 18px;  overflow: hidden;}
+ul.items li .title a{color:#999;font-size:12px}
 ul.items li .tools{height: 32px;padding: 5px 8px;}
 ul.items li .tools span i{padding-right: 15px;}
 ul.items li .tools span.count{border: 1px solid rgb(111,190,45); background-color:#fff; color: rgb(111,190,45); padding: 2px 6px;}

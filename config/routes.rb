@@ -58,6 +58,7 @@ Babe::Application.routes.draw do
     collection do
       get 'fetch'
       get 'fans'
+      get 'more'
     end
   end
 
