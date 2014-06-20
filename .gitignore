@@ -12,10 +12,13 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
+/*.html
+/*.txt
 /log/*.log
 /tmp
 
 /spec
+public/ad
 public/uploads
 public/assets
 public/users

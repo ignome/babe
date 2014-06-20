@@ -23,11 +23,13 @@ class Item < ActiveRecord::Base
   after_create :new_first_comment
 
   def download_images_from_urls
+    cover_saved = false
     self.urls.each_with_index do |url, index|
       Rails.logger.info '*' * 80
       Rails.logger.info url
+      # avoid failing in some one of urls
       begin
-        cover = self.covers.new
+        cover = self.photos.new
         cover.file.download! url
       rescue Exception => e
         Rails.logger.info e.message
@@ -37,13 +39,16 @@ class Item < ActiveRecord::Base
       cover.user_id = self.user_id
       cover.save
       # Changed once
-      self.set_cover cover if self.cover.empty?
+      if cover_saved == false
+        self.set_as_cover cover
+        cover_saved = true
+      end
     end
   end
 
-  def set_cover photo
+  def set_as_cover photo
     begin
-      img = Magick::Image.read(photo.path).first.quantize(8)
+      img = Magick::Image.read(photo.file.path).first.quantize(8)
       # memory warning!!!
       his = img.color_histogram()
       # sort by times appeared in image
@@ -70,7 +75,7 @@ class Item < ActiveRecord::Base
       Rails.logger.info '*'*80
       Rails.logger.info e.message
     end
-    self.cover = photo.file.url
+    self.cover = File.new(photo.file.path)
     self.save
   end
 
@@ -96,9 +101,18 @@ class Item < ActiveRecord::Base
       http.request(req)
     end
 
-    page = Nokogiri::HTML(res.body, nil, 'GBK')
+    html = res.body.force_encoding('GBK')
+    #html.encode!('utf-8')
+    page = Nokogiri::HTML(res.body, nil, 'UTF-8')
     item = Item.new
-    item.url = url
+    # Fuck the long long url, cover to htt://taobao.com/item.html?id=id
+    if url.length > 128
+      id = url.match(/(id=\d+)/)[0]
+      item.url = url.split('?')[0] << '?' << id
+    else
+      item.url = url
+    end
+
     item.urls = []
 
     if /jd\.com/.match url
@@ -116,14 +130,9 @@ class Item < ActiveRecord::Base
     
     
     elsif /taobao\.com/.match url
-      # Fuck the long long url, cover to htt://taobao.com/item.html?id=id
-      if item.url.length > 128
-        id = item.url.match(/(id=\d+)/)[0]
-        item.url = item.url.split('?')[0] << '?' << id
-      end
       item.title = page.css('#J_Title h3').text.strip
       item.price = page.css('li#J_StrPriceModBox .tb-rmb-num').text.strip.to_f
-      item.mprice = page.css('li#J_PromoPrice .tb-rmb-num').text.strip.to_f
+      item.mprice = page.css('li#J_PromoPrice .tb-rmb-num').text.sub! /\D+/, ''
       page.css('ul.tb-thumb img').each do |img|
         src = img.attr('data-src').split('.')
         # remove jpg_50x50

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140525022512) do
+ActiveRecord::Schema.define(version: 20140620041425) do
 
   create_table "ads", force: true do |t|
     t.string   "title"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20140525022512) do
     t.datetime "updated_at"
     t.string   "subject_type", limit: 32
     t.string   "colors",       limit: 64
+    t.boolean  "new",                     default: false
   end
 
   create_table "positions", force: true do |t|

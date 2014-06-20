@@ -109,6 +109,7 @@ Babe::Application.routes.draw do
         post 'moveto'
         post 'free'
         post 'band'
+        get 'cover'
       end
     end
   end

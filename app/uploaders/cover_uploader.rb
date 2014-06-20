@@ -1,7 +1,11 @@
 class CoverUploader < BaseUploader
   
   def store_dir
-    "users/#{model.user_id}/#{model.subject_type.downcase}/#{model.subject_id}"
+    if is_ad?
+      "ad/#{model.id}"
+    else
+      "users/#{model.user_id}/item/#{model.id}"
+    end
   end
 
   def filename
@@ -12,15 +16,23 @@ class CoverUploader < BaseUploader
   end
 
   version :default do
-    process :resize_by_width
+    process :resize
   end
 
-  def resize_by_width
+  def is_ad?
+    model.instance_of?(Ad) ? true : false
+  end
+
+  def resize
     manipulate! do |img|
-      w = 215
-      r = w / img[:width]
-      h = r * h
-      img.resize! "#{width}x#{height}"
+      if is_ad?
+        img.resize!(model.position.width, model.position.height)
+      else
+        w = 215
+        r = w / img.rows
+        h = r * img.columns
+        img.resize_to_fit!(w, h)
+      end
     end
   end
 

@@ -9,6 +9,7 @@ class Photo < ActiveRecord::Base
   mount_uploader :file, PhotoUploader
 
   scope :recent, Proc.new { |last| order('id desc').limit(last || 4) }
+  scope :old, ->{where(:new, false)}
 
   before_create do
     self.name = file.file.original_filename

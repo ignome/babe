@@ -36,7 +36,7 @@ service = server.listen(port, function(request, response){
             file.close();
             //*/
             response.statusCode = 200;
-            response.setEncoding('gbk');
+            //response.setEncoding('gbk');
             response.write(html);
             response.close();
           }

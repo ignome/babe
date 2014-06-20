@@ -1,9 +1,9 @@
 <li class="item round">
   <div class="cover">
     <%= link_to item_path(item) do %>
-    <%= image_tag item.cover %>
+    <%= image_tag item.cover.default.url %>
     <% end %>
-    <span class="price round">&yen;<%= sprintf("%.2f", item.mprice.nil? ? item.price : item.mprice ) %></span>
+    <span class="price round">&yen;<%= sprintf("%.2f", item.mprice || item.price || 0) %></span>
   </div>
   <div class="tools">
     <span class="round-sm"><i class="glyphicon glyphicon-heart"></i>喜欢</span>
@@ -11,5 +11,4 @@
     <span class="view">浏览(<%= item.views_count%>)</span>
   </div>
   <div class="title"><%= link_to item.title, item_path(item.id), title: item.title %></div>
-  <div class="comment"><%= item.comments.last && item.comments.last.body %></div>
 </li>

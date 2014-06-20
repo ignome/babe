@@ -12,7 +12,28 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
   end
 
   def band
+  end
 
+  def cover
+    file = File.open('cover.txt', 'w')
+    Item.all.each do |item|
+      begin
+        if !item.cover.file.exists?
+          photo = item.photos.first
+          if photo.file.file.exists?
+            item.cover = File.new( photo.file.path )
+            item.save
+          else
+            file.puts "#{item.id} with #{photo.id} cover not set"
+          end          
+        end
+      rescue Exception=> e
+        file.puts e.message
+        file.puts item.id
+      end
+    end
+    file.close
+    render text: 'finish'
   end
 
   def moveto

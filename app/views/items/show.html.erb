@@ -1,17 +1,15 @@
-<% content_for :styles do %>
-<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21744169"></script>
-<% end %>
+
 <div class="container" id="main">
   <div class="row box details">
     <div class="col-md-7 photo">
       <h4><%= @item.title %></h4>
       <div class="zoom">
-        <%= image_tag @item.covers.first.file.url if @item.covers.first %>
+        <%= image_tag @item.photos.first.file.url if @item.photos.first %>
       </div>
       <div class="thumb clearfix center-block">
         <ul>
-          <% @item.covers.each do |cover| %>
-          <li class="box"><%= image_tag cover.file.default.url, url: cover.file.url, size: '50x50' %></li>
+          <% @item.photos.each do |photo| %>
+          <li class="box"><%= image_tag photo.file.url, url: photo.file.url, size: '50x50' %></li>
           <% end %>
         </ul>
       </div>
