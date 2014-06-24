@@ -143,8 +143,8 @@ ul.items {padding: 0; margin: 0; position:relative;}
 ul.items li {position:absolute;width: 215px;  float:left; margin: 0 16px 15px 0px; background-color: #fff; border: solid 1px #ebebeb; overflow: hidden;}
 ul.items li .cover{ overflow: hidden; position: relative;}
 ul.items li .cover img{width:215px;}
-ul.items li .price{position: absolute; right: 10px; bottom: 10px; background-color: rgb(111, 190, 45); color:#fff;padding: 3px 8px;font-size: 11px; border: none}
-ul.items li .title{padding: 5px 8px; height: 80px; line-height: 18px;  overflow: hidden;}
+ul.items li .price{position: absolute; right: 10px; bottom: 10px; background-color: #333; opacity: .2;filter: alpha(opacity=20); color:#fff;padding: 3px 8px;font-size: 11px; border: none}
+ul.items li .title{padding: 5px 8px; line-height: 20px; margin-bottom:10px; overflow: hidden;}
 ul.items li .title a{color:#999;font-size:12px}
 ul.items li .tools{height: 32px;padding: 5px 8px;}
 ul.items li .tools span i{padding-right: 15px;}

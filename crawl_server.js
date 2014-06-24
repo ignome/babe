@@ -18,7 +18,10 @@ service = server.listen(port, function(request, response){
     var target = request.post.url;
     console.log('Request crawl : ' + target );
     var page = webpage.create();
-        page.onLoadFinished = page.close;
+        page.onLoadFinished = function(){
+          console.log('finished');
+          page.close();
+        }
         page.open(target, function(status){
           
           if ('success' == status){
@@ -38,6 +41,7 @@ service = server.listen(port, function(request, response){
             response.write(html);
             response.close();
           }
+
         });
   }
 });

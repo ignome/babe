@@ -15,7 +15,6 @@
 //= require bootstrap.min
 //= require users
 //= require items
-//= require social-share-button
 
 function water(){
   var items = $('.items li'),
@@ -41,6 +40,8 @@ function water(){
   });
 
   h = tops.sort(function(a,b){return a-b})[tops.length-1] + Math.floor( items.length / cols * 20 );
+  console.log(h);
+  
   items.parent().css('height', h +"px");
 }
 

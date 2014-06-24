@@ -1,20 +1,45 @@
 require 'will_paginate/array'
 
 class Cpanel::ItemsController < Cpanel::ApplicationController
+
+  before_filter :set_return_page
+
   def index
-    @items = Item.all(:include => [:user, :category], order: 'id desc').paginate(per_page: 15, page: params[:page])
+    @items = Item.all.includes([:user, :category])
+    if params[:catalog]
+      @items = @items.where('catalog like ?', "#{params[:catalog]}%")
+    end
+    @items = @items.order('id desc').paginate(per_page: 15, page: params[:page])
   end
 
   def destroy
     Item.find(params[:id]).destroy
-
-    redirect_to cpanel_items_path, notice: 'remove an item success'
+    redirect_to cpanel_items_path(page: params[:page]), notice: 'remove an item success'
   end
 
   def band
   end
 
-  def cover
+  def pin
+    Item.where('id in (?)', params[:id]).update_all('status=status+1')
+    redirect_to cpanel_items_path(page: params[:page] || 1), notice: 'Set all selected items to pin in homepage'
+  end
+
+
+  def moveto
+    category = params['catalog'].split(',')[-1]
+    Item.where(id: params[:id]).update_all(catalog: params[:catalog], category_id: category)
+    redirect_to cpanel_items_path(page: params[:page]), notice: 'All selected items were moved to category'
+  end
+
+  def remove
+    Item.destroy_all(id: params[:id])
+    redirect_to cpanel_items_path(page: params[:page]), notice: 'remove success'
+  end
+
+  private
+
+  def reset_photo
     file = File.open('p.txt', 'w')
 
     Photo.where(subject_type: 'Item').includes(:subject).each do |p|
@@ -52,21 +77,7 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
     render text: 'done'
   end
 
-  def moveto
-    category = params['catalog'].split(',')[-1]
-    Item.where(id: params[:id]).update_all(catalog: params[:catalog], category_id: category)
-    redirect_to cpanel_items_path, notice: 'Moved class'
-  end
-
-  def remove
-    Item.destroy_all(id: params[:id])
-    page = params[:page].to_i > 0 ? params[:page] : 1
-    redirect_to cpanel_items_path(page: page), notice: 'remove success'
-  end
-
-  private
-
-  def _cover
+  def _reset_cover
     file = File.open('cover.txt', 'w')
     Item.all.each do |item|
       begin
@@ -88,4 +99,7 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
     render text: 'finish'
   end
 
+  def set_return_page
+    params[:page] = params[:page].to_i > 0 ? params[:page] : 1
+  end
 end

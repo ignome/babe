@@ -3,6 +3,7 @@ require 'nokogiri'
 
 class Cpanel::TasksController < Cpanel::ApplicationController
 
+  before_filter :set_page, only: [:recommend, :cancel]
   # items
   def index
     #@items = TaskLink.available.order('id desc').paginate(per_page: 15, page: params[:page])
@@ -52,7 +53,7 @@ class Cpanel::TasksController < Cpanel::ApplicationController
   end
 
   def promotion
-    @items = Promotion.all.paginate(per_page:15, page: params[:page])
+    @items = Promotion.order('id desc').paginate(per_page:15, page: params[:page])
   end
 
   def todaypromo
@@ -82,12 +83,15 @@ class Cpanel::TasksController < Cpanel::ApplicationController
     redirect_to promotion_cpanel_tasks_path, notice: 'today promotion done'
   end
 
-  def setpromo
+  def recommend
+    Promotion.where('id in (?)', params[:id]).update_all('status=status+1')
+    redirect_to promotion_cpanel_tasks_path(page: params[:page]), notice: 'Recommend success'
   end
 
-  def cancelpromo
+  def cancel
+    Promotion.where('id in (?)', params[:id]).update_all('status=0')
+    redirect_to promotion_cpanel_tasks_path(page: params[:page]), notice: 'Cancel recommend success'
   end
-
 
   def fetch
     links = TaskPage.where(['id in (?)', params[:id] ])
@@ -171,6 +175,13 @@ class Cpanel::TasksController < Cpanel::ApplicationController
   end
 
   def destroy
+    TaskPage.find(params[:id]).destroy
+    redirect_to cpanel_tasks_path(page: params[:page]), notice: 'remove a crawl page'
   end
 
+  private
+
+  def set_page
+    params[:page] = params[:page].to_i > 0 ? params[:page] : 1
+  end
 end

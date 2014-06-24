@@ -1,5 +1,3 @@
-require 'hmac-md5'
-
 module ItemsHelper
   def who_liked_this?(target)
     if current_user 

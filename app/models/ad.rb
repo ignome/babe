@@ -10,7 +10,7 @@ class Ad < ActiveRecord::Base
   scope :available, ->{ where(available: true) }
 
   # For uploader to get the size of position!
-  def position
+  def positionssss
     if self.new_record?
       self.position = Position.find(self.position_id)
     else

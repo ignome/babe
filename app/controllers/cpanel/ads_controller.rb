@@ -11,6 +11,7 @@ class Cpanel::AdsController < Cpanel::ApplicationController
   end
 
   def update
+    @ad.cover = params[:ad][:cover]
     if @ad.update_attributes ad_params
       redirect_to cpanel_ads_path, notice: 'update an advertisement success'
     else
@@ -23,9 +24,11 @@ class Cpanel::AdsController < Cpanel::ApplicationController
   end
 
   def create
-    @ad = Ad.new(ad_params)
+    ps = Position.find(params[:ad][:position_id])
+    @ad = ps.ads.build(ad_params)
+    @ad.cover = params[:ad][:cover]
     @ad.user_id = current_user.id
-    #@ad.cover = params[:ad][:cover]
+
     if @ad.save
       redirect_to cpanel_ads_path, notice: 'new an advertisement success'
     else
@@ -41,7 +44,7 @@ class Cpanel::AdsController < Cpanel::ApplicationController
   protected
 
   def ad_params
-    params.require(:ad).permit(:title, :url, :cover, :start_on, :expires_on, :description, :position_id)
+    params.require(:ad).permit(:title, :url, :start_on, :expires_on, :description, :position_id)
   end
 
   def find

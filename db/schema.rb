@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620041425) do
+ActiveRecord::Schema.define(version: 20140621063547) do
 
   create_table "ads", force: true do |t|
     t.string   "title"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20140620041425) do
     t.integer  "views_count",                                        default: 0
     t.string   "catalog",        limit: 32
     t.decimal  "mprice",                    precision: 10, scale: 2
+    t.integer  "status",                                             default: 0
   end
 
   create_table "items_of_styles", force: true do |t|

@@ -66,12 +66,12 @@ gem 'bootstrap_helper', '~> 4.0'
 # RMagick
 gem 'carrierwave', '0.6.2'
 gem "rmagick", "~> 2.13.1"
-gem 'mini_magick'
+#gem 'mini_magick'
 
 gem 'nokogiri'
 
-gem 'sidekiq'
-gem 'sinatra'
+#gem 'sidekiq'
+#gem 'sinatra'
 
-gem 'ruby-hmac'
-gem 'social-share-button'
+#gem 'ruby-hmac'
+#gem 'social-share-button'

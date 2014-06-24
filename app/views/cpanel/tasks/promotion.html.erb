@@ -4,6 +4,9 @@
   <li><a href="/cpanel/tasks/todaypromo?from=taobao">淘宝天天特价</a></li>
 </ul>
 
+<form name="form" id="form" method="post">
+  <input type="hidden" name="page" value="<%= params[:page];%>" />
+<input name="authenticity_token" type="hidden" value="#{form_authenticity_token}" />
 <table class="table" width="100%" cellpadding="0" cellspacing="0">
   <thead>
     <tr>
@@ -14,7 +17,7 @@
       <th>商品名称</th>
       <th width="100" >价格</th>
       <th width="100">生成时间</th>
-      <th width="120"></th>
+      <th width="120">状态</th>
     </tr>
   </thead>
 
@@ -33,16 +36,15 @@
       <td><%= link_to item.title, item.url %></td>
       <td><%= item.price %></td>
       <td><%= item.created_at.strftime("%Y-%m-%d %H:%M:%S")%></td>
-      <td>删除 推荐</td>
+      <td><%= item.status > 0 ? '推荐' : '默认'%></td>
     </tr>
     <% end %>
 
     <tfoot>
       <td colspan="9">
         <div class="btn-group btn-group-xs">
-          <button type="button" class="btn btn-danger">删除选中</button>
-          <button type="button" class="btn btn-info">设为推荐</button>
-          <button type="button" class="btn btn-success">取消推荐</button>          
+          <button type="button" class="btn btn-danger" onclick="post('./recommend');">推荐</button>
+          <button type="button" class="btn btn-success" onclick="post('./cancel');">取消推荐</button>          
         </div>
 
         <%= will_paginate @items%>
@@ -51,3 +53,14 @@
     </tfoot>
   </tbody>
 </table>
+
+</form>
+
+<%= content_for :scripts do %>
+<script type="text/javascript">
+function post(url){
+  $('#form').attr('action', url);
+  $('#form').submit();
+}
+</script>
+<% end %>

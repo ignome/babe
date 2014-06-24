@@ -56,11 +56,21 @@
   </div>
 </div>
 
+<div id="recommend">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="hd clearfix"><h2>编辑精选</h2></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="list">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12 clearfix">
         <div class="hd clearfix"><h2> 新上单品 </h2></div>
         <ul class="items">
           <%= render partial: 'items/item', collection: @items %>
@@ -98,26 +108,27 @@ $(document).ready(function(){
 
   window.onscroll = more;
 
-  var loading = false, page = 2;
+  var loading = false, page = 1;
 
   function more(){
     if (!loading){
       if( $(document).scrollTop() + $(window).height() > $(document).height() - 20) {
         //show loading
+        console.log($(document).scrollTop() + $(window).height());
         loading = true;
         $('#loading').show();
 
         $.ajax({
           url: '/items/more',
-          data: {page: page++},
+          data: {page: ++page},
           success: function(html){
             //unbind the scroll
             $('.items').append( html );
             //resort the waterfall
-            water();
-            loading = false;
+            //water();
             $('#loading').hide();
-
+            loading = false;
+            
             if (page > 4){
               window.onscroll = false;
               loading = true;

@@ -33,10 +33,9 @@
       <td><%= o.likes_count %></td>
       <td><%= o.user.try(:login) %></td>
       <td><%= o.created_at.strftime("%Y-%m-%d") %></td>
-      <td>Status</th>
+      <td><%= o.status > 0 ? '正常' : '采集' %></th>
       <td>
-        <%= link_to '删除', cpanel_item_path(o.id), :method => :delete, :'data-confirm' => '确定要删除吗?', :class => "icon-remove" %>
-        推荐
+        
       </td>
     </tr>
     <% end %>
@@ -46,11 +45,10 @@
         <select name="catalog" id="category" class="dropdown">
         </select>
         <div class="btn-group btn-group-xs">
-
+          <button type="button" class="btn btn-primary" onclick="post('./items', 'get');">浏览</button>
           <button type="button" class="btn btn-warning" onclick="post('./items/moveto');">移动分类</button>
-          <button type="button" class="btn btn-danger" onclick="post('./items/remove');">删除选中</button>
-          <button type="button" class="btn btn-info">隐藏选中</button>
-          <button type="button" class="btn btn-success">恢复选中</button>          
+          <button type="button" class="btn btn-danger" onclick="post('./items/remove');">删除</button>
+          <button type="button" class="btn btn-primary" onclick="post('./items/pin');">推荐</button>
         </div>
       </td>
     </tfoot>
@@ -66,9 +64,10 @@
 <%= content_for :scripts do %>
 <script type="text/javascript">
 Treeview.multiValue = 1;
-Treeview.render(tree['tree'], 'category');
+Treeview.render(tree['tree'], 'category', 17);
 function post(url){
   $('#form').attr('action', url);
+  if( arguments.length > 1) $('#form').attr('method', 'get');
   $('#form').submit();
 }
 </script>

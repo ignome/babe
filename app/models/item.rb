@@ -18,6 +18,7 @@ class Item < ActiveRecord::Base
 
   scope :fields_in_list, -> { select(Item.attribute_names - ['body']) }
   scope :recent, Proc.new { |last| order('id desc').limit(last || 4) }
+  scope :pins, ->{where('status > 0')}
 
   after_create :download_images_from_urls
   after_create :new_first_comment

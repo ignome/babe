@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
 
   # For Ajax loading more items
   def more
-    @items = Item.order('id desc').paginate(per_page: 20, page: params[:page])
+    @items = Item.pins.fields_in_list.order('id desc').paginate(per_page: 20, page: params[:page])
     render partial: 'item', collection: @items
   end
 

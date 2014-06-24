@@ -101,6 +101,8 @@ Babe::Application.routes.draw do
         post 'fetch'
         get 'promotion'
         get 'todaypromo'
+        post 'recommend'
+        post 'cancel'
       end
     end
 
@@ -111,6 +113,7 @@ Babe::Application.routes.draw do
         post 'free'
         post 'band'
         get 'cover'
+        post 'pin'
       end
     end
   end

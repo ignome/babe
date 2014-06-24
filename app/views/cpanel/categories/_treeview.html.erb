@@ -4,11 +4,11 @@ window.Treeview = {
   tree : [],
   multiValue : 0,
 
-  render : function(nodes, target ){
+  render : function(nodes, target, parent ){
     target = arguments.length > 2 ? target : 'category';
     
     Treeview.tree[0] = '<option value="0"> 选择上线分类 ...</option>';
-    Treeview.loop(nodes, '', 0);
+    Treeview.loop(nodes, parent, 0);
 
     $('#' + target).append( Treeview.tree.join("\n") );
   },
@@ -21,7 +21,7 @@ window.Treeview = {
         label += '-';
       }
       
-      if( Treeview.multiValue) id = '' == parent ? node['id'] : parent + ',' + node['id'];
+      if( Treeview.multiValue ) id = '' == parent ? node['id'] : parent + ',' + node['id'];
       else id = node['id'];
 
       pp = '' == parent ? node['id'] : parent + ',' + node['id'];
