@@ -3,7 +3,7 @@ require 'net/http'
 
 class Provider::Base
 
-  include Sidekiq::Worker
+  #include Sidekiq::Worker
 
   def perform(urls, id)
     #Sidekiq::Logging.logger.info('*' * 80)
