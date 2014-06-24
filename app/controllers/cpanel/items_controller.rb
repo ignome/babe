@@ -6,7 +6,7 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
 
   def index
     @items = Item.all.includes([:user, :category])
-    if params[:catalog]
+    if params[:catalog] and params[:catalog].to_i != 0
       @items = @items.where('catalog like ?', "#{params[:catalog]}%")
     end
     @items = @items.order('id desc').paginate(per_page: 15, page: params[:page])

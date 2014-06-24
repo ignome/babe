@@ -64,7 +64,8 @@
 <%= content_for :scripts do %>
 <script type="text/javascript">
 Treeview.multiValue = 1;
-Treeview.render(tree['tree'], 'category', 17);
+Treeview.render(tree['tree'], 'category', <%= params[:catalog].blank? ? 0 : params[:catalog].split(',')[-1] %>);
+
 function post(url){
   $('#form').attr('action', url);
   if( arguments.length > 1) $('#form').attr('method', 'get');

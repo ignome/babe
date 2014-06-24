@@ -4,16 +4,16 @@ window.Treeview = {
   tree : [],
   multiValue : 0,
 
-  render : function(nodes, target, parent ){
+  render : function(nodes, target, selected ){
     target = arguments.length > 2 ? target : 'category';
     
     Treeview.tree[0] = '<option value="0"> 选择上线分类 ...</option>';
-    Treeview.loop(nodes, parent, 0);
+    Treeview.loop(nodes, 0, 0, selected);
 
     $('#' + target).append( Treeview.tree.join("\n") );
   },
 
-  loop : function(nodes, parent, depth){
+  loop : function(nodes, parent, depth, selected){
     for(var i=0, e=nodes.length; i<e; i++){
       node = nodes[i];
       label = '|-';
@@ -25,9 +25,10 @@ window.Treeview = {
       else id = node['id'];
 
       pp = '' == parent ? node['id'] : parent + ',' + node['id'];
+      ss = node['id'] == selected ? 'selected="selected"' : '';
 
-      Treeview.tree[Treeview.tree.length] = '<option value="'+ id +'">'+ label + node['name'] +'</option>';
-      if ( node.child.length > 0 ) Treeview.loop(node['child'], pp , depth + 1);
+      Treeview.tree[Treeview.tree.length] = '<option value="'+ id +'" '+ ss+'>'+ label + node['name'] +'</option>';
+      if ( node.child.length > 0 ) Treeview.loop(node['child'], pp , depth + 1, selected);
     }
   }
 }
