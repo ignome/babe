@@ -24,7 +24,14 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
   end
 
   def cover
-    Item.where('iid=0').select('id,url').each do |item|
+    Item.where('iid=0').select('id,user_id,url').each do |item|
+
+      if item.url.nil?
+        item.destroy
+        Rails.logger.info "#{item.id} deleted"
+        next
+      end
+
       uri = URI(item.url)
       host = uri.hostname.split('.')[1].downcase
 
@@ -33,7 +40,7 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
         item.iid = uri.path.gsub /\D+/,''
       when 'taobao', 'tmall'
         item.iid = /id=(\d+)/.match(uri.query)[1]
-        item.url = self.url.split('?')[0] << '?id=' << item.iid
+        item.url = item.url.split('?')[0] << '?id=' << item.iid.to_s
       else
         iid = 0
       end
