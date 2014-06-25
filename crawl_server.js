@@ -18,15 +18,12 @@ service = server.listen(port, function(request, response){
     var target = request.post.url;
     console.log('Request crawl : ' + target );
     var page = webpage.create();
-        page.onLoadFinished = function(){
-          console.log('finished');
-          page.close();
-        }
+        page.onLoadFinished =  page.close;
         page.open(target, function(status){
           
           if ('success' == status){
             console.log('Request ' + target + ' is ' + status);
-            page.sendEvent('mousemove', 100, 2000);
+            page.sendEvent('mousemove', 100, 3000);
             // waiting for all done!
             html = page.content;
 

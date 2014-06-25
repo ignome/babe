@@ -59,7 +59,7 @@
               <span class="glyphicon glyphicon-share"></span>分享到
             </a>
             <span class="social-count">
-              <%= social_share_button_tag(@style.title) %>
+              
             </span>
           </li>
         </ul>
@@ -84,11 +84,11 @@
         <li class="style">
           <div class="bd">
             <div class="cover">
-              <%= image_tag style.photos.first.file.default.url %>
+              <%= image_tag style.photos.first.file.url %>
             </div>
             <div class="thumb">
               <% style.photos.limit(4).each do |pic| %>
-              <%= image_tag pic.file.default.url %>
+              <%= image_tag pic.file.url %>
               <% end %>
             </div>
           </div>

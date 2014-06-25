@@ -6,8 +6,11 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
 
   def index
     @items = Item.all.includes([:user, :category])
-    if params[:catalog] and params[:catalog].to_i != 0
-      @items = @items.where('catalog like ?', "#{params[:catalog]}%")
+    if params[:c] and params[:c].to_i != 0
+      @items = @items.where('catalog like ?', "#{params[:c]}%")
+    end
+    if not params[:q].blank?
+      @items = @items.where('title like ?', "%#{params[:q]}%")
     end
     @items = @items.order('id desc').paginate(per_page: 15, page: params[:page])
   end
@@ -18,6 +21,24 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
   end
 
   def band
+  end
+
+  def cover
+    Item.where('iid=0').select('id,url').each do |item|
+      uri = URI(item.url)
+      host = uri.hostname.split('.')[1].downcase
+
+      case host
+      when 'jd'
+        item.iid = uri.path.gsub /\D+/,''
+      when 'taobao', 'tmall'
+        item.iid = /id=(\d+)/.match(uri.query)[1]
+        item.url = url.split('?')[0] << '?id=' << item.iid
+      else
+        iid = 0
+      end
+      item.save
+    end
   end
 
   def pin

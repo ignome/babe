@@ -29,7 +29,24 @@
     </div>
   </div>
 </div>
+
+<script id="template-item" type="text/x-tmpl">
+<div class="links clearfix">
+  <ul>
+    <li class="clearfix">
+      <a href="{%=o.url%}">
+        <span class="pic"><img src="{%=o.cover%}" width="27" /></span>
+        <span class="title">{%=o.title%}</span>
+        <span class="price">&yen;{%=o.price%}</span>
+        <span class="buy">去看看</span>
+      </a>
+    </li>
+  </ul>
+</div>
+</script>
+
 <% content_for :scripts do %>
+<script src="/scripts/tmpl.min.js"></script>
 <script type="text/javascript">
 $(document).on('click', '#fetch', function(){
   var url = $('input[name="url"]').val();
@@ -47,8 +64,9 @@ $(document).on('click', '#fetch', function(){
       if ( 201 == xhr.status ){
         $('#item').html(html);
       }else{
-        $('.alert').removeClass('hide').addClass('show').find('p').html(html);
-        //$('.alert').alert();
+        json = $.parseJSON(html);
+        $('.alert').removeClass('hide').addClass('show').find('p').html('<h5>相同的宝贝已经存在!</h5>');
+        $('.alert').after( tmpl('template-item', json) );
       }
     }
   });

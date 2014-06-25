@@ -11,7 +11,7 @@
       <% item.photos.recent.each_with_index do |photo,index| %>
         <div class="thumb <%= 'last' if index == 3%> ">
         <%= link_to style_path(item.id) do %>
-        <%= image_tag photo.file.default.url %>
+        <%= image_tag photo.file.url %>
         <% end %>
         </div>
       <% end %>

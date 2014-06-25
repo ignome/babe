@@ -42,6 +42,14 @@
         <%= render 'tools', target: @item %>
       </div>
 
+      <div class="colors">
+        <ul class="color-chips">
+          <% @item.photos.first.colors.to_s.split(';').each do |color| %>
+          <li class="color"><%= link_to color, '', style: "background-color:##{color}" %></li>
+          <% end %>
+        </ul>
+      </div>
+
       <div class="comments">
         <div class="comment">
           <%= render 'comments/comment', :target => @item %>

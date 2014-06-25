@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140621063547) do
+ActiveRecord::Schema.define(version: 20140625064600) do
 
   create_table "ads", force: true do |t|
     t.string   "title"
@@ -98,7 +98,13 @@ ActiveRecord::Schema.define(version: 20140621063547) do
     t.string   "catalog",        limit: 32
     t.decimal  "mprice",                    precision: 10, scale: 2
     t.integer  "status",                                             default: 0
+    t.string   "provider",       limit: 16
+    t.integer  "iid"
   end
+
+  add_index "items", ["provider", "iid"], name: "provider", unique: true, using: :btree
+  add_index "items", ["user_id"], name: "user", using: :btree
+  add_index "items", ["user_id"], name: "user_id", using: :btree
 
   create_table "items_of_styles", force: true do |t|
     t.integer "item_id"
@@ -140,7 +146,7 @@ ActiveRecord::Schema.define(version: 20140621063547) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "subject_type", limit: 32
-    t.string   "colors",       limit: 64
+    t.string   "color",        limit: 64
     t.boolean  "new",                     default: false
   end
 

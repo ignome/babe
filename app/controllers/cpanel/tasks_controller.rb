@@ -1,3 +1,4 @@
+#coding:utf-8
 require 'net/http'
 require 'nokogiri'
 
@@ -94,8 +95,8 @@ class Cpanel::TasksController < Cpanel::ApplicationController
   end
 
   def fetch
-    links = TaskPage.where(['id in (?)', params[:id] ])
-    Rails.logger.info '*'
+    links = TaskPage.find(params[:id])
+    Rails.logger.info '*' * 80
     begin
       links.each do |link|
         Rails.logger.info link.url
@@ -105,45 +106,24 @@ class Cpanel::TasksController < Cpanel::ApplicationController
         urls = []
 
         if /jd\.com/.match link.url
-          page.css('ul.list-h div.lh-wrap').each do |li|
-            a = Hash.new
-            a['url']   = li.css('div.p-img a').attr('href').value
-            #a['cover'] = li.css('div.p-img img').attr('data-lazyload').value
-            #a['title'] = li.css('div.p-name a').children[0].text.strip
-            #a['price'] = li.css('div.p-price strong').text.sub! /\D/,''
-            urls << a
+          page.css('ul.list-h div.lh-wrap').each do |div|
+            urls << div.css('div.p-img a').attr('href').value
           end
         elsif /tmall\.com/.match link.url
           page.css('div#J_ItemList div.product').each do |p|
-            a = Hash.new
-            a['url'] = p.css('div.productImg-wrap a').attr('href').value
-            #a['cover']  = p.css('div.productImg-wrap img').attr('src').value
-            #a['title'] = p.css('p.productTitle a').text.strip
-            #a['price'] = p.css('p.productPrice em').attr('title').value
-            a['url'] = "http:#{a['url']}" if not a['url'].start_with?('http') 
-            urls << a
+            url = p.css('div.productImg-wrap a').attr('href').value
+            url = "http:#{url}" if not url.start_with?('http')
+            urls << url
           end
         else
           slug = link.url.split('.')[0][7..-1]
           if "s" == slug
             page.css('div.tb-content .item').each do |div|
-              a = Hash.new
-              a['url'] = div.css('h3.summary a').attr('href').value
-              #img = div.css('p.pic-box img')
-              #cover = img.attr('data-ks-lazyload') || img.attr('src')
-              #a['cover'] = cover.value
-              #a['title'] = div.css('h3.summary a').attr('title').value
-              #a['price'] = div.css('div.price').text[1..-1]
-              urls << a
+              urls << div.css('h3.summary a').attr('href').value
             end
           else
             page.css('div.m-items li.item').each do |li|
-              a = Hash.new
-              a['url'] = li.css('a.J_AtpLog').attr('href').value
-              #a['cover'] = li.css('img.J_ItemMainImg').attr('src').value
-              #a['title'] = li.css('li.title a.J_AtpLog').children[0].text
-              #a['price'] = li.css('li.price strong').text
-              urls << a
+              urls << li.css('a.J_AtpLog').attr('href').value
             end
           end
         end
@@ -152,13 +132,18 @@ class Cpanel::TasksController < Cpanel::ApplicationController
         Rails.logger.info '#' * 80
 
         urls.each do |url|
-          #response = Net::HTTP.post_form(URI('http://localhost:8088'), {'url' => url['url']})
-          item  = Item.parse(url['url'])
-          Rails.logger.info url['url']
-          # A random user, id > 1,000 and < 10,000
-          #rand(900) + 100
-          item.user_id = 1
-          item.save
+          item  = Item.parse(url)
+          Rails.logger.info url
+          if nil == item
+            Rails.logger.info 'item not found'
+          elsif item.id.to_i > 0
+            Rails.logger.info 'item was already exists'
+          else
+            # A random user, id > 1,000 and < 10,000
+            #rand(900) + 100
+            item.user_id = 1
+            item.save
+          end
         end
       end
 
@@ -167,7 +152,7 @@ class Cpanel::TasksController < Cpanel::ApplicationController
       Rails.logger.info e.message
     end
     # Set as finished
-    TaskPage.update_all("status=1", ["id in (?)", params[:id]])
+    TaskPage.where(["id in (?)", params[:id]]).update_all("status=1")
 
     #render text: 'done'
     redirect_to cpanel_tasks_path, notice: '采完了'

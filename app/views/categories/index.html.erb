@@ -92,7 +92,6 @@
   _height: 64px;
   }
   .c_d_list .c_d_mod {
-  width: 49px;
   margin: 0 6px;
   text-align: center;
   }
@@ -166,6 +165,8 @@
       <ul class="items">
         <%= render partial: 'items/item', collection: @items %>
       </ul>
+
+      <%= will_paginate @items%>
     </div>
   </div>
 </div>
