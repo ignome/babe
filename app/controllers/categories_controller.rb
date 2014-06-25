@@ -19,7 +19,7 @@ class CategoriesController < ApplicationController
     end
     ids << "%"
 
-    @items = Item.where(["catalog like ?", ids]).order('id desc').paginate(per_page: 20, page: params[:page])
+    @items = Item.where(["catalog like ?", ids]).order('id desc').paginate(per_page: 50, page: params[:page])
   end
 
   protected

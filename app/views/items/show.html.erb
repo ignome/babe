@@ -44,7 +44,7 @@
 
       <div class="colors">
         <ul class="color-chips">
-          <% @item.photos.first.colors.to_s.split(';').each do |color| %>
+          <% @item.photos.first.color.to_s.split(';').each do |color| %>
           <li class="color"><%= link_to color, '', style: "background-color:##{color}" %></li>
           <% end %>
         </ul>

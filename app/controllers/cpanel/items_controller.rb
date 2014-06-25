@@ -33,12 +33,13 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
         item.iid = uri.path.gsub /\D+/,''
       when 'taobao', 'tmall'
         item.iid = /id=(\d+)/.match(uri.query)[1]
-        item.url = url.split('?')[0] << '?id=' << item.iid
+        item.url = self.url.split('?')[0] << '?id=' << item.iid
       else
         iid = 0
       end
       item.save
     end
+    render text: 'done'
   end
 
   def pin
