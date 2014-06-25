@@ -23,7 +23,36 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
   def band
   end
 
-  
+  def cover
+    Item.where('provider is null').select('id,user_id,url').each do |item|
+      begin
+        if item.url.nil?
+          item.destroy
+          Rails.logger.info "#{item.id} deleted"
+          next
+        end
+
+        uri = URI(item.url)
+        host = uri.hostname.split('.')[1].downcase
+
+        case host
+        when 'jd'
+          item.iid = uri.path.gsub /\D+/,''
+        when 'taobao', 'tmall'
+          item.iid = /id=(\d+)/.match(uri.query)[1]
+          item.url = item.url.split('?')[0] << '?id=' << item.iid.to_s
+        else
+          iid = 0
+        end
+        item.provider = host
+        item.save
+      rescue Exception => e
+        item.destroy
+        Rails.logger.info e.message
+      end
+    end
+    render text: 'done'
+  end
 
   def pin
     Item.where('id in (?)', params[:id]).update_all('status=status+1')
@@ -44,33 +73,7 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
 
   private
 
-  def set_iid
-    Item.where('provider is null').select('id,user_id,url').each do |item|
-
-      if item.url.nil?
-        item.destroy
-        Rails.logger.info "#{item.id} deleted"
-        next
-      end
-
-      uri = URI(item.url)
-      host = uri.hostname.split('.')[1].downcase
-
-      case host
-      when 'jd'
-        item.iid = uri.path.gsub /\D+/,''
-      when 'taobao', 'tmall'
-        item.iid = /id=(\d+)/.match(uri.query)[1]
-        item.url = item.url.split('?')[0] << '?id=' << item.iid.to_s
-        item.
-      else
-        iid = 0
-      end
-      item.provider = host
-      item.save
-    end
-    render text: 'done'
-  end
+  
 
   def reset_photo
     file = File.open('p.txt', 'w')
