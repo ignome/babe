@@ -1,16 +1,16 @@
 <script type="text/javascript" src="/scripts/category.json"></script>
 <script type="text/javascript">
-window.Treeview = {
+window.SelectView = {
   tree : [],
   multiValue : 0,
 
   render : function(nodes, target, selected ){
     target = arguments.length > 2 ? target : 'category';
-    
-    Treeview.tree[0] = '<option value="0"> 选择上线分类 ...</option>';
-    Treeview.loop(nodes, 0, 0, selected);
+    SelectView.tree = [];
+    SelectView.tree[0] = '<option value="0"> 选择上线分类 ...</option>';
+    SelectView.loop(nodes, 0, 0, selected);
 
-    $('#' + target).append( Treeview.tree.join("\n") );
+    $('#' + target).append( SelectView.tree.join("\n") );
   },
 
   loop : function(nodes, parent, depth, selected){
@@ -21,14 +21,42 @@ window.Treeview = {
         label += '-';
       }
       
-      if( Treeview.multiValue ) id = '' == parent ? node['id'] : parent + ',' + node['id'];
+      if( SelectView.multiValue ) id = '' == parent ? node['id'] : parent + ',' + node['id'];
       else id = node['id'];
 
       pp = '' == parent ? node['id'] : parent + ',' + node['id'];
-      ss = node['id'] == selected ? 'selected="selected"' : '';
+      ss = node['id'] == selected ? 'selected' : '';
 
-      Treeview.tree[Treeview.tree.length] = '<option value="'+ id +'" '+ ss+'>'+ label + node['name'] +'</option>';
-      if ( node.child.length > 0 ) Treeview.loop(node['child'], pp , depth + 1, selected);
+      SelectView.tree[SelectView.tree.length] = '<option value="'+ id +'" '+ ss+'>'+ label + node['name'] +'</option>';
+      if ( node.child.length > 0 ) SelectView.loop(node['child'], pp , depth + 1, selected);
+    }
+  }
+}
+
+window.TreeView = {
+  selected : [],
+
+  render : function(nodes){
+    TreeView.tree = [];
+    TreeView.build(nodes, selected);
+  },
+
+  build : function(nodes, depth){
+    for(var i=0, e=nodes.length; i<e; i++){
+      node = nodes[i];
+      label = '|-';
+      for(var k=0; k < depth; k++){
+        label += '-';
+      }
+      
+      if( SelectView.multiValue ) id = '' == parent ? node['id'] : parent + ',' + node['id'];
+      else id = node['id'];
+
+      pp = '' == parent ? node['id'] : parent + ',' + node['id'];
+      ss = node['id'] == selected ? 'selected' : '';
+
+      SelectView.tree[SelectView.tree.length] = '<option value="'+ id +'" '+ ss+'>'+ label + node['name'] +'</option>';
+      if ( node.child.length > 0 ) SelectView.loop(node['child'], pp , depth + 1, selected);
     }
   }
 }

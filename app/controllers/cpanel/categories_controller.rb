@@ -8,6 +8,7 @@ class Cpanel::CategoriesController < Cpanel::ApplicationController
 
   def new
     @category = Category.new
+    @category.parent = params[:parent] and params[:parent].to_i ? params[:parent].to_i : 0
   end
 
   def edit
@@ -32,8 +33,8 @@ class Cpanel::CategoriesController < Cpanel::ApplicationController
   end
 
   def destroy
-    @category.destroy
-    redirect_to cpanel_categories_path, notice: "#{@category.name} Have been removed successfully"
+    @category.destroy if @category
+    redirect_to cpanel_categories_path, notice: " Have been removed successfully"
   end
 
   protected
@@ -43,6 +44,6 @@ class Cpanel::CategoriesController < Cpanel::ApplicationController
   end
 
   def find
-    @category = Category.find(params[:id])
+    @category = Category.where(['id=?', params[:id]]).first
   end
 end

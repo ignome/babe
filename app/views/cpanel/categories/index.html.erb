@@ -4,7 +4,7 @@
       <tr>
         <th class="center">
           <label>
-            <input type="checkbox" class="ace">
+            <input type="checkbox" class="ace" name="all" id="chkall">
             <span class="lbl"></span>
           </label>
         </th>
@@ -20,9 +20,10 @@
 </div>
 
 <!-- The template to display files available for upload -->
-<script id="template-upload" type="text/x-tmpl">
+<script id="template-category" type="text/x-tmpl">
   <tr>
-    <td>{%= o.id %}</td>
+    <td width="15"><input type="checkbox" name="id[]" value="{%= o.id %}"/></td>
+    <!--tree level -->
     {% for( var i=0; i < o.depth; i++ ) { %}
     <td></td>
     {% } %}
@@ -30,11 +31,13 @@
     <td colspan="{%= o.max - o.depth %}">
         {%=o.name%}
     </td>
+
     <td> {%=o.slug%} </td>
     <td> {%=o.sort%} </td>
     <td>
-        <a href="category/{%=o.id%}/edit">编辑</a>
         <a class="icon-remove" data-confirm="确定要删除吗?" data-method="delete" href="category/{%=o.id%}" rel="nofollow">删除</a>
+        <a href="category/{%=o.id%}/edit">编辑</a>
+        <a href="category/new?parent={%=o.id%}">添加</a>
     </td>
   </tr>
 </script>
@@ -46,14 +49,14 @@
 var $tbody = $('#sample-table-1 tbody');
 var max = tree['depth'];
 
-$('#sample-table-1 thead tr th').eq(1).attr('colspan', max);
+$('#tree thead tr th').eq(1).attr('colspan', max);
 
 function render_node(tree, depth){
   for(var i=0; i < tree.length; i++){
     node = tree[i];
     node['depth'] = depth;
     node['max'] = max;
-    $tbody.append( tmpl('template-upload', node) );
+    $tbody.append( tmpl('template-category', node) );
     if (node['child'].length > 0) render_node(node['child'], depth+1)
   }
 }

@@ -5,7 +5,7 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
   before_filter :set_return_page
 
   def index
-    @items = Item.all.includes([:user, :category])
+    @items = Item.all.includes([:user, :categories])
     if params[:c] and params[:c].to_i != 0
       @items = @items.where('catalog like ?', "#{params[:c]}%")
     end

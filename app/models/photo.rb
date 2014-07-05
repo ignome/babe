@@ -18,7 +18,8 @@ class Photo < ActiveRecord::Base
   end
 
   # Apply to item only
-  after_create do
+  #after_create :pick_colors_up
+  def pick_colors_up
     if self.subject_type.to_s.downcase == 'item'
       img = Magick::Image.read(self.file.path).first.quantize(8)
       # memory warning!!!

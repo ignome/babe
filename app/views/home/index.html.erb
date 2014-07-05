@@ -31,6 +31,7 @@
 
 <div class="cat box">
   <div class="sub">
+    <div class="hd">潮流单品</div>
     <ul class="first"></ul>
   </div>
 </div>
@@ -75,8 +76,8 @@
         <ul class="items">
           <%= render partial: 'items/item', collection: @items %>
         </ul>
-        <div class="hide" id="loading"><h3>努力加载中...</h3></div>
-        <div class="hide" id="more"><h3>浏览更多</h3></div>
+        <div style="display:none; position: absolute; bottom:10px;left:49%" id="loading"><h3>努力加载中...</h3></div>
+        <div style="display:none; position: absolute; bottom:10px;left:49%" id="more"><h3>浏览更多</h3></div>
       </div>
     </div>
   </div>
@@ -86,14 +87,17 @@
 <script id="template-nav" type="text/x-tmpl">
 {% for(var i=0, e = o.tree.length; i < e; i++) { %}
 <li  data-tag="{%= i +1 %}">
-  <h3 class="title">
-      <a href="/explore/{%=o.tree[i].slug%}" target="_blank" class="primary_navlist_h fl mr10">{%= o.tree[i]['name'] %}</a>
-  </h3>
-  <ol class="secondary clearfix">
-      {% for(var j=0, k=o.tree[i].child.length; j < k ; j++) { %}
-      <li> <a href="/explore/{%=o.tree[i].slug%}/{%= o.tree[i].child[j].slug%}" target="_blank">{%= o.tree[i].child[j].name %}</a> </li>
-      {% } %}
-  </ol>
+  <div class="icon"><img src="/assets/{%=o.tree[i].slug%}.png" /></div>
+  <div class="item">
+    <h3 class="title">
+        <a href="/explore/{%=o.tree[i].slug%}" target="_blank" class="primary_navlist_h fl mr10">{%= o.tree[i]['name'] %}</a>
+    </h3>
+    <ol class="secondary clearfix">
+        {% for(var j=0, k=o.tree[i].child.length; j < k ; j++) { %}
+        <li> <a href="/explore/{%=o.tree[i].slug%}/{%= o.tree[i].child[j].slug%}" target="_blank">{%= o.tree[i].child[j].name %}</a> </li>
+        {% } %}
+    </ol>
+  </div>
 </li>
 {% } %}
 </script>
@@ -112,7 +116,7 @@ $(document).ready(function(){
 
   function more(){
     if (!loading){
-      if( $(document).scrollTop() + $(window).height() > $(document).height() - 20) {
+      if( $(document).scrollTop() + $(window).height() > $(document).height() - 200) {
         //show loading
         //console.log($(document).scrollTop() + $(window).height());
         loading = true;
@@ -125,7 +129,20 @@ $(document).ready(function(){
             //unbind the scroll
             $('.items').append( html );
             //resort the waterfall
-            //water();
+            //waiting all images load
+            var images = $('img', html), t = images.length;
+ 
+            for(var i=0, e=t; i < e; i++){
+              img = new Image();
+              img.src = images[i].src;
+              //cached images
+              if(img.complete) --t;
+              //new images
+              img.onload = function(){
+                if (0 >= --t) water();
+              }
+            }
+
             $('#loading').hide();
             loading = false;
             

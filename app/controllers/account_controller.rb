@@ -26,7 +26,7 @@ class AccountController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     resource.login = params[resource_name][:login]
-    resource.email = params[resource_name][:email]
+    #resource.email = params[resource_name][:email]
     resource.name  = params[resource_name][:name]
     
     if resource.save

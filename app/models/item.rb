@@ -1,4 +1,5 @@
 require 'nokogiri'
+require 'net/http'
 
 class Item < ActiveRecord::Base
 
@@ -6,10 +7,12 @@ class Item < ActiveRecord::Base
   attr_accessor :urls, :comment
 
   belongs_to :user, counter_cache: true
-  belongs_to :category
-  
+  #belongs_to :category
+
   has_many :fans_of_items
   has_many :fans, :through => :fans_of_items, :source => :user
+  has_many :items_of_categories
+  has_many :categories, :through => :items_of_categories
   has_many :comments, :as => :subject
   has_many :photos, :as => :subject, :dependent => :destroy
 
@@ -66,7 +69,6 @@ class Item < ActiveRecord::Base
   end
   
   def self.parse url
-    
     uri = URI(url)
     host = uri.hostname.split('.')[1].downcase
     Rails.logger.info host
@@ -135,7 +137,7 @@ class Item < ActiveRecord::Base
         
 
         elsif 'tmall'  == host
-          item.title = page.css('div.tb-detail-hd h3').text.strip
+          item.title = page.css('div.tb-detail-hd h1').text.strip
           item.price = page.css('li#J_StrPriceModBox .tm-price').text.strip.to_f
           item.mprice = page.css('li#J_PromoPrice .tm-price').text.strip.to_f
           page.css('ul#J_UlThumb img').each do |img|

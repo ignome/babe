@@ -33,16 +33,17 @@
       </td>
 
       <td>
-        <%= image_tag o.cover, size: '50x50' %>
+        <%= image_tag o.cover.default.url, size: '50x50' %>
       </td>
       <td><%= link_to o.title, item_path(o.id) %></td>
-      <td><%= o.category.name if o.category %></td>
-      <td><%= o.likes_count %></td>
+      <td><%= o.categories.map{|c| categories_path(c.id)} %></td>
+      <td><%= "#{o.likes_count}/#{o.views_count}" %></td>
       <td><%= o.user.try(:login) %></td>
       <td><%= o.created_at.strftime("%Y-%m-%d") %></td>
-      <td><%= o.status > 0 ? '正常' : '采集' %></th>
+      <td><%= o.status > 0 ? '收入' : '采集' %></th>
       <td>
-        
+        <a href="javascript:;" class="cat">分类</a>
+        标签
       </td>
     </tr>
     <% end %>
@@ -64,14 +65,81 @@
 
 <%= will_paginate @items%>
 
+<div class="modal fade" id="pop">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">选择分类</h4>
+      </div>
+      <div class="modal-body">
+        <select name="list" multiple  size="25"   >
+<option   value= "1 "   > 爱情片 </option>
+<option   value= "2 "   > 动作片 </option>
+<option   value= "3 "   > 战争片 </option>
+<option   value= "4 "   > 恐怖片 </option>
+<option   value= "5 "   > 喜剧片 </option>
+<option   value= "6 "   > 伦理片 </option>
+<option   value= "7 "   > 电视剧 </option>
+<option   value= "8 "   > 动画片 </option>
+<option   value= "9 "   > 其它 </option>
+</select>
+ 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" class="btn btn-primary">完成</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- The template to display files available for upload -->
+<script id="template-category" type="text/x-tmpl">
+  <tr>
+    {% for( var i=0; i < o.depth; i++ ) { %}
+    <td></td>
+    {% } %}
+
+    <td colspan="{%= o.max - o.depth %}">
+        {%=o.name%}
+    </td>
+    <td>
+        {% if(o.child.length == 0){ %}
+        <input type="checkbox" name="id[]" value="{%= o.id%}" />
+        {% } %}
+    </td>
+  </tr>
+</script>
+
 <!-- Treeview -->
 <%= render 'cpanel/categories/treeview' %>
 
 <%= content_for :scripts do %>
+<script src="/scripts/tmpl.min.js"></script>
 <script type="text/javascript">
-Treeview.multiValue = 1;
-Treeview.render(tree['tree'], 'category', <%= params[:catalog].blank? ? 0 : params[:catalog].split(',')[-1] %>);
-Treeview.render(tree['tree'], 'catalog', <%= params[:c].blank? ? 0 : params[:c].split(',')[-1] %>);
+SelectView.multiValue = 1;
+SelectView.render(tree['tree'], 'category', <%= params[:catalog].blank? ? 0 : params[:catalog].split(',')[-1] %>);
+SelectView.render(tree['tree'], 'catalog', <%= params[:c].blank? ? 0 : params[:c].split(',')[-1] %>);
+
+var max = tree['depth'],
+    tbody = $('#tree tbody');
+
+function render_node(tree, depth){
+  for(var i=0; i < tree.length; i++){
+    node = tree[i];
+    node['depth'] = depth;
+    node['max'] = max;
+    tbody.append( tmpl('template-category', node) );
+    if (node['child'].length > 0) render_node(node['child'], depth+1)
+  }
+}
+$('#tree thead tr th').eq(1).attr('colspan', max);
+render_node(tree['tree'], 0);
+
+$('.cat').on('click', function(){
+  $('#pop').modal();
+});
 
 function post(url){
   $('#form').attr('action', url);

@@ -1,55 +1,101 @@
 <div id="signin">
   <div class="container">
 
-    <% if not flash.empty? %>
-    <p></p>
-    <div class="alert alert-danger alert-dismissable">
-      <a class="close" data-dismiss='alert' href="#">×</a>
-      <% flash.each do |type, message| %>
-      <%= content_tag(:div, message) %>
-      <% end %>
-    </div>
-    <% end %>
-    
     <div class="row">
       <%= render "shared/error", :target => resource %>
       <div class="col-md-7">
-        <img src="/signin.jpg">
+        <div id="ad"><img src="/signin.jpg"></div>
       </div>
 
-      <div class="col-md-5 box">
-        <%= simple_form_for(resource, url: session_path(resource_name) ) do |f| %>
-          <%= f.input :login, label: '用户名', input_html:{class: 'form-control'} %>
-          <%= f.input :password, label: '密码', input_html:{class: 'form-control'} %>
-          <%- if devise_mapping.rememberable? -%>
-          <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
-              <div class="checkbox">
-                <label>
-                  <%= f.check_box :remember_me %> <%= t("users.remember_me") %>
-                </label>
+      <div class="col-md-5">
+        <div class="box">
+          <div class="hd"> 
+            <h2>登录</h2>
+          </div>
+          <div class="bd">
+            <div class="inner">
+              <%= simple_form_for(resource, url: session_path(resource_name) ) do |f| %>
+              
+              <% if not flash.empty? %>
+              <div style="display: block;" class="login-msg msg">
+                <div class="error">
+                <% flash.each do |type, message| %>
+                  <%= content_tag(:p, message) %>
+                <% end %>
+                </div>
               </div>
+              <% end %>
+
+             <div class="field username-field">
+                <label for="TPL_username_1" class="iconfont"></label>
+                  <span class="ph-label">手机号/会员名/邮箱</span>
+                  <input type="text" name="user[login]" id="TPL_username_1" class="login-text " value="<%=resource.login%>"  autocomplete="off" maxlength="32" tabindex="1">
+                  <span class="nickx" href="javascript:void(0)" style="display: none;"></span>
+              </div>
+              <div class="field pwd-field">
+                <label id="password-label" for="TPL_password_1" class="iconfont"></label>
+                <span id="J_StandardPwd">
+                  <input type="password" aria-labelledby="password-label" name="user[password]" id="TPL_password_1" class="login-text" maxlength="20" tabindex="2">
+                </span>
+              </div>
+
+              <div class="safe">
+                <span class="safe-login">
+                  <label>
+                    <%= f.check_box :remember_me %> <%= t("users.remember_me") %>
+                  </label>
+                </span>
+                <a href="#" id="forget-pw-safe" class="forget-pw">忘记登录密码?</a>
+              </div>
+
+              <div class="submit">
+                  <input type="hidden" name="ppp" id="ppp">
+                  <button type="submit" class="J_Submit" tabindex="5">登　录</button>
+              </div>
+
+              <ul class="entries" id="xtylorukwpgzcfbhejnmvqiads">
+                <li class="other-login">
+                  <a href="#" class="weibo-login" title="微博帐号登录">微博登录</a> 
+                  <a href="#" class="alipay-login" title="支付宝账户登录">QQ账号登录</a>
+                </li>
+                <li class="register"><%= link_to t("users.signup"), new_registration_path(resource_name) %></li>
+              </ul>
+              
+            <% end %>
             </div>
           </div>
-          <%- end -%>
           
-          <div class="form-group">
-            <div class="col-sm-offset-3 col-sm-9">
-                <%= f.submit t("users.signin"), :class => "btn btn-primary", 'data-disable-with' => t("users.signing") %>
-            </div>
-          </div>
-        <% end %>
-
-        <h5>还没有帐号？</h5>
-        <%= render :partial => "shared/links" %>
-
-        <h5>使用其它方式接入</h5>
-        <ul>
-          <li>新浪微博登录</li>
-          <li>QQ账号登录</li>
-        </ul>
-        
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<% content_for :scripts do %>
+<script type="text/javascript">
+$('.ph-label').on('click', function(e){   
+  $('#TPL_username_1')[0].focus();
+});
+
+if( $('#TPL_username_1').val().length > 0 ) $('.username-field').addClass('ph-hide');
+
+$('#TPL_username_1').on('focus', function(){
+  var field = $('.username-field');
+  if(field.val()== 0){
+    $('.username-field').addClass('ph-focus');
+  }
+});
+$('#TPL_username_1').on('keyup', function(){
+  var self = $(this);
+  if(self.val().length >= 1){
+    $('.username-field').removeClass('ph-focus').addClass('ph-hide');
+    $('.nickx').css('display', 'block');
+  }
+});
+$('.nickx').click(function(){
+  $('#TPL_username_1').val('');
+  $('.username-field').removeClass('ph-hide ph-focus');
+  $('.nickx').css('display','none');
+});
+</script>
+<% end %>

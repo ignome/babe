@@ -1,6 +1,7 @@
 class Category < ActiveRecord::Base
-  
-  has_many :items
+
+  has_many :items_of_categories
+  has_many :items, :through => :items_of_categories
   has_many :child, foreign_key: 'parent', class_name: 'Category'
   #belongs_to :parent, foreign_key: 'parent', class_name: 'Category'
 
@@ -9,6 +10,7 @@ class Category < ActiveRecord::Base
   validates_presence_of :name, :parent, :slug
 
   after_save :render_as_treeview
+  after_destroy :render_as_treeview
   @datasource = []
 
   def render_as_treeview

@@ -18,15 +18,33 @@ service = server.listen(port, function(request, response){
     var target = request.post.url;
     console.log('Request crawl : ' + target );
     var page = webpage.create();
-        page.onLoadFinished =  page.close;
+        page.onLoadFinished =  function(){
+            console.log('finished and closed');
+            //page.close();
+        }
         page.open(target, function(status){
           
           if ('success' == status){
             console.log('Request ' + target + ' is ' + status);
-            page.sendEvent('mousemove', 100, 3000);
-            // waiting for all done!
-            html = page.content;
+            //page.sendEvent('mousemove', 100, 2000);
+            //*
+            max = page.evaluate(function(){
+                window.document.body.scrollTop = 10000000000;
+                return window.document.body.scrollTop;
+            });
 
+            page.evaluate(function(){
+                
+            });
+
+            interval = window.setInterval(function(){
+                
+            }, 1000);
+            //*/
+ 
+            html = page.content;
+            page.render('html.png');
+           
             //console.log(html);
             /*
             file = fs.open( request.post.id + '.html', 'w');

@@ -18,31 +18,34 @@
 
 function water(){
   var items = $('.items li'),
-      width = 215,
+      width = 215 + 16,
       mxw = $('.container').eq(1).width(),
-      cols = Math.floor(mxw / (width + 4)),
+      cols = Math.round(mxw / width),
       tops = [];
   
   //init with 0
   for(var i=0; i<cols; i++) tops[i] = 0;
 
   $.each(items, function(i){
-    col = i % cols;
-    row = Math.floor(i / cols);
+    var col = i % cols,
+        row = Math.floor(i / cols),
+        x = 0, y = 0;
 
     x = Math.floor(col * width);
-    x += col == 0 ? 0 : 16 * col;
+    // on width not plus the space width 16
+    //x += col == 0 ? 0 : 16;
     y = row > 0 ? tops[col] : 0;
-    y += row * 20;//space
+    //y +=  20;//space
+    tops[col] += items.eq(i).height() + 20;
 
-    tops[col] += items.eq(i).height();
     items.eq(i).css({left: x +'px', top: y + 'px'});
   });
 
-  h = tops.sort(function(a,b){return a-b})[tops.length-1] + Math.floor( items.length / cols * 20 );
+  // more 50 for explore more ...
+  var h = tops.sort(function(a,b){return a-b})[tops.length-1] + 50;
   
   items.parent().css('height', h +"px");
 }
 
 window.onload = water;
-window.onresize = water;
+//window.onresize = water;
