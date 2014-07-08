@@ -7,12 +7,12 @@ class Item < ActiveRecord::Base
   attr_accessor :urls, :comment
 
   belongs_to :user, counter_cache: true
-  #belongs_to :category
+  belongs_to :category
 
   has_many :fans_of_items
   has_many :fans, :through => :fans_of_items, :source => :user
-  has_many :items_of_categories
-  has_many :categories, :through => :items_of_categories
+  has_many :items_of_tags
+  has_many :tags, :through => :items_of_tags
   has_many :comments, :as => :subject
   has_many :photos, :as => :subject, :dependent => :destroy
 

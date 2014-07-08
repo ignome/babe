@@ -1,0 +1,28 @@
+<table class="table table-bordered table-striped table-condensed">
+  <tr class="head">
+    <td class="first"></td>
+    <td>名称</td>
+    <td>推荐</td>
+    <td>状态</td>
+    <td></td>
+  </tr>
+
+<% @tags.each do |tag| %>
+  <tr>
+    <td width="15">
+      <input type="checkbox" id="chk<%= tag.id %>" name="id[]" value="<%=tag.id %>">
+    </td>
+    <td><%= tag.name %></td>
+    <td><%= tag.recommend ? '推荐' : ''; %></td>
+    <td><%= tag.available ? '有效' : '无效'; %></td>
+    <td>
+      <%= link_to '编辑', edit_cpanel_tag_path(tag) , :class => "icon small_edit" %>
+      <%= link_to '删除', cpanel_tag_path(tag), 'data-confirm' => 'Are you sure?', :method => :delete, :class => "icon small_delete" %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to '创建新标签', new_cpanel_tag_path %>

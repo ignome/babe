@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140704080607) do
+ActiveRecord::Schema.define(version: 20140708114128) do
 
   create_table "ads", force: true do |t|
     t.string   "title"
@@ -120,6 +120,13 @@ ActiveRecord::Schema.define(version: 20140704080607) do
 
   add_index "items_of_styles", ["style_id", "item_id"], name: "index_items_of_styles_on_style_id_and_item_id", unique: true, using: :btree
 
+  create_table "items_of_tags", force: true do |t|
+    t.integer  "item_id"
+    t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "nodes", force: true do |t|
     t.integer  "section_id"
     t.string   "name"
@@ -197,6 +204,14 @@ ActiveRecord::Schema.define(version: 20140704080607) do
     t.datetime "updated_at"
     t.string   "body"
     t.string   "title"
+  end
+
+  create_table "tags", force: true do |t|
+    t.string   "name"
+    t.boolean  "recommend"
+    t.boolean  "available"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "task_links", force: true do |t|

@@ -1,9 +1,10 @@
 class Category < ActiveRecord::Base
 
-  has_many :items_of_categories
-  has_many :items, :through => :items_of_categories
+  #has_many :items_of_categories
+  #has_many :items, :through => :items_of_categories
   has_many :child, foreign_key: 'parent', class_name: 'Category'
-  #belongs_to :parent, foreign_key: 'parent', class_name: 'Category'
+  has_many :items
+  belongs_to :parent, foreign_key: 'parent', class_name: 'Category'
 
   scope :roots, -> { where(parent: 0).order('sort asc') }
 

@@ -1,0 +1,9 @@
+<%= simple_form_for([:cpanel,@tag], html:{class: 'form-horizontal'}) do |f| %>
+  <%= render 'shared/error', :target => @tag %>
+
+  <%= f.input :name %>
+  <%= f.input :available, as: 'boolean', label: '有效' %>
+  <%= f.input :recommend, as: 'boolean', label: '推荐' %>
+
+  <%= f.submit t("common.submit"), :class => "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+<% end %>

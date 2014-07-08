@@ -5,7 +5,7 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
   before_filter :set_return_page
 
   def index
-    @items = Item.all.includes([:user, :categories])
+    @items = Item.all.includes([:user, :category])
     if params[:c] and params[:c].to_i != 0
       @items = @items.where('catalog like ?', "#{params[:c]}%")
     end
@@ -18,6 +18,12 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
   def destroy
     Item.find(params[:id]).destroy
     redirect_to cpanel_items_path(page: params[:page]), notice: 'remove an item success'
+  end
+
+  def tags
+    @selected = Item.find(params[:id]).tags.select('tag_id')
+    @tags = Tag.where('available',true).paginate(per_page: 15, page: params[:page])
+    render 'tags', layout: false
   end
 
   def band
@@ -72,8 +78,6 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
   end
 
   private
-
-  
 
   def reset_photo
     file = File.open('p.txt', 'w')

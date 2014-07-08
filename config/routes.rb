@@ -89,6 +89,7 @@ Babe::Application.routes.draw do
     resources :ads
     resources :catalogs
     resources :pages
+    resources :tags
 
     resources :users do
       collection do
@@ -112,6 +113,7 @@ Babe::Application.routes.draw do
         post 'moveto'
         post 'free'
         post 'band'
+        get 'tags'
         get 'cover'
         post 'pin'
       end

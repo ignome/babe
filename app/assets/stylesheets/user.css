@@ -193,7 +193,7 @@ width: 16px;
 height: 16px;
 background: url(/assets/c.png) no-repeat 4px -310px;
 position: absolute;
-left: 234px;
+right: 5px;
 top: 38px;
 z-index: 1000;
 cursor: pointer;

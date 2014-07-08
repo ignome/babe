@@ -1,4 +1,3 @@
-
 <%= simple_form_for([:cpanel, Item.new], html:{ id: 'form' }) do %>
 <input type="hidden" name="page" value="<%= params[:page];%>" />
 <div class="input-group">
@@ -35,15 +34,14 @@
       <td>
         <%= image_tag o.cover.default.url, size: '50x50' %>
       </td>
-      <td><%= link_to o.title, item_path(o.id) %></td>
-      <td><%= o.categories.map{|c| categories_path(c.id)} %></td>
+      <td><%= link_to o.title, item_path(o.id), target: '_blank' %></td>
+      <td><%= o.category.nil? ? '' : o.category.name %></td>
       <td><%= "#{o.likes_count}/#{o.views_count}" %></td>
       <td><%= o.user.try(:login) %></td>
       <td><%= o.created_at.strftime("%Y-%m-%d") %></td>
       <td><%= o.status > 0 ? '收入' : '采集' %></th>
       <td>
-        <a href="javascript:;" class="cat">分类</a>
-        标签
+        <a href="javascript:;" class="tag" id="<%= o.id%>">标签</a>
       </td>
     </tr>
     <% end %>
@@ -73,18 +71,7 @@
         <h4 class="modal-title">选择分类</h4>
       </div>
       <div class="modal-body">
-        <select name="list" multiple  size="25"   >
-<option   value= "1 "   > 爱情片 </option>
-<option   value= "2 "   > 动作片 </option>
-<option   value= "3 "   > 战争片 </option>
-<option   value= "4 "   > 恐怖片 </option>
-<option   value= "5 "   > 喜剧片 </option>
-<option   value= "6 "   > 伦理片 </option>
-<option   value= "7 "   > 电视剧 </option>
-<option   value= "8 "   > 动画片 </option>
-<option   value= "9 "   > 其它 </option>
-</select>
- 
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -137,7 +124,8 @@ function render_node(tree, depth){
 $('#tree thead tr th').eq(1).attr('colspan', max);
 render_node(tree['tree'], 0);
 
-$('.cat').on('click', function(){
+$('.tag').on('click', function(){
+  $('#pop .modal-body').html('<iframe src="/cpanel/items/tags?id='+ $(this).attr('id')+'" width="100%" height="100%" frameborder="0"></iframe>');
   $('#pop').modal();
 });
 

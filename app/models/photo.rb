@@ -5,7 +5,7 @@ class Photo < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :subject, polymorphic: true
-  has_many :colors, :dependent => :delete_all
+  #has_many :colors, :dependent => :delete_all
 
   mount_uploader :file, PhotoUploader
 

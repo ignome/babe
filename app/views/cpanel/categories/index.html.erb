@@ -49,7 +49,7 @@
 var $tbody = $('#sample-table-1 tbody');
 var max = tree['depth'];
 
-$('#tree thead tr th').eq(1).attr('colspan', max);
+$('#sample-table-1 thead tr th').eq(1).attr('colspan', max);
 
 function render_node(tree, depth){
   for(var i=0; i < tree.length; i++){
