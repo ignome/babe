@@ -113,8 +113,8 @@ Babe::Application.routes.draw do
         post 'moveto'
         post 'free'
         post 'band'
+        post 'bind'
         get 'tags'
-        get 'cover'
         post 'pin'
       end
     end

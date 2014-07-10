@@ -21,9 +21,23 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
   end
 
   def tags
-    @selected = Item.find(params[:id]).tags.select('tag_id')
+    @item = Item.find(params[:id])
+    @selected = @item.tags.select('tags.id').map{|x| x.id}
     @tags = Tag.where('available',true).paginate(per_page: 15, page: params[:page])
     render 'tags', layout: false
+  end
+
+  def bind
+    item = params[:item][:id]
+    if params[:id]
+      tags = params[:id].map{|id| {tag_id: id, item_id: item} }
+      if params[:do] == 'bind'
+        ItemsOfTag.create tags
+      else
+        ItemsOfTag.where(["item_id=? and tag_id in (?)", item, params[:id]]).delete_all
+      end
+    end
+    redirect_to tags_cpanel_items_path(page: params[:page], id: item), notice: 'set tags success'
   end
 
   def band

@@ -45,7 +45,7 @@
     <a name="{%= o.tree[i].slug %}"></a>
     <li class="cate_li_v1 cate_highlight{%= o.tree[i].id == category.id ? '' : '_'+o.tree[i].slug %} li_{%= o.tree[i].slug %}">
       <div class="cate_show_v1">
-          <a href="{%= o.tree[i].slug %}" class="nav_link_v1 c_top">
+          <a href="/explore/{%= o.tree[i].slug %}" class="nav_link_v1 c_top">
             <img src="/images/{%= o.tree[i].slug %}.png" class="nav_icon_v1 clothing">{%= o.tree[i].name %}
             <b>></b>
           </a>
@@ -56,11 +56,11 @@
         {% for(var j=0, k=o.tree[i].child.length; j < k ; j++) { %}
         <div class="c_d_list">
           <div class="c_d_mod">
-              <a href="" class="title">{%= o.tree[i].child[j].name %}</a>
+              <a href="/explore/{%= o.tree[i].slug + '/' + o.tree[i].child[j].slug%}" class="title">{%= o.tree[i].child[j].name %}</a>
           </div>
           <div class="c_d_words_box">
             {% for(var x=0, y=o.tree[i].child[j].child.length; x < y; x++) { %}
-            <a href="">{%= o.tree[i].child[j].child[x].name %}</a>
+            <a href="/explore/{%= o.tree[i].slug + '/' + o.tree[i].child[j].slug + '/' + o.tree[i].child[j].child[x].slug %}">{%= o.tree[i].child[j].child[x].name %}</a>
             {% } %}
           </div>
         </div>

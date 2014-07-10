@@ -63,19 +63,14 @@
 
 <%= will_paginate @items%>
 
-<div class="modal fade" id="pop">
-  <div class="modal-dialog">
+<div class="modal fade " id="pop">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">选择分类</h4>
+        <h4 class="modal-title">选择标签</h4>
       </div>
       <div class="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary">完成</button>
       </div>
     </div>
   </div>
@@ -125,8 +120,14 @@ $('#tree thead tr th').eq(1).attr('colspan', max);
 render_node(tree['tree'], 0);
 
 $('.tag').on('click', function(){
-  $('#pop .modal-body').html('<iframe src="/cpanel/items/tags?id='+ $(this).attr('id')+'" width="100%" height="100%" frameborder="0"></iframe>');
+  $('#pop .modal-body').html('<iframe name="itag" src="/cpanel/items/tags?id='+ $(this).attr('id')+'" width="100%" height="100%" frameborder="0"></iframe>');
   $('#pop').modal();
+});
+
+// ajax post on close the pop
+$('#pop #finish').on('click', function(){
+  var id = $('input[type="checkbox"]', window.frames["itag"].document);
+  console.log(id);
 });
 
 function post(url){
