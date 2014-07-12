@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140708114128) do
+ActiveRecord::Schema.define(version: 20140712021228) do
 
   create_table "ads", force: true do |t|
     t.string   "title"
@@ -212,6 +212,7 @@ ActiveRecord::Schema.define(version: 20140708114128) do
     t.boolean  "available"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "category_id", default: 0
   end
 
   create_table "task_links", force: true do |t|

@@ -31,24 +31,31 @@
 
 <div class="cat box">
   <div class="sub">
-    <div class="hd"><i class="glyphicon glyphicon-bookmark"></i>潮流单品</div>
+    <div class="hd"></div>
     <ul class="first"></ul>
   </div>
 </div>
 
 <div id="special">
-  <ul>
-    <li><img src="/images/promotion.png" height="110" /></li>
-    <li>话题推荐</li>
-    <li>推荐网店</li>
-  </ul>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="hd clearfix"><h3><img src="/images/hot.png" /></h2></div>
+        <ul>
+          <li style="margin-left:0;"><img src="/images/10.png" /></li>
+          <li><img src="/images/style.png" /></li>
+          <li><img src="/images/community.png" /></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div id="promotion">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="hd clearfix"><h2> 值得购买 </h2></div>
+        <div class="hd clearfix"><h3><img src="/images/worthbuying.png" /></h2></div>
         <ul>
           <%= render partial: 'item', collection: @promotions %>
         </ul>
@@ -56,23 +63,22 @@
     </div>
   </div>
 </div>
-<!--
+
 <div id="recommend">
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="hd clearfix"><h2>编辑精选</h2></div>
+        <div class="hd clearfix"><h3><img src="/images/collection.png" alt="编辑推荐"/></h2></div>
       </div>
     </div>
   </div>
 </div>
--->
 
 <div class="list">
   <div class="container">
     <div class="row">
       <div class="col-md-12 clearfix">
-        <div class="hd clearfix"><h2> 新上单品 </h2></div>
+        <div class="hd clearfix"><h3><img src="/images/whatsnew.png" alt="新上单品" /></h2></div>
         <ul class="items">
           <%= render partial: 'items/item', collection: @items %>
         </ul>

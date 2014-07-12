@@ -51,7 +51,7 @@
 $(document).on('click', '#fetch', function(){
   var url = $('input[name="url"]').val();
   if( url.length < 12 ){
-    $('.alert').removeClass('hide').addClass('show');//.alert();
+    $('.alert').removeClass('hide').addClass('show');
     return false;
   }
 
@@ -61,6 +61,7 @@ $(document).on('click', '#fetch', function(){
     data : {url: url},
     dataType : 'HTML',
     success : function(html, status, xhr){
+      $('#.modal').modal('hide');
       if ( 201 == xhr.status ){
         $('#item').html(html);
       }else{

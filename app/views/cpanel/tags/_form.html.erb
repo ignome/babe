@@ -2,8 +2,25 @@
   <%= render 'shared/error', :target => @tag %>
 
   <%= f.input :name %>
+
+  <div class="form-group string optional category_name">
+    <label class="string optional col-sm-3 control-label " for="category_name">上级分类</label>
+    <div class="col-sm-9">
+      <select name="tag[category_id]" id="category">
+      </select>
+    </div>
+  </div>
+  
   <%= f.input :available, as: 'boolean', label: '有效' %>
   <%= f.input :recommend, as: 'boolean', label: '推荐' %>
 
   <%= f.submit t("common.submit"), :class => "btn btn-primary", 'data-disable-with' => t("common.submitting") %>
+<% end %>
+
+<%= render 'cpanel/categories/treeview' %>
+
+<% content_for :scripts do %>
+<script type="text/javascript">
+SelectView.render(tree['tree'], 'category', "<%= @tag.category_id%>");
+</script>
 <% end %>

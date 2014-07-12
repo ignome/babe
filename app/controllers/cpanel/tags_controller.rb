@@ -3,7 +3,7 @@ class Cpanel::TagsController < Cpanel::ApplicationController
   before_action :find, only:[:edit,:update,:destroy]
 
   def index
-    @tags = Tag.all.paginate(per_page: 20, page: params[:page])
+    @tags = Tag.all.includes([:category]).paginate(per_page: 20, page: params[:page])
   end
 
   def edit
@@ -41,6 +41,6 @@ class Cpanel::TagsController < Cpanel::ApplicationController
   end
 
   def tag_params
-    params.require(:tag).permit(:name, :available, :recommend)
+    params.require(:tag).permit(:name, :available, :recommend, :category_id)
   end
 end

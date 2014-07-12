@@ -3,7 +3,7 @@ a{color:#333;}
 a:hover{text-decoration: none; color: #6FBE2D}
 .container{width:980px;}
 #home .container, #categories .container{width:1170px}
-.logo{ background: image_url('logo.gif'); width:206px; height:36px;  }
+.logo{ background: image_url('logo.png'); width:100%; height:60px;display:block}
 
 .carousel-inner .item a img{height: 100%; max-height: none; max-width: none}
 
@@ -106,16 +106,17 @@ ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
 #account .main, #profile .main{background-color: #fff; padding: 15px; min-height: 500px;}
 
 #home .cat {margin-left: auto;margin-right: auto;width: 100%;position: relative;}
-#home .cat .sub{position: absolute; left: 60px; top: -400px; background-color: #fff; width: 250px; height: 516px;}
-#home .cat .hd{background-color: #6FBE2D; color: #fff; font-size:16px; line-height:32px; text-align:center; }
-#home .cat ul li{border-bottom: solid 1px #ebebeb; padding: 5px 10px;}
-#home .cat ul li .icon{width: 32px;float:left}
-#home .cat ul li .item{margin-left: 42px;}
+#home .cat .sub{position: absolute; left: 60px; top: -400px; background-color: #fff; width: 250px;opacity: .86}
+#home .cat .hd{border-top:solid 2px #6FBE2D; }
+#home .cat ul{padding: 0 8px;}
+#home .cat ul li{border-bottom: dashed 1px #ebebeb; padding: 15px 0px;}
+#home .cat ul li .icon{width: 36px;float:left}
+#home .cat ul li .item{margin-left: 46px;}
 #home .cat ul li .title{font-size: 16px; font-weight: bold; margin:0; padding:0}
-#home .cat ol.secondary li{float: left; padding: 10px 10px 5px 0; border-bottom: none;}
+#home .cat ol.secondary li{float: left; padding: 10px 6px 0 0; border-bottom: none;}
 
-#home #special{height: 110px; margin-left: 310px; margin-top: 5px;}
-#home #special ul li{float: left; height: 110px; overflow: hidden;width:260px;overflow:hidden; border:solid 1px #ccc;margin-left:10px;}
+#home #special{}
+#home #special ul li{float: left; overflow: hidden;overflow:hidden;margin-left:25px;}
 
 #home #promotion ul li{background-color: #fff; float: left; margin: 0 -1px -1px 0; padding: 18px 8px; border: 1px solid #e4e3e5;}
 #home #promotion .title{font-size: 13px; height: 35px; line-height: 35px; margin-top: 15px}
