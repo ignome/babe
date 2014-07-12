@@ -40,7 +40,7 @@ class Cpanel::CategoriesController < Cpanel::ApplicationController
   protected
 
   def category_params
-    params.require(:category).permit(:name, :parent, :slug, :sort)
+    params.require(:category).permit(:name, :parent, :slug, :sort, :recommend, :display)
   end
 
   def find

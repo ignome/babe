@@ -1,0 +1,293 @@
+/*
+ *= require bootstrap
+ *= require_self
+ */
+ .logo{ background: image_url('logo.gif'); width:206px; height:36px;  }
+ #signin{padding-top: 50px;}
+ #ad{text-align: center;}
+ a {
+  color: #6d6d6d;
+  text-decoration: none
+}
+
+a:hover {
+  color: #ff4200;
+  text-decoration: underline
+}
+
+
+html,legend {
+  color: #404040;
+  background: #fff
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td {
+  margin: 0;
+  padding: 0
+}
+body {
+  font: 12px/1.5 Tahoma,Helvetica,Arial,'\5B8B\4F53',sans-serif;
+  padding-top: 45px;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0
+}
+
+fieldset,img {
+  border: 0
+}
+
+address,caption,cite,code,dfn,em,strong,th,var {
+  font-style: normal;
+  font-weight: normal
+}
+
+li {
+  list-style: none
+}
+
+caption,th {
+  text-align: left
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-size: 100%
+}
+
+h1 {
+  font-size: 18px
+}
+
+h2 {
+  font-size: 16px
+}
+
+h3 {
+  font-size: 14px
+}
+
+q:before,q:after {
+  content: ''
+}
+
+abbr,acronym {
+  border: 0;
+  font-variant: normal
+}
+
+sup {
+  vertical-align: text-top
+}
+
+sub {
+  vertical-align: text-bottom
+}
+
+input,button,textarea,select {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit
+}
+
+input,button,textarea,select {
+  *font-size: 100%
+}
+
+select,input,button,textarea {
+  font: 100% Tahoma,Helvetica,Arial,sans-serif
+}
+
+table {
+  font-size: inherit;
+  font: 100%
+}
+#signup .row,#signin .row{min-height: 400px;}
+.box{
+  width: 320px;
+z-index: 1;
+border: 2px solid #dedede;
+border-top: 2px solid #ff4200;}
+.box .hd {
+margin: 0 20px;
+padding-top: 10px;
+position: relative;
+z-index: 1;
+}
+.box .hd h2 {
+display: block;
+font-size: 16px;
+color: #333;
+font-weight: bold;
+z-index: 1;
+}
+.box  .bd {
+position: relative;
+z-index: 2;
+margin: 0 20px;
+zoom: 1;
+}
+.box .inner{
+color: #666;
+zoom: 1;
+margin: 20px 0;
+}
+.field {
+padding: 10px 0;
+zoom: 1;
+position: relative;
+z-index: 1;
+}
+.field label {
+display: block;
+width: 27px;
+height: 27px;
+line-height: 27px;
+color: #FFF;
+text-align: center;
+background: #ccc image_url('icon-label2.png') no-repeat 50% 7px;
+position: absolute;
+left: 0;
+top: 10px;
+text-indent: -9999em;
+outline: 0;
+}
+.pwd-field label {
+background-position: 50% -30px;
+}
+.username-field label {
+top: 32px;
+}
+.ph-label {
+position: absolute;
+padding: 0 0 0 6px;
+line-height: 26px;
+height: 26px;
+color: #999;
+opacity: 1;
+transition: all .2s ease-out;
+-webkit-transition: all .2s ease-in;
+-moz-transition: all .2s ease-out;
+}
+.ph-label {
+height: 27px;
+line-height: 27px;
+left: 30px;
+}
+.field-checkcode .ph-label {
+  margin-top: 2px
+}
+
+.ph-hide .ph-label {
+  opacity: 0;
+  visibility: hidden
+}
+
+.ph-focus .ph-label {
+  color: #CCC
+}
+.nickx {
+display: none;
+width: 16px;
+height: 16px;
+background: image_url('c.png') no-repeat 4px -310px;
+position: absolute;
+right: 5px;
+top: 38px;
+z-index: 1000;
+cursor: pointer;
+filter: alpha(opacity=70);
+opacity: .7;
+}
+li {
+list-style: none;
+}
+.username-field {
+padding-top: 32px;
+}
+.login-text {
+width: 276px;
+
+line-height: 19px;
+padding: 3px;
+padding-left: 30px;
+vertical-align: middle;
+border: 1px solid #dedede;
+}
+.safe {
+position: relative;
+padding: 15px 0 10px;
+line-height: 26px;
+min-height: 26px;
+_height: 26px;
+}
+.safe input {
+margin-right: 6px;
+}
+.safe-login {
+zoom: 1;
+line-height: 22px;
+color: #999;
+}
+.safe label {
+vertical-align: middle;
+color: #aaa;
+font-weight: normal;
+}
+.forget-pw {
+position: absolute;
+right: 0;
+top: 18px;
+}
+.submit {
+padding: 5px 0 10px;
+overflow: hidden;
+clear: both;
+zoom: 1;
+}
+.submit button {
+width: 276px;
+height: 38px;
+border: 0;
+display: inline-block;
+overflow: hidden;
+vertical-align: middle;
+line-height: 36px;
+font-size: 16px;
+font-weight: bold;
+color: #FFF;
+background: #ff4700;
+border-radius: 3px;
+cursor: pointer;
+zoom: 1;
+}
+ul.entries {
+padding-top: 8px;
+overflow: hidden;
+zoom: 1;
+}
+ul.entries li {
+float: left;
+word-break: keep-all;
+}
+ul.entries .register {
+float: right;
+}
+.msg {
+overflow: hidden;
+margin-bottom: 5px;}
+.msg .error {
+background: image_url('stuff.png') no-repeat -319px -449px #fff2f2;
+border: solid 1px #ff8080;
+line-height: 18px;
+padding: 2px 10px 2px 23px;
+white-space: normal;
+word-wrap: break-word;
+}
+
+#footer {border-top: 1px solid #ddd; background-color:#505050; margin-top: 100px;}
+#footer .container{padding: 30px 10px 20px 10px;font-size: 12px;color: #999;}
+#footer h3{font-size: 16px; color:#fff;}
+#footer a {font-weight: bold;color: #ccc}
+#footer p {clear:left;margin:0 15px 10px 0;line-height: 1.6}
