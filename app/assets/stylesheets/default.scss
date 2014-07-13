@@ -92,7 +92,9 @@ ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
 /* search bar */
 .search{height: 80px; background-color: #fff}
 #search {padding:20px;}
-#search input{width: 300px;float: right; }
+#search input{width: 300px;float: right; border-color: #6FBE2D; padding-left:33px; }
+#search i{position: absolute; right: 325px; top:10px; color: #6FBE2D}
+#search button{background-color: #6FBE2D; border-color: #6FBE2D; color: #fff;}
 
 .menu {background-color: #6FBE2D; height: 25px; line-height: 25px;}
 .menu .home{text-align: center;}
@@ -105,13 +107,11 @@ ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
 #account .sider, #profile .sider{padding: 15px; min-height: 500px; background-color: rgb(243,243,243);}
 #account .main, #profile .main{background-color: #fff; padding: 15px; min-height: 500px;}
 
-#home .cat {margin-left: auto;margin-right: auto;width: 100%;position: relative;}
-#home .cat .sub{position: absolute; left: 60px; top: -400px; background-color: #fff; width: 250px;opacity: .86}
-#home .cat .hd{border-top:solid 2px #6FBE2D; }
-#home .cat ul{padding: 0 8px;}
+#home .cat {position: relative;}
+#home .cat .sub{position: absolute; top: -400px; background-color: #fff; width: 250px;opacity: .86; border-top: solid 2px  #6FBE2D; padding:5px;}
 #home .cat ul li{border-bottom: dashed 1px #ebebeb; padding: 15px 0px;}
 #home .cat ul li .icon{width: 36px;float:left}
-#home .cat ul li .item{margin-left: 46px;}
+#home .cat ul li .item{margin-left: 50px;}
 #home .cat ul li .title{font-size: 16px; font-weight: bold; margin:0; padding:0}
 #home .cat ol.secondary li{float: left; padding: 10px 6px 0 0; border-bottom: none;}
 

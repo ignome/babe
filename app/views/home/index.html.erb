@@ -29,10 +29,11 @@
   </a>
 </div>
 
-<div class="cat box">
-  <div class="sub">
-    <div class="hd"></div>
-    <ul class="first"></ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 cat">
+      <ul class="first sub "></ul>
+    </div>
   </div>
 </div>
 
@@ -113,7 +114,7 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-  var $nav = $('.sub ul');
+  var $nav = $('.sub');
       $nav.append( tmpl('template-nav', tree) );
 
   window.onscroll = more;
