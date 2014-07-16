@@ -16,7 +16,7 @@ class Category < ActiveRecord::Base
   @datasource = []
 
   def render_as_treeview
-    @datasource = Category.all.order('sort asc')
+    @datasource = Category.all.includes([:tags]).order('sort asc')
     tree = build_treeview_datasource
     depth = depth tree
     target = "#{Rails.root}/public/scripts/category.json"

@@ -1,12 +1,13 @@
-<%= simple_form_for([:cpanel, Item.new], html:{ id: 'form' }) do %>
+<%= simple_form_for([:cpanel, Item.new], html:{ id: 'form',class: 'form-inline' }) do %>
 <input type="hidden" name="page" value="<%= params[:page];%>" />
-<div class="input-group">
-  <input type="text" name="q" class="form-control" value="<%= params[:q]%>">
-  <span class="input-group-btn">
-    <select id="catalog" name="c"></select>
-    <button class="btn btn-default" onclick="post('./items', 'get');" type="button">查找</button>
-  </span>
-</div>
+<table>
+  <tr>
+    <td style="padding:0"><div class="q-box"><input type="text" name="q" class="form-control" value="<%= params[:q]%>"></div></td>
+    <td style="padding:0"><div class="cat-box"><select id="catalog" name="c"></select></div></td>
+    <td><button class="btn btn-default" onclick="post('./items', 'get');" type="button">查找</button></td>
+  </tr>
+</table>
+
 <table class="table" width="100%" cellpadding="0" cellspacing="0">
   <thead>
     <tr>
