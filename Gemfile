@@ -75,3 +75,4 @@ gem 'nokogiri'
 
 #gem 'ruby-hmac'
 #gem 'social-share-button'
+gem "settingslogic"

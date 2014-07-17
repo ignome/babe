@@ -1,7 +1,7 @@
 module ApplicationHelper
 
-  def render_page_title(title='')
-    content_tag('title', title)
+  def render_page_title
+    content_tag('title', "#{@page_title} #{Settings.app_name}")
   end
 
   def notice_message

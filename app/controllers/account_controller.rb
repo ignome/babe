@@ -10,7 +10,7 @@ class AccountController < Devise::RegistrationsController
 
   def edit
     @user = current_user
-    #set_seo_meta('修改个人信息')
+    set_seo_meta('修改个人信息')
   end
   
   def update

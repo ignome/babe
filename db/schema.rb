@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140712021228) do
+ActiveRecord::Schema.define(version: 20140717103127) do
 
   create_table "ads", force: true do |t|
     t.string   "title"
@@ -45,8 +45,11 @@ ActiveRecord::Schema.define(version: 20140712021228) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "display",    default: true
-    t.boolean  "recommend",  default: false
+    t.boolean  "display",     default: true
+    t.boolean  "recommend",   default: false
+    t.string   "title"
+    t.string   "keywords"
+    t.string   "description"
   end
 
   create_table "colors", force: true do |t|

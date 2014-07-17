@@ -4,6 +4,9 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= render_page_title %>
+  <meta name="keywords" content="<%= @meta_keywords %>" />
+  <meta name="description" content="<%= truncate(@meta_description, :length => 150) %>" />
+  <link rel="shortcut icon" href="/favicon.ico" />
   <%= stylesheet_link_tag    "application", media: "all"%>
   <%= javascript_include_tag "application" %>
   <!--[if lt IE 9]>

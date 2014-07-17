@@ -14,6 +14,8 @@ class ItemsController < ApplicationController
     # Guess what's the user liked?
     @items = @item.user.items.limit(15)
     @comments = @item.comments.includes(:user)
+    #宝贝{宝贝标题}由宝贝丁{用户}分享，图片精美，价格为{宝贝价格}
+    set_seo_meta(@item.title,'', "#{@item.title}#{@item.user.name}分享,最低折扣价格#{@item.mprice}")
   end
 
   # For Ajax loading more items
