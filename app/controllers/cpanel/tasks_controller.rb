@@ -97,7 +97,7 @@ class Cpanel::TasksController < Cpanel::ApplicationController
   def fetch
     links = TaskPage.find(params[:id])
     Rails.logger.info '*' * 80
-    begin
+    #begin
       links.each do |link|
         Rails.logger.info link.url
         response = Net::HTTP.post_form(URI('http://localhost:8088'), {'url' => link.url})
@@ -130,10 +130,11 @@ class Cpanel::TasksController < Cpanel::ApplicationController
 
         # Get the item from url
         Rails.logger.info '#' * 80
-
+        
         urls.each do |url|
           item  = Item.parse(url)
           Rails.logger.info url
+          Rails.logger.info item.id.to_i
           if nil == item
             Rails.logger.info 'item not found'
           elsif item.id.to_i > 0
@@ -147,12 +148,12 @@ class Cpanel::TasksController < Cpanel::ApplicationController
         end
       end
 
-    rescue Exception => e
+    #rescue Exception => e
       Rails.logger.info '*' * 80
       Rails.logger.info e.message
-    end
+    #end
     # Set as finished
-    TaskPage.where(["id in (?)", params[:id]]).update_all("status=1")
+    #TaskPage.where(["id in (?)", params[:id]]).update_all("status=1")
 
     #render text: 'done'
     redirect_to cpanel_tasks_path, notice: '采完了'

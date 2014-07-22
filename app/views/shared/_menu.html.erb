@@ -2,10 +2,14 @@
   
   Category.roots.each do |c|
     li << link_to(c.name, explore_path(c.slug))
+    #li << %Q( #{a} <i class="bar">|</i> )
+    li << '<i class="bar">|</i>'
   end
 
   li << link_to(t('common.styles'), styles_path)
+  li << '<i class="bar">|</i>'
   li << link_to(t('common.community'),  topics_path)
+  li << '<i class="bar">|</i>'
   li << link_to(t('common.groupon'), '')
 end
 %>

@@ -41,7 +41,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="hd clearfix"><h3><img src="/images/hot.png" /></h2></div>
+        <!--<div class="hd clearfix"><h3><img src="/images/hot.png" /></h2></div>-->
         <ul>
           <li style="margin-left:0;"><img src="/images/10.png" /></li>
           <li><img src="/images/style.png" /></li>
@@ -64,7 +64,7 @@
     </div>
   </div>
 </div>
-
+<!--
 <div id="recommend">
   <div class="container">
     <div class="row">
@@ -74,17 +74,19 @@
     </div>
   </div>
 </div>
-
+-->
 <div class="list">
   <div class="container">
     <div class="row">
       <div class="col-md-12 clearfix">
         <div class="hd clearfix"><h3><img src="/images/whatsnew.png" alt="新上单品" /></h2></div>
-        <ul class="items">
+        <ul class="items clearfix">
           <%= render partial: 'items/item', collection: @items %>
         </ul>
         <div style="display:none; position: absolute; bottom:10px;left:49%" id="loading"><h3>努力加载中...</h3></div>
-        <div style="display:none; position: absolute; bottom:10px;left:49%" id="more"><a href="" class="btn btn-success btn-lg">浏览更多</a></div>
+        <div id="more">
+          <a href="" class="btn btn-success btn-lg">浏览更多</a>
+        </div>
       </div>
     </div>
   </div>
@@ -93,7 +95,7 @@
 <%= content_for :scripts do %>
 <script id="template-nav" type="text/x-tmpl">
 {% for(var i=0, e = o.tree.length; i < e; i++) { %}
-<li  data-tag="{%= i +1 %}">
+<li data-tag="{%= i + 1 %}" class="{%= i == e - 1 ? 'last' : '' %}{%= 0 == i ? 'first' : '' %}">
   <div class="icon"><img src="/images/{%=o.tree[i].slug%}.png" /></div>
   <div class="item">
     <h3 class="title">

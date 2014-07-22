@@ -26,25 +26,7 @@ service = server.listen(port, function(request, response){
           
           if ('success' == status){
             console.log('Request ' + target + ' is ' + status);
-            //page.sendEvent('mousemove', 100, 2000);
-            //*
-            max = page.evaluate(function(){
-                window.document.body.scrollTop = 10000000000;
-                return window.document.body.scrollTop;
-            });
-
-            page.evaluate(function(){
-                
-            });
-
-            interval = window.setInterval(function(){
-                
-            }, 1000);
-            //*/
- 
             html = page.content;
-            page.render('html.png');
-           
             //console.log(html);
             /*
             file = fs.open( request.post.id + '.html', 'w');
@@ -55,8 +37,36 @@ service = server.listen(port, function(request, response){
             //response.setEncoding('gbk');
             response.write(html);
             response.close();
+
+            //page.sendEvent('mousemove', 100, 2000);
+            /*
+            var h =0;
+
+            interval = window.setInterval(function(){
+                s = page.evaluate(function(){
+                    t = window.document.body.scrollTop += 450;
+                    h = document.body.scrollHeight;
+                    return h;
+                });
+
+                h += 450;
+                console.log(h + '==' + s);
+                //if( s[0] >= s[1] ) {
+                    //clearInterval(interval);
+                
+                if( h >= s){
+                    clearInterval(interval);
+                    
+                    console.log('--------------------');
+                    page.render('html.png');
+                    
+                }
+                //page.sendEvent('mousemove', 100, h);
+            }, 2000);
+            */
+            
           }
 
         });
-  }
+    }
 });

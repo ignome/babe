@@ -1,4 +1,4 @@
-body{padding-top: 30px;}
+body{padding-top: 25px;}
 a{color:#333;}
 a:hover{text-decoration: none; color: #6cc01a}
 .container{width:980px;}
@@ -7,7 +7,6 @@ a:hover{text-decoration: none; color: #6cc01a}
 
 .carousel-inner .item a img{height: 100%; max-height: none; max-width: none}
 
-.navbar-inverse{background-color: #eee;}
 /* common style */
 .round{ border: solid 1px #ebebeb;
         -webkit-border-radius: 5px;
@@ -84,25 +83,28 @@ ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
 #wrap{padding-bottom: 45px;}
 #main{margin-top: 20px;}
 /* navbar of top */
-.navbar{height: 30px; min-height:30px;border: solid 1px #2b2a2a}
+.navbar{height: 25px; min-height:25px;background: image-url('nav-bg.png');}
 .navbar-brand{padding: 0 15px;}
-.navbar-inverse {background-color: #2b2a2a}
+.navbar-inverse {background-color: #191817}
 .navbar-inverse .navbar-nav > li > a{color:#fff}
-.navbar-nav>li>a{padding: 0 10px; line-height: 30px;}
-/* .dropdown-menu {background-color: #2b2a2a} */
+.navbar-nav>li>a{padding: 0 10px; line-height: 25px;}
+/* .dropdown-menu {background-color: #191817} */
 
 /* search bar */
-.search{height: 100px; background-color: #fff}
-#search {padding:30px;}
-#search input{width: 300px;float: right; border-color: #6cc01a; padding-left:33px; }
-#search i{position: absolute; right: 325px; top:10px; color: #6cc01a}
-#search button{background-color: #6cc01a; border-color: #6cc01a; color: #fff;}
+.search{height: 90px; background-color: #fff}
+.search .form .input-group{height:30px; margin-top:20px;}
+.search .form input{float: right;width: 300px; height:30px; border-color: #6cc01a; padding-left:33px; }
+.search .form i{position: absolute; right: 345px; top:8px; color: #6cc01a}
+.search .form button{background: transparent image-url('search.png') no-repeat; width:72px; height:30px;border:0; text-indent:-999999px;}
+.search .form .keywords {float: right; height:40px; line-height:40px;}
+.search .form .keywords a{padding-left:18px; color:#a3a3a3;}
 
-.menu {background-color: #6cc01a; height: 25px; line-height: 25px;}
-.menu .home{text-align: center;}
+.menu {background-color: #6cc01a; height: 27px; line-height: 27px;}
+.menu .home i{text-align: center; line-height:27px; width:100%}
 .menu .glyphicon{font-size: 16px; color: #fff;}
-.menu .nav li a{padding: 0; color: #fff}
+.menu .nav li a{padding: 0; color: #fff; font-weight: bolder}
 .menu .nav li a:hover{background-color: transparent;}
+.menu .nav li i{height:12px; color: #acdb7e; display:block; text-align:center}
 .menu .nav li.active{background-color: #4da80e; }
 
 /* account style */
@@ -110,14 +112,16 @@ ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
 #account .main, #profile .main{background-color: #fff; padding: 15px; min-height: 500px;}
 
 #home .cat {position: relative;}
-#home .cat .sub{position: absolute; top: -400px; background-color: #fff; width: 250px;opacity: .86; border-top: solid 2px  #6cc01a; padding:5px;}
-#home .cat ul li{border-bottom: dashed 1px #ebebeb; padding: 15px 0px;}
-#home .cat ul li .icon{width: 36px;float:left}
+#home .cat .sub{position: absolute; top: -400px; background-color: #fff; width: 250px;opacity: .86; border-top: solid 5px  #6cc01a; padding:0 15px;}
+#home .cat ul li{border-bottom: dashed 1px #ccc; padding: 15px 0 10px;}
+#home .cat ul li.first{padding-top: 20px;}
+#home .cat ul li.last{border-bottom: 0;}
+#home .cat ul li .icon{width: 70px;float:left; text-align: center}
 #home .cat ul li .item{margin-left: 50px;}
 #home .cat ul li .title{font-size: 16px; font-weight: bold; margin:0; padding:0}
 #home .cat ol.secondary li{float: left; padding: 10px 6px 0 0; border-bottom: none;}
 
-#home #special{}
+#home #special{margin-top:20px;}
 #home #special ul li{float: left; overflow: hidden;overflow:hidden;margin-left:25px;}
 
 #home #promotion ul li{background-color: #fff; float: left; margin: 0 -1px -1px 0; padding: 18px 8px; border: 1px solid #e4e3e5;}

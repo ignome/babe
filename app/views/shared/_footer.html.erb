@@ -1,43 +1,42 @@
 <div id="footer">
   <div class="container">
-    <div class="row">
-      <div class="col-md-3">
-        <p class="logo"></p>
-      </div>
-      <div class="col-md-3">
-        <h3>公司</h3>
-        <ul>
-          <% Catalog.about.child.limit(4).each do |about| %>
-          <li><%= link_to about.name, about_path(about.slug)%></li>
-          <% end %>
-        </ul>
+    <div class="row one">
+      
+      <div class="col-md-7">
+        <div class="serial">
+          <h3>公司</h3>
+          <%= render_about_links %>
+        </div>
+
+        <div class="serial">
+          <h3>社区</h3>
+          <ul>
+            <li><a href="#">问答</a></li>
+            <li><a href="#">主题</a></li>
+            <li><a href="#">推广</a></li>
+          </ul>
+        </div>
+
+        <div class="serial">
+          <h3>帮助</h3>
+          <ul>
+            <li><a href="#">进入社区讨论</a></li>
+            <li><a href="#">如何发布单品</a></li>
+            <li><a href="#">如何发布搭配</a></li>
+            <li><a href="#">如何申请达人</a></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="col-md-3">
-        <h3>社区</h3>
-        <ul>
-          <li><a href="#">问答</a></li>
-          <li><a href="#">主题</a></li>
-          <li><a href="#">推广</a></li>
-        </ul>
+      <div class="col-md-5">
+        <h3>分享</h3>
+        <div><%= image_tag('share.png')%></div>
       </div>
-
-      <div class="col-md-3">
-        <h3>帮助</h3>
-        <ul>
-          <li><a href="#">进入社区讨论</a></li>
-          <li><a href="#">如何发布单品</a></li>
-          <li><a href="#">如何发布搭配</a></li>
-          <li><a href="#">如何申请达人</a></li>
-        </ul>
-      </div>
-
     </div>
 
-
-    <div class="row">
+    <div class="row two">
       <div class="col-md-12">
-        <p>Copyright © 2011–2014 厦门快鱼信息技术有限公司版权所有. 闽ICP备01235678</p>
+        <p> © 厦门快鱼信息技术有限公司  保留所有解释权</p>
       </div>
     </div>
   </div>

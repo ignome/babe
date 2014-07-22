@@ -4,6 +4,17 @@ module ApplicationHelper
     content_tag('title', "#{@page_title} #{Settings.app_name}")
   end
 
+  def render_about_links
+    links = Catalog.about
+    if not links.nil?
+      render_list do |li|
+        links.child.limit(4).each do |about|
+          li <<  link_to(about.name, about_path(about.slug))
+        end
+      end
+    end
+  end
+
   def notice_message
     flash_messages = []
 

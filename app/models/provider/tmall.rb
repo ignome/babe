@@ -2,26 +2,31 @@
 
 class Provider::Tmall < Provider::Base
 
-  def self.parse(url)
-
-    html = fetch(url)
-
-    page = Nokogiri::HTML(html, nil, 'GBK')
-
-    it = Item.new
-    it.title = page.css('h3[data-spm]').text.strip
-    it.price = page.css('.J_originalPrice').text.strip
-    it.mprice = page.css('span.tm-price').text.strip
-    images = page.css('li.tb-s60 img')
-    it.urls = images.reverse.map{ |img| img.attr('src')[0..-14] }
-    it.body = page.css('div#description img').map{ |img| img.attr('src') }.join(';')
-
-    class << it
-        def download
-            Provider::Tmall.perform_async(self.urls, self.id)
-        end
+  def parse
+    html = self.fetch
+    page = Nokogiri::HTML(html, nil, 'UTF-8')
+    
+    @item.title = page.css('div.tb-detail-hd h1').text.strip
+    @item.price = page.css('li#J_StrPriceModBox .tm-price').text.strip.to_f
+    @item.mprice = page.css('li#J_PromoPrice .tm-price').text.strip.to_f
+    page.css('ul#J_UlThumb img').each do |img|
+        src = img.attr('src').split('.')
+        ext = src.delete_at(-2)
+        # sometimes xx.png_WWxHH.jpg will 404
+        src[-1] = ext.split('_')[0]
+        @item.urls << src.join('.')
     end
 
-    it
+    # Details got by regular
+    self.parse_body html
+  end
+
+  def parse_body html
+    #descUrl":"http://dsc.taobaocdn.com/i1/380/510/38251046430/TB1WK4RFVXXXXbCXpXX8qtpFXXX.desc%7Cvar%5Edesc%3Bsign%5E6c7c3fae3bd71af2dd45baa201077160%3Blang%5Egbk%3Bt%5E1405829236","fetchDcUrl":
+    m = /"descUrl":"([^"]+)"/.match(html)
+    if m
+        text = open(m[1]).read
+        @item.body = text.scan(/src="([^"]+)"/).join(';')
+    end
   end
 end

@@ -61,7 +61,7 @@ $(document).on('click', '#fetch', function(){
     data : {url: url},
     dataType : 'HTML',
     success : function(html, status, xhr){
-      $('#.modal').modal('hide');
+
       if ( 201 == xhr.status ){
         $('#item').html(html);
       }else{

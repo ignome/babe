@@ -5,27 +5,45 @@ class Provider::Base
 
   #include Sidekiq::Worker
 
-  def perform(urls, id)
-    #Sidekiq::Logging.logger.info('*' * 80)
-    #Sidekiq::Logging.logger.info(Rails.env)
-    it = Item.find(id)
-    if it
-        urls.each do |url|
-            cover = it.covers.new
-            cover.file.download! url
-            cover.user_id = it.user_id
-            cover.save
-            # Change the cover too!
-            it.cover = cover.file.default.url
-        end
-        it.save
+  def initialize(url)
+    @item = Item.new
+    @item.url = url
+    @item.urls = []
+    parse
+  end
+
+  def item
+    @item
+  end
+
+  def self.iid(url)
+    iid = /id=(\d+)/.match(url)[1]
+  end
+  
+  def self.parse url
+    uri = URI(url)
+    host = uri.hostname.split('.')[1].downcase
+    
+    klass = "Provider::#{host.singularize.classify}".constantize
+    iid = klass.iid url
+    item = Item.where(['provider=? and iid=?', host, iid]).first
+    if @item.nil?
+      Rails.logger.info "Fetch #{url}"
+      instan = klass.new(url)
+      item = instan.item
     end
+    item
   end
   
-  # Automatic retry 5 times if return is emtpy!
-  def self.fetch(url, id=0)
-    response = Net::HTTP.post_form(URI('http://127.0.0.1:8088'), {'url' => url, 'id' => id})
-    response.body
+  def fetch
+    # Should read from config
+    uri = URI('http://localhost:8088/')
+    req = Net::HTTP::Post.new(uri.path)
+    req.set_form_data('url' => @item.url)
+    res = Net::HTTP.start(uri.hostname, uri.port) do |http|
+      http.read_timeout = 10 * 60 * 60
+      http.request(req)
+    end
+    res.body
   end
-  
 end
