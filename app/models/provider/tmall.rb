@@ -18,10 +18,18 @@ class Provider::Tmall < Provider::Base
     end
 
     # Details got by regular
-    self.parse_body html
+    self.body html
+
+    @item.iid = iid(@item.url)
+    @item.provider = 'taobao'
+    slugs = @item.url.split('?')
+    id = /id=(\d+)/.match(slugs[1])
+    if id
+      @item.url = slugs[0] << '?id=' << id[1]
+    end
   end
 
-  def parse_body html
+  def body html
     #descUrl":"http://dsc.taobaocdn.com/i1/380/510/38251046430/TB1WK4RFVXXXXbCXpXX8qtpFXXX.desc%7Cvar%5Edesc%3Bsign%5E6c7c3fae3bd71af2dd45baa201077160%3Blang%5Egbk%3Bt%5E1405829236","fetchDcUrl":
     m = /"descUrl":"([^"]+)"/.match(html)
     if m

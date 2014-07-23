@@ -62,7 +62,7 @@ class Item < ActiveRecord::Base
 
   def parse_provider_and_iid
     self.provider = URI(self.url).hostname.split('.')[1].downcase
-    self.iid = /id=(\d+)/.match(self.url)[1]
+    self.iid = /(\d+)/.match(self.url)[1]
   end
   
   def self.parse url

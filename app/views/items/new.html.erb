@@ -61,13 +61,16 @@ $(document).on('click', '#fetch', function(){
     data : {url: url},
     dataType : 'HTML',
     success : function(html, status, xhr){
-
       if ( 201 == xhr.status ){
         $('#item').html(html);
       }else{
         json = $.parseJSON(html);
-        $('.alert').removeClass('hide').addClass('show').find('p').html('<h5>相同的宝贝已经存在!</h5>');
-        $('.alert').after( tmpl('template-item', json) );
+        if(json[0] < 0){
+          $('.alert').removeClass('hide').addClass('show').find('p').html('<h5>目前支持该网站或网址不正确!</h5>');
+        }else{
+          $('.alert').removeClass('hide').addClass('show').find('p').html('<h5>相同的宝贝已经存在!</h5>');
+          $('.alert').after( tmpl('template-item', json) );
+        }
       }
     }
   });

@@ -17,6 +17,10 @@ class Provider::Jd < Provider::Base
 
         # Should get all pictures of description.
         @item.body = page.css('div.detail-content img').map{|img| img.attr('data-lazyload')}.join(';')
+
+        # Formating iid, provider and url
+        @item.provider = 'jd'
+        @item.iid = Provider::Jd.iid(@item.url)
     end
 
     def self.iid(url)

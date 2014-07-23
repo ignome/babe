@@ -23,11 +23,20 @@ class Provider::Base
   def self.parse url
     uri = URI(url)
     host = uri.hostname.split('.')[1].downcase
-    
-    klass = "Provider::#{host.singularize.classify}".constantize
+    begin
+      klass = "Provider::#{host.singularize.classify}".constantize
+    rescue NameError
+      # Does not support the domain!
+      return nil
+    end
+
     iid = klass.iid url
+    
+    # no id matched
+    return nil if iid.empty?
+
     item = Item.where(['provider=? and iid=?', host, iid]).first
-    if @item.nil?
+    if item.nil?
       Rails.logger.info "Fetch #{url}"
       instan = klass.new(url)
       item = instan.item

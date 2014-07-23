@@ -79,6 +79,10 @@ class Cpanel::ItemsController < Cpanel::ApplicationController
     redirect_to cpanel_items_path(page: params[:page] || 1), notice: 'Set all selected items to pin in homepage'
   end
 
+  def cancel
+    Item.where('id in (?)', params[:id]).update_all('status=0')
+    redirect_to cpanel_items_path(page: params[:page] || 1), notice: 'Cancel all selected items to pin in homepage'
+  end
 
   def moveto
     category = params['catalog'].split(',')[-1]

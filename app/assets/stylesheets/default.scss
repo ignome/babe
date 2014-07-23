@@ -139,9 +139,12 @@ ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
 #home .list, #home #promotion, #home #recommend{padding: 15px;}
 #home #groupon .item {height: 380px;}
 
-
-#home #styles .items li:nth-child(4){margin-right: 0}
-
+#home .list .end{display:none;width:100%;border-top: solid 1px #ede7e1; position: relative; }
+#home .list .end .dot{width:20%; position: absolute; top: -10px; background-color: #f3f3f3; text-align:center; margin-left: 40%;}
+#home .list .end li{list-style-type: circle; width: 5px; height:5px; border-radius: 5px; display: inline-block; margin-left: 5px; background-color: #878787}
+#home .list .end li.active{ width: 8px; height:8px; background-color: #6cc01a}
+#home .list .more{margin-top: 25px; text-align:center}
+#home .list .more a{width:360px;}
 /* recommend & lastest style */
 .lastest{height: 380px; display: block}
 .lastest ul li{float: left; width: 33%}

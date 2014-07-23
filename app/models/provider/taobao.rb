@@ -19,7 +19,15 @@ class Provider::Taobao < Provider::Base
     end
 
     #item.body = page.css('div#description img').map{ |img| img.attr('src') }.join(';')
-    self.body
+    self.body html
+
+    @item.iid = Provider::Taobao.iid(@item.url)
+    @item.provider = 'taobao'
+    slugs = @item.url.split('?')
+    id = /id=(\d+)/.match(slugs[1])
+    if id
+      @item.url = slugs[0] << '?id=' << id[1]
+    end
   end
 
   def body(html)

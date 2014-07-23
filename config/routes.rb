@@ -110,6 +110,7 @@ Babe::Application.routes.draw do
     resources :items do
       collection do
         post 'remove'
+        post 'cancel'
         post 'moveto'
         post 'free'
         post 'band'

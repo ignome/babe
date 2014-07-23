@@ -84,8 +84,17 @@
           <%= render partial: 'items/item', collection: @items %>
         </ul>
         <div style="display:none; position: absolute; bottom:10px;left:49%" id="loading"><h3>努力加载中...</h3></div>
-        <div id="more">
-          <a href="" class="btn btn-success btn-lg">浏览更多</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 end">
+        <ol class="dot">
+          <li ></li>
+          <li class="active"></li>
+          <li ></li>
+        </ol>
+        <div class="more">
+          <a href="/explore/clothes" class="btn btn-success btn-lg">浏览更多</a>
         </div>
       </div>
     </div>
@@ -159,7 +168,7 @@ $(document).ready(function(){
               window.onscroll = false;
               loading = true;
               // show explore more
-              $('#more').show();
+              $('.list .end').show();
             }
           }
         });
