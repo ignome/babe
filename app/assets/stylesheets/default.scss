@@ -53,8 +53,8 @@ ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
 
 
 .hd {position: relative; margin-bottom: 15px;}
-.hd .pagination{position: absolute; right: 0}
-.hd h2{font-size: 16px;height: 20px;line-height: 20px;float: left;color: #333;display: inline-block;}
+.hd .pagination{float:right; width:auto;}
+.hd h2{float: left;color: #333;display: inline-block;}
 
 .pagination li span{padding: 3px 6px;}
 .pagination li input{width: 64px}
@@ -117,7 +117,7 @@ ul.pagehead-actions {margin: 0;float: right;z-index: 21;}
 #home .cat ul li.first{padding-top: 20px;}
 #home .cat ul li.last{border-bottom: 0;}
 #home .cat ul li .icon{width: 70px;float:left; text-align: center}
-#home .cat ul li .item{margin-left: 50px;}
+#home .cat ul li .item{margin-left: 70px;}
 #home .cat ul li .title{font-size: 16px; font-weight: bold; margin:0; padding:0}
 #home .cat ol.secondary li{float: left; padding: 10px 6px 0 0; border-bottom: none;}
 
@@ -367,6 +367,8 @@ overflow: hidden;}
  .links .buy{float: right;margin: 15px 2px 0 10px;display: inline-block;width: 56px;height: 24px;}
 
 /* item details */
+#items .selected{border: solid 1px #6cc01a}
+
 #items .details .photo{border-right: 1px solid #ebebeb; padding: 0}
 #items .details .info{padding: 0}
 #items .details .zoom,
@@ -393,7 +395,7 @@ overflow: hidden;}
 #items .details .thumb .active{border:2px solid #f40;}
 #items .details .comment{ height: 120px; }
 #items .info .price{font-size:40px; line-height: 45px; color: red}
-#items .info .buy .url{float: right; font-size: 22px; line-height: 22px;padding: 10px 20px; cursor: pointer;}
+#items .info .buy .url{float: right; font-size: 22px; line-height: 22px; cursor: pointer;}
 #items .info .buy .url a{color: rgb(252,118,35);}
 #items .info .tools {text-align: right;}
 #items .guess{margin-top: 30px;}

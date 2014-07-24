@@ -3,6 +3,7 @@
   <%= f.input :mprice, as: 'hidden' %>
   <%= f.input :body, as: 'hidden' %>
   <%= f.input :url, as: 'hidden' %>
+  <%= f.input :selected, as: 'hidden', input_html: {id: 'selected', value: '0'} %>
 
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">名称</label>
@@ -27,9 +28,9 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <ul>
-      <% @item.urls.each do |url| %>
-      <li>
+      <ul id="cover">
+      <% @item.urls.each_with_index do |url, index| %>
+      <li data="<%= index %>">
         <%= image_tag url, size: '88x88' %>
         <input type="hidden" name="item[urls][]" value="<%= url %>" />
       </li>

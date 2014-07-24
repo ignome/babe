@@ -63,6 +63,11 @@ $(document).on('click', '#fetch', function(){
     success : function(html, status, xhr){
       if ( 201 == xhr.status ){
         $('#item').html(html);
+        $('#cover li').on('click', function(){
+          $('#selected').val($(this).attr('data'));
+          $('#cover li').removeClass('selected');
+          $(this).addClass('selected');
+        });
       }else{
         json = $.parseJSON(html);
         if(json[0] < 0){

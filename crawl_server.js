@@ -28,51 +28,20 @@ service = server.listen(port, function(request, response){
             console.log('Request ' + target + ' is ' + status);
             
             h = page.evaluate(function(){
-                h = document.body.scrollHeight;
+                var h = document.body.scrollHeight;
                 window.document.body.scrollTop = h;
-            }
+                return h;
+            });
+            console.log(h);
 
             html = page.content;
-            //console.log(html);
-            /*
-            file = fs.open( request.post.id + '.html', 'w');
-            file.write(page.content);
-            file.close();
-            //*/
+            
             response.statusCode = 200;
             //response.setEncoding('gbk');
             response.write(html);
             response.close();
-
-            //page.sendEvent('mousemove', 100, 2000);
-            /*
-            var h =0;
-
-            interval = window.setInterval(function(){
-                s = page.evaluate(function(){
-                    t = window.document.body.scrollTop += 450;
-                    h = document.body.scrollHeight;
-                    return h;
-                });
-
-                h += 450;
-                console.log(h + '==' + s);
-                //if( s[0] >= s[1] ) {
-                    //clearInterval(interval);
-                
-                if( h >= s){
-                    clearInterval(interval);
-                    
-                    console.log('--------------------');
-                    page.render('html.png');
-                    
-                }
-                //page.sendEvent('mousemove', 100, h);
-            }, 2000);
-            */
             
           }
-
         });
     }
 });

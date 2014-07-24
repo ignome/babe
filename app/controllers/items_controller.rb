@@ -74,7 +74,7 @@ class ItemsController < ApplicationController
   protected
 
   def item_params
-    params.require(:item).permit(:title, :url, :body, :price, :mprice, :comment, :urls => [])
+    params.require(:item).permit(:title, :url, :body, :price, :mprice, :selected, :comment, :urls => [])
   end
 
   def find

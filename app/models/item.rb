@@ -2,7 +2,7 @@
 class Item < ActiveRecord::Base
 
   # For keeping the URL to download 
-  attr_accessor :urls, :comment
+  attr_accessor :urls, :comment, :selected
 
   belongs_to :user, counter_cache: true
   belongs_to :category
@@ -25,10 +25,8 @@ class Item < ActiveRecord::Base
   after_create :new_first_comment
 
   def download_images_from_urls
-    have_set_cover = false
-
+    
     self.urls.each_with_index do |url, index|
-
       # avoid failing in some one of urls
       begin
         cover = self.photos.new
@@ -40,13 +38,11 @@ class Item < ActiveRecord::Base
       end
       cover.user_id = self.user_id
       cover.save
-
       # Pick first photo as cover!
-      if not have_set_cover
+      if index == self.selected.to_i
         Rails.logger.info "set cover #{cover.file.path}"
         self.cover = File.new(cover.file.path)
         self.save
-        have_set_cover = true
       end
     end
   end
