@@ -18,7 +18,7 @@
       <span class="glyphicon glyphicon-share"></span>分享到
     </a>
     <span class="social-count">
-      
+      <%= social_share_button_tag(target.title, :image => "#{root_url}#{target.cover.url}", :'data-type' => 'photo') %>
     </span>
   </li>
 </ul>

@@ -15,6 +15,7 @@
 //= require bootstrap.min
 //= require users
 //= require items
+//= require social-share-button
 
 function water(){
   var items = $('.items li'),

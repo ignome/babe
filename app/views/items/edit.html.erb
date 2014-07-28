@@ -22,7 +22,7 @@
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-2 control-label">价格</label>
     <div class="col-sm-10">
-      <p class="price"><span class="yen">&yen;</span><strong><%= @item.price %></strong></p>
+      <p class="price"><span class="yen">&yen;</span><strong><%= @item.mprice || @item.price %></strong></p>
     </div>
   </div>
 
@@ -30,8 +30,8 @@
     <div class="col-sm-offset-2 col-sm-10">
       <ul id="cover">
       <% @item.urls.each_with_index do |url, index| %>
-      <li data="<%= index %>">
-        <%= image_tag url, size: '88x88' %>
+      <li data="<%= index %>" <%= index == 0 ? 'class=selected' : '' %> >
+        <%= image_tag url, size: '60x60' %>
         <input type="hidden" name="item[urls][]" value="<%= url %>" />
       </li>
       <% end %>

@@ -21,11 +21,12 @@ class Provider::Base
   end
   
   def self.parse url
-    uri = URI(url)
-    host = uri.hostname.split('.')[1].downcase
+    
     begin
+      uri = URI(url)
+      host = uri.hostname.split('.')[1].downcase
       klass = "Provider::#{host.singularize.classify}".constantize
-    rescue NameError
+    rescue Exception
       # Does not support the domain!
       return nil
     end

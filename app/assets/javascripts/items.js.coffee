@@ -36,7 +36,18 @@ window.Item =
       $(this).addClass('active')
       $(this).siblings('.active').removeClass('active')
 
+  share : ()->
+    $.ajax
+      dataType: 'html',
+      url: $(this).attr('href'),
+      success: (html) ->
+        $('#share .modal-body').html( html )
+        $('#share').modal()
+    false
+
+
 # Like or unlike a item
+$(document).on 'click', '.navbar a.share', Item.share
 $(document).on 'click', '.tools a.like', Item.Like.toggle
 $(document).on 'mouseover', '.thumb li', Item.Thumbnail.select
 $(document).on 'click', '.tools a.favourite', Item.Favourite

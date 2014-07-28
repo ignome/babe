@@ -3,13 +3,7 @@
     <nav class="collapse navbar-collapse" role="navigation">
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b>发布</a>
-          <%= render_list :class => "dropdown-menu" do |li|
-            li << link_to( t('common.publish'), new_item_path )
-            li << link_to( t('common.styles'), new_style_path )
-          end %>
-        </li>
+        <li><%=link_to t('common.publish'), new_item_path, class: 'share' %></li>
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%=current_user.name%><b class="caret"></b></a>
@@ -37,7 +31,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3">
-        <h4 class="logo"></h4>
+        <h5><a href="/" class="logo"></a></h5>
       </div>
       <div class="col-md-9">
         <div class="form">
@@ -47,13 +41,12 @@
             <span class="input-group-btn">
               <button class="btn btn-default" type="button">搜索</button>
             </span>          
-          </div><!-- /input-group -->
+          </div>
           <div class="keywords">
-            <a href="">清凉一夏</a>
-            <a href="">小短裤</a>
-            <a href="">萌小萌</a>
-            <a href="">夏日清凉</a>
-            <a href="">小脚库</a>
+           <% Tag.keywords.each do |tag| %>
+           <%= link_to tag.name,search_path(tag.name) %>
+           <% end %>
+          </div>              
         </div>
       </div>
     </div>

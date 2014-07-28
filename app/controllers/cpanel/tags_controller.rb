@@ -41,6 +41,6 @@ class Cpanel::TagsController < Cpanel::ApplicationController
   end
 
   def tag_params
-    params.require(:tag).permit(:name, :available, :recommend, :category_id)
+    params.require(:tag).permit(:name, :available, :searchable,:recommend, :category_id)
   end
 end

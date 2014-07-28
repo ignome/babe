@@ -43,15 +43,18 @@
       <td><%= o.status > 0 ? '收入' : '采集' %></th>
       <td>
         <a href="javascript:;" class="tag" id="<%= o.id%>">标签</a>
+        <a href="#operation" class="cat" data-id="<%=o.id%>">设置分类</a>
       </td>
     </tr>
     <% end %>
 
     <tfoot>
       <td colspan="9">
-        <select name="catalog" id="category" class="dropdown">
-        </select>
-        <div class="btn-group btn-group-xs">
+        <div class="btn-group">
+          <div class="cat-box">
+            <select name="catalog" id="category"></select>
+          </div>
+          <a name="operation"></a>
           <button type="button" class="btn btn-warning" onclick="post('./items/moveto');">移动分类</button>
           <button type="button" class="btn btn-danger" onclick="post('./items/remove');">删除</button>
           <button type="button" class="btn btn-primary" onclick="post('./items/cancel');">取消</button>
@@ -121,6 +124,11 @@ function render_node(tree, depth){
 $('#tree thead tr th').eq(1).attr('colspan', max);
 render_node(tree['tree'], 0);
 
+$('.cat').on('click', function(){
+  $('#chk' + $(this).attr('data-id')).attr('checked', true);
+  return true;
+});
+
 $('.tag').on('click', function(){
   $('#pop .modal-body').html('<iframe name="itag" src="/cpanel/items/tags?id='+ $(this).attr('id')+'" width="100%" height="100%" frameborder="0"></iframe>');
   $('#pop').modal();
@@ -129,7 +137,6 @@ $('.tag').on('click', function(){
 // ajax post on close the pop
 $('#pop #finish').on('click', function(){
   var id = $('input[type="checkbox"]', window.frames["itag"].document);
-  console.log(id);
 });
 
 function post(url){

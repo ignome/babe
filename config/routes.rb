@@ -24,6 +24,7 @@ Babe::Application.routes.draw do
   # root 'welcome#index'
   root 'home#index'
 
+  get '/search/:word' => 'home#search', as: 'search'
   get '/about/:slug' => 'help#about', as: 'about'
   get '/help/:slug(/:page)' => 'help#view', as: 'help'
 

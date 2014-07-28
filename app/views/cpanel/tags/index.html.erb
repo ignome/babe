@@ -3,6 +3,7 @@
     <td class="first"></td>
     <td>名称</td>
     <td>分类</td>
+    <td>搜索关键字</td>
     <td>推荐</td>
     <td>状态</td>
     <td></td>
@@ -15,6 +16,7 @@
     </td>
     <td><%= tag.name %></td>
     <td><%= tag.category.name unless tag.category.nil? %></td>
+    <td><%= tag.searchable ? '是' : '否' %></td>
     <td><%= tag.recommend ? '推荐' : ''; %></td>
     <td><%= tag.available ? '有效' : '无效'; %></td>
     <td>

@@ -125,29 +125,30 @@ body{position: relative;padding-top: 50px;}
 .tabs .active a{border: 1px solid #ddd; margin-bottom: -1px;}
 
 /* category list */
-.cat-box{border: 1px solid #ddd;
-border-left: 0;
-padding: 0 10px;
-height: 38px;
-background: #fff;
--moz-border-radius: 0 3px 3px 0;
--webkit-border-radius: 0 3px 3px 0;
-border-radius: 0 3px 3px 0;}
-.cat-box select{-webkit-appearance: none;
-border: 0;
-padding-right: 10px;
-background: url(http://ir.ebaystatic.com/pictures/aw/pics/globalheader/spr15.png) no-repeat right 6px;
-outline: 0;
-color: #333;
-font: 12px Arial;
-border-width: 0;
-margin-top: 10px;
-width: 160px;
-height: 18px;
-overflow: hidden;
-text-overflow: ellipsis;
-background: transparent;
+.cat-box{
+  border: 1px solid #ddd;
+  border-left: 0;
+  background: #fff;
+  -moz-border-radius: 0 3px 3px 0;
+  -webkit-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
+  height: 38px;
+  padding: 6px 10px;
 }
+.cat-box select{
+  -webkit-appearance: none;
+  border: 0;
+  background: url(http://ir.ebaystatic.com/pictures/aw/pics/globalheader/spr15.png) no-repeat right 6px;
+  color: #333;
+  font-size: 14px;
+  line-height: 14px;
+  padding: 6px 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: transparent;
+}
+
+.btn-group .cat-box{float:left;border:solid 1px #ddd;border-right: 0; height: 34px;}
 
 .q-box{border: 1px solid #ddd;
 background: #fff;

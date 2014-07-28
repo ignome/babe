@@ -26,13 +26,14 @@ service = server.listen(port, function(request, response){
           
           if ('success' == status){
             console.log('Request ' + target + ' is ' + status);
-            
+            /*
             h = page.evaluate(function(){
                 var h = document.body.scrollHeight;
                 window.document.body.scrollTop = h;
                 return h;
             });
             console.log(h);
+            */
 
             html = page.content;
             

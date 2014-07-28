@@ -5,4 +5,6 @@ class Tag < ActiveRecord::Base
   belongs_to :category
 
   validates :name, :presence => true, :uniqueness => {:case_sensitive => false}
+
+  scope :keywords, ->{where(['available=? and searchable=?', true, true]).order('updated_at desc').limit(5)}
 end

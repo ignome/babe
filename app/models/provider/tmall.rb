@@ -7,8 +7,8 @@ class Provider::Tmall < Provider::Base
     page = Nokogiri::HTML(html, nil, 'UTF-8')
     
     @item.title = page.css('div.tb-detail-hd h1').text.strip
-    @item.price = page.css('li#J_StrPriceModBox .tm-price').text.strip.to_f
-    @item.mprice = page.css('li#J_PromoPrice .tm-price').text.strip.to_f
+    @item.price = page.css('#J_StrPriceModBox .tm-price').text.strip.to_f
+    @item.mprice = page.css('#J_PromoPrice .tm-price').text.strip.to_f
     page.css('ul#J_UlThumb img').each do |img|
         src = img.attr('src').split('.')
         ext = src.delete_at(-2)
@@ -20,7 +20,7 @@ class Provider::Tmall < Provider::Base
     # Details got by regular
     self.body html
 
-    @item.iid = iid(@item.url)
+    @item.iid = Provider::Tmall.iid(@item.url)
     @item.provider = 'taobao'
     slugs = @item.url.split('?')
     id = /id=(\d+)/.match(slugs[1])

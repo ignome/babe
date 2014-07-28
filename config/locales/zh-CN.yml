@@ -8,7 +8,7 @@
     groupon: '团购'
     edit_account: '编辑账号'
     submit: '提交'
-    publish: '发布宝贝'
+    publish: '分享'
     submitting: '正在提交, 请稍后...'
   users:
     signin: '登录'

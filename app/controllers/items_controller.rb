@@ -6,7 +6,8 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:fetch, :like, :unlike, :new, :create, :edit]
 
   def new
-    @item = Item.new
+    #@item = Item.new
+    render 'new', layout: false
   end
 
   def show
