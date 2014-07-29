@@ -30,7 +30,7 @@ module UsersHelper
   end
 
   def follow_or_unfollow user
-    if current_user
+    if not current_user
       link_to user_follow_path(user.login), class: 'follow' do
         content_tag(:span, t('users.follow'))
       end

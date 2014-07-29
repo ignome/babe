@@ -1,7 +1,7 @@
 <li class="item round">
   <div class="cover">
     <%= link_to item_path(item) do %>
-    <%= image_tag item.cover.default.url %>
+    <%= image_tag item.cover.default.url, alt: item.title %>
     <% end %>
     <span class="price round">&yen;<%= sprintf("%.2f", item.mprice || item.price || 0) %></span>
   </div>

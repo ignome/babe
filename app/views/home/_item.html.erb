@@ -1,7 +1,7 @@
 <li>
   <div class="cover">
   <%= link_to item.url, target: '_blank' do %>
-  <%= image_tag item.cover %>
+  <%= image_tag item.cover, alt: "#{item.title} 天天特价 #{item.mprice} 包邮" %>
   <% end %>
   </div>
   <div class="title"><%= link_to item.title, item.url, target: '_blank' %></div>

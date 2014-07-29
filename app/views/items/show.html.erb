@@ -8,8 +8,10 @@
       </div>
       <div class="thumb clearfix center-block">
         <ul>
+          <% index =1 %>
           <% @item.photos.each do |photo| %>
-          <li class="box"><%= image_tag photo.file.url, url: photo.file.url, size: '50x50' %></li>
+          <li class="box"><%= image_tag photo.file.url, url: photo.file.url, size: '50x50', alt: "#{@item.title}图片#{index}" %></li>
+          <% index += 1 %>
           <% end %>
         </ul>
       </div>
@@ -17,8 +19,8 @@
       <div id="more">
         <p class="center-block"><span class="caret"></span>展开</p>
         <div class="hidden">
-        <% @item.body.to_s.split(';').each do |img| %>
-        <%= image_tag img %>
+        <% @item.body.to_s.split(';').each_with_index do |img,index| %>
+        <%= image_tag img, alt: "#{@item.title}大图#{index}" %>
         <% end %>
         </div>
       </div>
