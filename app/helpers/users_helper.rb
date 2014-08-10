@@ -45,4 +45,8 @@ module UsersHelper
     end
   end
 
+  def path_active current
+    action_name == current ? 'active' : ''
+  end
+
 end

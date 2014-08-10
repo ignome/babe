@@ -38,4 +38,15 @@ class ProfileController < ApplicationController
       redirect_to edit_user_registration_path, :alert => 'update avatar error'
     end
   end
+
+  def cover
+    @user = current_user
+    @user.cover = params[:cover]
+    
+    if @user.save
+      render json: {0, @user.cover.url}.to_json
+    else
+      render json: {-1, 'error'}.to_json
+    end
+  end
 end

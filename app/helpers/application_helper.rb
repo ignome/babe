@@ -5,8 +5,9 @@ module ApplicationHelper
   end
 
   def render_about_links
-    links = Catalog.about
-    if not links.nil?
+    links = Catalog.find_by(slug: 'about')
+
+    if links
       render_list do |li|
         links.child.limit(4).each do |about|
           li <<  link_to(about.name, about_path(about.slug))

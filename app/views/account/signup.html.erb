@@ -26,22 +26,21 @@
 
              <div class="field username-field">
                 <label for="TPL_username_1" class="iconfont"></label>
-                  <span class="ph-label">手机号/会员名/邮箱</span>
-                  <input type="text" name="user[login]" id="TPL_username_1" class="login-text " value="<%=resource.login%>"  autocomplete="off" maxlength="32" tabindex="1">
+                  <input type="text" name="user[login]" id="TPL_username_1" class="login-text" value="<%=resource.login%>"  autocomplete="off" maxlength="32" tabindex="1">
                   <span class="nickx" href="javascript:void(0)" style="display: none;"></span>
               </div>
 
               <div class="field pwd-field">
-                <label id="password-label" for="TPL_password_1" class="iconfont"></label>
+                <label id="password-label" for="user_password" class="iconfont"></label>
                 <span id="J_StandardPwd">
-                  <input type="text"  name="user[email]" id="nickname" class="login-text"  tabindex="2">
+                  <input class="login-text" id="user_password" name="user[password]" type="password">
                 </span>
               </div>
 
               <div class="field pwd-field">
-                <label id="password-label" for="TPL_password_1" class="iconfont"></label>
+                <label id="password-label" for="user_password_confirmation" class="iconfont"></label>
                 <span id="J_StandardPwd">
-                  <input type="password" aria-labelledby="password-label" name="user[password]" id="TPL_password_1" class="login-text" maxlength="20" tabindex="2">
+                  <input class="login-text" id="user_password_confirmation" name="user[password_confirmation]" type="password">
                 </span>
               </div>
 

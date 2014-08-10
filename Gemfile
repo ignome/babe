@@ -74,5 +74,5 @@ gem 'nokogiri'
 #gem 'sinatra'
 
 #gem 'ruby-hmac'
-gem 'social-share-button'
+#gem 'social-share-button'
 gem "settingslogic"

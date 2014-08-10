@@ -23,10 +23,16 @@ class CoverUploader < BaseUploader
     model.instance_of?(Ad) ? true : false
   end
 
+  def is_user?
+    model.instance_of?(User) ? true : false
+  end
+
   def resize
     manipulate! do |img|
       if is_ad?
         img.resize!(model.position.width, model.position.height)
+      elsif is_user?
+        img.resize!(120)
       else
         w = 215
         r = w / img.rows

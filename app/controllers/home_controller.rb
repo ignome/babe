@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     @slider = Ad.includes(:position).where("positions.slug= 'homepage slider'").references(:positions).limit(4)
     @items  = Item.pins.fields_in_list.limit(40).includes([:user, :comments]).order('id desc')
     @styles = Style.last.limit(5).includes([:user,:photos])
-    @promotions = Promotion.today.pins.limit(10)
+    @promotions = Promotion.pins.limit(10)
 
     set_seo_meta(Settings.seo.title, Settings.seo.keywords, Settings.seo.description)
   end

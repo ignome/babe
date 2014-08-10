@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show
     # Last 12 items
-    @items = Item.where(user_id: @user.id).order('created_at desc').limit(12)
+    @items = Item.where(user_id: @user.id).order('created_at desc').paginate(per_page: 30, page:  params[:page])
     set_seo_meta(@user.name, "#{@user.name}分享的宝贝")
   end
 

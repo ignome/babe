@@ -13,9 +13,6 @@
       <%= link_to ad.url do %>
       <%= image_tag ad.cover.default.url %>
       <% end %>
-      <div class="carousel-caption">
-        <%= link_to ad.title,ad.url %>
-      </div>
     </div>
     <% end %>
   </div>
@@ -130,7 +127,7 @@ $(document).ready(function(){
 
   window.onscroll = more;
 
-  var loading = false, page = 1;
+  var loading = false, page = 2;
 
   function more(){
     if (!loading){
@@ -164,7 +161,7 @@ $(document).ready(function(){
             $('#loading').hide();
             loading = false;
             
-            if (page > 4){
+            if (page > 5){
               window.onscroll = false;
               loading = true;
               // show explore more

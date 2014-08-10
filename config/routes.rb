@@ -10,6 +10,7 @@ Babe::Application.routes.draw do
   put "account/password" => "profile#update"
   get "account/addition" => "profile#addition"
   post "account/addition" => "profile#save"
+  post "account/cover" => "profile#cover"
 
   devise_for :users, :path => "account", :controllers => {
     :registrations => :account,

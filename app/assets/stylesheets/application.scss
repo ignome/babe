@@ -11,7 +11,6 @@
  *= require bootstrap
  *= require default
  *= require footer
- *= require social-share-button
  *= require_self
  */
 
@@ -166,3 +165,5 @@ div.go-top div.stick {
   border-bottom-right-radius: 3px
 }
 .alert{margin-bottom: 0}
+
+.social-count .bdshare-button-style1-16 a{margin:2px 6px 2px 0}

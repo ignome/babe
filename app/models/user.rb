@@ -23,9 +23,14 @@ class User < ActiveRecord::Base
   validates :login, :format => {:with => /\A\w+\z/, :message => '只允许数字、大小写字母和下划线'}, :length => {:in => 3..20}, :presence => true, :uniqueness => {:case_sensitive => false}
 
   mount_uploader :avatar, AvatarUploader
+  mount_uploader :cover, CoverUploader
 
   def followed_by user
     Followership.exists?(follower_id: self.id, following_id: user.id)
+  end
+
+  def email_required?
+    false
   end
 
 end

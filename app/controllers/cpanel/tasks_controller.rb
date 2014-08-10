@@ -59,7 +59,8 @@ class Cpanel::TasksController < Cpanel::ApplicationController
 
   def todaypromo
     # Got the link of promotion site
-    url = 'http://te.tejia.taobao.com/tenV2.htm?spm=a3109.2211525.0.0.JGDpv2&&nid=7984'
+    #url = 'http://te.tejia.taobao.com/tenV2.htm?spm=a3109.2211525.0.0.JGDpv2&&nid=7984'
+    url = 'http://te.tejia.taobao.com/tenV2.htm?spm=a3109.2211525.0.0.0JkgkC&&nid=9024'
     page = Nokogiri::HTML(open(url), nil, 'GBK')
     item = []
 

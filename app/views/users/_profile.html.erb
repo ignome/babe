@@ -1,36 +1,59 @@
-<div class="row profile">
-  <div class="col-md-8">
-      <div class="user group ">
+<div class="row">
+  <div class="col-md-12">
+     <div id="profile" style="background:#fff url('/images/b.jpg') repeat-x;">
+      <form id="fileupload">
+        <div id="customize">自定义封面</div>
+        <input type="file" name="files">
+      </form>
+      
+      <div id="user">
         <%= user_avatar_tag(@user, :big) %>
-        <h4><%= @user.name %></h4>
-        <div class="follow-prompt">
-          <%= follow_or_unfollow(@user) %>
-        </div>
+        <%= link_to @user.name, '#' %>
+        <a href="">关注</a>
       </div>
-  </div>
-  <div class="col-md-4">
-    <div class="profile-actions group">
-      <ul class="profile-tabs">
-        <li class="works">
-          <%= link_to items_user_path(@user.login) do %>
-          <span class="count"><%= @user.items_count %></span>
-          <span class="meta"><%=t('item.name')%></span>
-          <% end %>    
-        </li>
-        <li class="followers">
-          <%= link_to followers_user_path(@user.login) do %>
-            <span class="count"><%=@user.followers_count%></span>
-            <span class="meta"><%=t('users.follower')%></span>
-          <% end %>
-        </li>
-          
-        <li class="following">
-         <%= link_to following_user_path(@user.login) do %>
-            <span class="count"><%=@user.following_count%></span>
-            <span class="meta"><%=t('users.following')%></span>
-          <% end %>
-        </li>
-      </ul>
-    </div>
+
+      <div id="path">
+        <ul class="tabs clearfix">
+          <li class="items dropup <%= path_active 'show' %>">
+            <%= link_to user_path(@user.login) do %>
+              <span class="meta"><%= t('item.name')%></span>
+              <span class="count"><%= @user.items_count %></span>
+            <% end %>
+            <span class="caret"></span>
+          </li>
+          <li class="likes dropup <%= path_active 'likes' %>">
+            <%= link_to likes_user_path(@user.login) do %>
+              <span class="meta"><%=t('item.like')%></span>
+              <span class="count"><%= @user.likes_count%></span>
+            <% end %>
+            <span class="caret"></span>
+          </li>
+
+          <li class="topics dropup <%= path_active 'topics' %>">
+            <%= link_to topics_user_path(@user.login) do %>
+              <span class="meta"><%= t('topics.name')%></span>
+              <span class="count"><%= @user.topics_count %></span>
+            <% end %>
+            <span class="caret"></span>
+          </li>
+
+          <li class="followers dropup <%= path_active 'followers' %> ">
+            <%= link_to followers_user_path(@user.login) do %>
+              <span class="meta"><%=t('users.follower')%></span>
+              <span class="count"><%=@user.followers_count%></span>
+            <% end %>
+            <span class="caret"></span>
+          </li>
+            
+          <li class="following dropup <%= path_active 'following' %> ">
+           <%= link_to following_user_path(@user.login) do %>
+              <span class="meta"><%=t('users.following')%></span>
+              <span class="count"><%=@user.following_count%></span>
+            <% end %>
+            <span class="caret"></span>
+          </li>
+        </ul>
+      </div>
+     </div>
   </div>
 </div>

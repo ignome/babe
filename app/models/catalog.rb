@@ -8,6 +8,6 @@ class Catalog < ActiveRecord::Base
   validates :slug, :presence => true, :uniqueness => {:case_sensitive => false}
 
   scope :roots, ->{where('parent_id=0')}
-  scope :about, ->{find_by(slug: "about")}
+  scope :about, ->{where(slug: "about").first}
 
 end

@@ -4,9 +4,11 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
-
     @comment.user_id = current_user.id
     @comment.save
+
+    #@comment.subject_type.to_s
+    redirect_to item_path(@comment.subject_id)
   end
 
   private
