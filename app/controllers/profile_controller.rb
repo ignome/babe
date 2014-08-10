@@ -44,9 +44,9 @@ class ProfileController < ApplicationController
     @user.cover = params[:cover]
     
     if @user.save
-      render json: {0, @user.cover.url}.to_json
+      render json: [0, @user.cover.url].to_json
     else
-      render json: {-1, 'error'}.to_json
+      render json: [-1, 'error'].to_json
     end
   end
 end
