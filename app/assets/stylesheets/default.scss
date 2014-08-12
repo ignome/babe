@@ -373,6 +373,7 @@ ul#cover .selected{border: solid 2px #6cc01a}
 ul#cover li{float:left}
 ul#sites li{float:left;margin-right:10px;}
 
+#items #wrap .container{width: 980px;}
 #items .details .photo{border-right: 1px solid #ebebeb; padding: 0}
 #items .details .info{padding: 0}
 #items .details .zoom,
@@ -393,9 +394,9 @@ ul#sites li{float:left;margin-right:10px;}
   border-bottom: 1px dotted #ebebeb;
 }
 
-#items .details .zoom img{max-width: 100%}
+#items .details .zoom img{max-width: 100%; max-height: 360px; _height:360px}
 #items #more {text-align:center;}
-#items #more #expand {background-color:#efefef; color:#acdb7e; margin: 10px 0;}
+#items #more #expand {background-color:#efefef; color:#acdb7e; margin: 10px 0; cursor: pointer}
 #items #more img{max-width: 100%;}
 #items .details .thumb li{float: left; width: 64px; margin-right: 5px;}
 #items .details .thumb .active{border:2px solid #f40;}
@@ -454,10 +455,22 @@ dl.comment dt{float:left; width: 64px;}
 #users #profile #path .tabs li.active .meta,
 #users #profile #path .tabs li.active .count{color: #fff;}
 #users #profile .meta,
-#users #profile .count{float:left; clear:both; width:100%;color:#858585;text-align:center;}
+#users #profile .count{float:left; clear:both; width:100%;color:#858585;text-align:center;font-weight: bold}
 #users #profile .count{font-size:11px;}
 #users #profile #path .caret{position: absolute; left: 23px; bottom: 0px; color:#fff; display:none}
 #users #profile #path .active .caret{display:block}
+
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  direction: ltr;
+  cursor: pointer;
+}
+
 /* topics */
 #topics .toolbar{
     background: #fff;height: 40px;line-height: 26px;padding: 7px 15px;

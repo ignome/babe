@@ -1,15 +1,21 @@
 <div class="row">
   <div class="col-md-12">
-     <div id="profile" style="background:#fff url('/images/b.jpg') repeat-x;">
+     <div id="profile" style="background:#fff url('<%= @user.cover.default.url%>') repeat-x;">
+      <% if current_user and current_user == @user %>
       <form id="fileupload">
-        <div id="customize">自定义封面</div>
-        <input type="file" name="files">
+        <div id="customize">
+          <span class="btn btn-xs fileinput-button">
+          <span>自定义封面</span>
+          <input type="file" name="files" multiple>
+          </span>
+        </div>
       </form>
+      <% end %>
       
       <div id="user">
         <%= user_avatar_tag(@user, :big) %>
-        <%= link_to @user.name, '#' %>
-        <a href="">关注</a>
+        <%= link_to @user.name, '#', class: 'name' %>
+        <%= follow_or_unfollow(@user) %>
       </div>
 
       <div id="path">

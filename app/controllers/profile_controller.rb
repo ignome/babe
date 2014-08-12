@@ -41,10 +41,10 @@ class ProfileController < ApplicationController
 
   def cover
     @user = current_user
-    @user.cover = params[:cover]
+    @user.cover = params[:files]
     
     if @user.save
-      render json: [0, @user.cover.url].to_json
+      render json: [0, @user.cover.default.url].to_json
     else
       render json: [-1, 'error'].to_json
     end

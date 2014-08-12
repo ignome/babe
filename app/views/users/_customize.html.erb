@@ -1,27 +1,31 @@
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<script src="/jquery-file-uploader/js/vendor/jquery.ui.widget.js"></script>
-<!-- The Templates plugin is included to render the upload/download listings -->
-<script src="/jquery-file-uploader/js/tmpl.min.js"></script>
+<script src="/scripts/jquery-file-uploader/js/vendor/jquery.ui.widget.js"></script>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
-<script src="/jquery-file-uploader/js/load-image.min.js"></script>
+<script src="/scripts/jquery-file-uploader/js/load-image.min.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<script src="/jquery-file-uploader/js/jquery.iframe-transport.js"></script>
+<script src="/scripts/jquery-file-uploader/js/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
-<script src="/jquery-file-uploader/js/jquery.fileupload.js"></script>
+<script src="/scripts/jquery-file-uploader/js/jquery.fileupload.js"></script>
 <!-- The File Upload processing plugin -->
-<script src="/jquery-file-uploader/js/jquery.fileupload-process.js"></script>
+<script src="/scripts/jquery-file-uploader/js/jquery.fileupload-process.js"></script>
 <!-- The File Upload image preview & resize plugin -->
-<script src="/jquery-file-uploader/js/jquery.fileupload-image.js"></script>
+<script src="/scripts/jquery-file-uploader/js/jquery.fileupload-image.js"></script>
 
 <script type="text/javascript">
 $(function(){
   $('#fileupload').fileupload({
-    url: '/uploads',
+    url: "<%= account_cover_path%>",
     dataType: 'json',
     _method: 'POST',
     ///*
     done: function (e, data) {
-      $('#files').append( tmpl('template-download', data.result) );
+      console.log(data.result);
+      //json = $.parseJSON(data);
+      if(0 == data.result[0]){
+        $('#profile').css({'backgroundImage':'url('+ data.result[1]+')', 'backgroundRepeat': 'repeat-x'});
+      }else{
+
+      }
     }
     //*/
   });

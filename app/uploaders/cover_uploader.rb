@@ -3,6 +3,8 @@ class CoverUploader < BaseUploader
   def store_dir
     if is_ad?
       "ad/#{model.id}"
+    elsif is_user?
+      "users/#{model.id}/#{mounted_as}"
     else
       "users/#{model.user_id}/item/#{model.id}"
     end
@@ -32,7 +34,7 @@ class CoverUploader < BaseUploader
       if is_ad?
         img.resize!(model.position.width, model.position.height)
       elsif is_user?
-        img.resize!(120)
+        img.crop! 0,0,img.columns,180
       else
         w = 215
         r = w / img.rows
