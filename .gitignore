@@ -17,6 +17,8 @@
 /log/*.log
 /tmp
 
+.DS_Store
+
 /spec
 public/ad
 public/uploads

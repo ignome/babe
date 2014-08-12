@@ -20,60 +20,63 @@
 
 <script id="template-category" type="text/x-tmpl">
 <div class="category clearfix">
-  <ul class="cate_list_wrap_v1">
-    <li class="cate_li_v1 cate_o_v1 li_shopping">
-      <div class="cate_show_v1">
-        <a href="/active" class="nav_link_v1">
-          <span class="fl">关注动态</span>
-          <span class="u_a_num user_active_num clearfix fl" style="display: none;">(<span class="con"></span>)</span>
-          <b></b>
-        </a>
-      </div>
-      <div class="cate_detail_v1"></div>
-    </li>
-
-    <li class="cate_li_v1 cate_o_v1">
-      <div class="cate_show_v1">
-          <a href="/shopping/1/all/new/" class="nav_link_v1">
-          24小时最新
-          <b></b>
-        </a>
-      </div>
-    </li>
-
-    {% for (var i=0, e=o.tree.length; i < e; i++) { %}
-
-    <a name="{%= o.tree[i].slug %}"></a>
-    <li class="cate_li_v1 cate_highlight{%= o.tree[i].id == category.id ? '' : '_'+o.tree[i].slug %} li_{%= o.tree[i].slug %}">
-      <div class="cate_show_v1">
-          <a href="/explore/{%= o.tree[i].slug %}" class="nav_link_v1 c_top">
-            <img src="/images/{%= o.tree[i].slug %}.png" class="nav_icon_v1 clothing">{%= o.tree[i].name %}
-            <b>></b>
+  <div class="cat-list">
+    <ul class="cate_list_wrap_v1">
+      <li class="cate_li_v1 cate_o_v1 li_shopping">
+        <div class="cate_show_v1 first">
+          <a href="/active" class="nav_link_v1">
+            <i class="nav_icon_v1 24h glyphicon glyphicon-bookmark"></i>关注动态
+            <b></b>
           </a>
-      </div>
-      <div class="cate_detail_v1">
-        
-        {% if (category.id == o.tree[i].id){ %}
-        {% for(var j=0, k=o.tree[i].child.length; j < k ; j++) { %}
-        <div class="c_d_list">
-          <div class="c_d_mod">
-              <a href="/explore/{%= o.tree[i].slug + '/' + o.tree[i].child[j].slug%}" class="title">{%= o.tree[i].child[j].name %}</a>
-          </div>
-          <div class="c_d_words_box">
-            {% for(var x=0, y=o.tree[i].child[j].child.length; x < y; x++) { %}
-            <a href="/explore/{%= o.tree[i].slug + '/' + o.tree[i].child[j].slug + '/' + o.tree[i].child[j].child[x].slug %}">{%= o.tree[i].child[j].child[x].name %}</a>
-            {% } %}
-          </div>
         </div>
-        {% } %}
-        {% } %}
+        <div class="cate_detail_v1"></div>
+      </li>
 
-      </div>
-    </li>
-    {% } %}
-  </ul>
+      <li class="cate_li_v1 cate_o_v1">
+        <div class="cate_show_v1">
+            <a href="/shopping/1/all/new/" class="nav_link_v1">
+            <i class="nav_icon_v1 24h glyphicon glyphicon-time"></i>24小时最新
+            <b></b>
+          </a>
+        </div>
+      </li>
 
-  <div class="choose_more_box"></div>
+      {% for (var i=0, e=o.tree.length; i < e; i++) { %}
+
+      <a name="{%= o.tree[i].slug %}"></a>
+      <li class="cate_li_v1 cate_highlight{%= o.tree[i].id == category.id ? '' : '_'+o.tree[i].slug %} li_{%= o.tree[i].slug %}">
+        <div class="cate_show_v1">
+            <a href="/explore/{%= o.tree[i].slug %}" class="nav_link_v1 c_top">
+              <img src="/images/{%= o.tree[i].slug %}.png" class="nav_icon_v1">{%= o.tree[i].name %}
+              <b>></b>
+            </a>
+        </div>
+        <div class="cate_detail_v1" style="background: transparent url(/images/d.jpg) no-repeat;">
+          
+          {% if (category.id == o.tree[i].id){ %}
+          {% for(var j=0, k=o.tree[i].child.length; j < k ; j++) { %}
+          <div class="c_d_list">
+            <div class="c_d_mod">
+                <a href="/explore/{%= o.tree[i].slug + '/' + o.tree[i].child[j].slug%}" class="title">{%= o.tree[i].child[j].name %}</a>
+            </div>
+            <div class="c_d_words_box">
+              {% for(var x=0, y=o.tree[i].child[j].child.length; x < y; x++) { %}
+              <a href="/explore/{%= o.tree[i].slug + '/' + o.tree[i].child[j].slug + '/' + o.tree[i].child[j].child[x].slug %}">{%= o.tree[i].child[j].child[x].name %}</a>
+              {% } %}
+            </div>
+          </div>
+          {% } %}
+          {% } %}
+
+        </div>
+      </li>
+      {% } %}
+    </ul>
+  </div>
+
+  <div class="ad-box">
+    <img src="/images/c.png" width="234" />
+  </div>
 </div>
 </script>
 
