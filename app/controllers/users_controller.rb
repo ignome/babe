@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :find, only: [:show, :followers, :following, :follow, :unfollow, :items, :likes, :topics]
+  before_action :authenticate_user!, only: [:follow, :unfollow]
 
   def index
     @users = User.all.order('items_count desc')
@@ -36,10 +37,12 @@ class UsersController < ApplicationController
   end
 
   def follow
-    unless @user.id == current_user.id
+    if @user.id != current_user.id
       Followership.where({follower_id: current_user.id, following_id: @user.id}).first_or_create
+      render nothing: true, status: 201
+    else
+      render nothing: true
     end
-    render nothing: true, status: 201
   end
 
   def unfollow

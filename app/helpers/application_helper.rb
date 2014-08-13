@@ -32,12 +32,6 @@ module ApplicationHelper
     class_attribute = ["#{controller_name}","#{action_name}"].join("-")
     id_attribute = (@body_id)? " id=\"#{@body_id}\"" : "id=\"#{controller_name}\""
 
-    raw(%Q|<!--[if lt IE 7 ]>
-      <body #{id_attribute} class="#{class_attribute} ie6"><![endif]-->
-      <!--[if gte IE 7 ]>
-      <body #{id_attribute} class="#{class_attribute} ie"><![endif]-->
-      <!--[if !IE]>-->
-      <body #{id_attribute} class="#{class_attribute}">
-      <!--<![endif]-->|)
+    raw %Q| <body #{id_attribute} class="#{class_attribute} #{current_user ? "signin" : ""}"> |
   end
 end

@@ -19,10 +19,9 @@
 function water(){
   var items = $('.items li'),
       width = 215 + 16,
-      mxw = $('.container').eq(1).width(),
+      mxw = $('#wrap .container').eq(0).width(),
       cols = Math.round(mxw / width),
       tops = [];
-  
   //init with 0
   for(var i=0; i<cols; i++) tops[i] = 0;
 

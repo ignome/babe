@@ -12,10 +12,12 @@
       </form>
       <% end %>
       
-      <div id="user">
+      <div class="user">
         <%= user_avatar_tag(@user, :big) %>
-        <%= link_to @user.name, '#', class: 'name' %>
-        <%= follow_or_unfollow(@user) %>
+        <div class="link">
+          <%= link_to @user.name, '#', class: 'name' %>
+          <%= follow_or_unfollow(@user) %>
+        </div>
       </div>
 
       <div id="path">

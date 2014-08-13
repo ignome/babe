@@ -27,7 +27,8 @@ class CategoriesController < ApplicationController
 
     title = "#{@current_selected.name}-宝贝丁儿童#{@current_selected.name}_2014春夏季新款时尚品牌儿童#{@current_selected.name}"
     description = "欢迎访问宝贝丁儿童#{@current_selected.name}频道，这里有淘宝网购物达人妈妈精心挑选的最热2014新款时尚品牌儿童#{@current_selected.name}，发现当季最潮品牌儿童T恤和最佳搭配心得。"
-    @items = Item.where(["status > 0 and catalog like ?", ids.join(',')]).order('id desc').paginate(per_page: 50, page: params[:page])
+    #status > 0 and
+    @items = Item.where([" catalog like ?", ids.join(',')]).order('id desc').paginate(per_page: 50, page: params[:page])
 
     set_seo_meta(title, keywords, description)
   end

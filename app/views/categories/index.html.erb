@@ -61,7 +61,7 @@
             </div>
             <div class="c_d_words_box">
               {% for(var x=0, y=o.tree[i].child[j].child.length; x < y; x++) { %}
-              <a href="/explore/{%= o.tree[i].slug + '/' + o.tree[i].child[j].slug + '/' + o.tree[i].child[j].child[x].slug %}">{%= o.tree[i].child[j].child[x].name %}</a>
+              <a href="/explore/{%= o.tree[i].slug + '/' + o.tree[i].child[j].slug + '/' + o.tree[i].child[j].child[x].slug %}" {%= current_category_id == o.tree[i].child[j].child[x].id ? 'class=active' : '' %} >{%= o.tree[i].child[j].child[x].name %}</a>
               {% } %}
             </div>
           </div>
@@ -85,6 +85,8 @@
 <script type="text/javascript" src="/scripts/tmpl.min.js"></script>
 <script type="text/javascript">
 var category = <%= @category.to_json.html_safe %>;
+var current_category_id = <%= @current_selected.id %>;
 $('#category').html( tmpl('template-category', tree));
+
 </script>
 <% end %>
