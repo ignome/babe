@@ -219,19 +219,19 @@ ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
 .cate_li_v1{background-color:#f8f8f8}
 
 .c_d_list .c_d_mod {
-  float:left;
+  width: 15%;
   text-align: center;
 }
 .c_d_list {
   margin: 10px;
   float:left;
-  width:100%;
+  width: 100%;
   clear:both;
 }
 .c_d_list .c_d_mod .title,
 .c_d_words_box a {
   color: #585858;
-  font-size: 14px;
+  font-size: 16px;
   height: 32px;
   line-height: 32px;
 }
@@ -243,7 +243,8 @@ ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
   zoom: 1;
 }
 .c_d_words_box a {
-  padding: 0 20px;
+  margin-right:20px;
+  font-size: 14px;
 }
 .c_d_words_box .active{color: #6cc01a}
 

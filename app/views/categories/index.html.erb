@@ -19,7 +19,7 @@
 </div>
 
 <script id="template-category" type="text/x-tmpl">
-<div class="category clearfix">
+<div class="category clearfix" style="background: transparent url(/images/d.jpg) no-repeat;">
   <div class="cat-list">
     <ul class="cate_list_wrap_v1">
       <li class="cate_li_v1 cate_o_v1 li_shopping">
@@ -51,20 +51,22 @@
               <b>></b>
             </a>
         </div>
-        <div class="cate_detail_v1" style="background: transparent url(/images/d.jpg) no-repeat;">
+        <div class="cate_detail_v1" >
           
           {% if (category.id == o.tree[i].id){ %}
           {% for(var j=0, k=o.tree[i].child.length; j < k ; j++) { %}
-          <div class="c_d_list">
-            <div class="c_d_mod">
+          <table class="c_d_list">
+            <tr>
+            <td class="c_d_mod">
                 <a href="/explore/{%= o.tree[i].slug + '/' + o.tree[i].child[j].slug%}" class="title">{%= o.tree[i].child[j].name %}</a>
-            </div>
-            <div class="c_d_words_box">
+            </td>
+            <td class="c_d_words_box">
               {% for(var x=0, y=o.tree[i].child[j].child.length; x < y; x++) { %}
               <a href="/explore/{%= o.tree[i].slug + '/' + o.tree[i].child[j].slug + '/' + o.tree[i].child[j].child[x].slug %}" {%= current_category_id == o.tree[i].child[j].child[x].id ? 'class=active' : '' %} >{%= o.tree[i].child[j].child[x].name %}</a>
               {% } %}
-            </div>
-          </div>
+            </td>
+            </tr>
+          </table>
           {% } %}
           {% } %}
 
@@ -75,7 +77,7 @@
   </div>
 
   <div class="ad-box">
-    <img src="/images/c.png" width="234" />
+    <img src="/images/c.png" height="330" />
   </div>
 </div>
 </script>
