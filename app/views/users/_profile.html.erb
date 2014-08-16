@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-     <div id="profile" style="background:#fff url('<%= @user.cover.default.url%>') repeat-x;">
+     <div id="profile" style="background:#fff url('<%= @user.cover.default.url || '/images/b.png' %>') repeat-x;">
       <% if current_user and current_user == @user %>
       <form id="fileupload">
         <div id="customize">

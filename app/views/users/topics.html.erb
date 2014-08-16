@@ -3,6 +3,7 @@
 
   <div class="row mt20">
     <div class="col-md-12">
+      <% if @topics %>
       <ul >
         <% @topics.each do |topic| %>
         <li>
@@ -12,6 +13,9 @@
         </li>
         <% end %>
       </ul>
+      <% else %>
+      <h2>还没有发表话题</h2>
+      <% end %>
     </div>
   </div>
 </div>

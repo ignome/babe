@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140810095737) do
+ActiveRecord::Schema.define(version: 20140816041736) do
 
   create_table "ads", force: true do |t|
     t.string   "title"
@@ -278,7 +278,6 @@ ActiveRecord::Schema.define(version: 20140810095737) do
     t.string   "cover"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 

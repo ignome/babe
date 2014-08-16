@@ -33,21 +33,21 @@
               <div class="field pwd-field">
                 <label id="password-label" for="user_password" class="iconfont"></label>
                 <span id="J_StandardPwd">
-                  <input class="login-text" id="user_password" name="user[password]" type="password">
+                  <input class="login-text" id="user_password" name="user[password]" type="password" tabindex="2">
                 </span>
               </div>
 
               <div class="field pwd-field">
                 <label id="password-label" for="user_password_confirmation" class="iconfont"></label>
                 <span id="J_StandardPwd">
-                  <input class="login-text" id="user_password_confirmation" name="user[password_confirmation]" type="password">
+                  <input class="login-text" id="user_password_confirmation" name="user[password_confirmation]" type="password" tabindex="3">
                 </span>
               </div>
 
               <div class="safe">
                 <span class="safe-login">
                   <label>
-                    <%= f.check_box :remember_me, checked: true, readonly: true %> <a href="">阅读用户注册条款</a>
+                    <%= f.check_box :remember_me, checked: true, readonly: true, tabindex: "4" %> <a href="">阅读用户注册条款</a>
                   </label>
                 </span>
                 
