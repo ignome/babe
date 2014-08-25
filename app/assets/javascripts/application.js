@@ -16,8 +16,8 @@
 //= require users
 //= require items
 
-function water(){
-  var items = $('.items li'),
+function waterFall(){
+    var items = $('.items li'),
       width = 215 + 16,
       mxw = $('#wrap .container').eq(0).width(),
       cols = Math.round(mxw / width),
@@ -46,5 +46,4 @@ function water(){
   items.parent().css('height', h +"px");
 }
 
-window.onload = water;
-//window.onresize = water;
+window.onload= waterFall;

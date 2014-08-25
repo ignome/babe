@@ -6,6 +6,7 @@ a:hover{text-decoration: none; color: #6cc01a}
 
 .carousel-inner .item a img{height: 100%; max-height: none; max-width: none}
 .mt20{margin-top:20px;}
+#share .modal-footer{text-align: left; padding: 10px;}
 
 /* common style */
 .round{ border: solid 1px #ebebeb;
@@ -52,9 +53,10 @@ a.with-count:hover{
 #item .price strong{font-weight: 800; font-size: 20px; padding-left: 5px;}
 
 
-.hd {position: relative; margin-bottom: 15px;}
-.hd .pagination{float:right; width:auto;}
-.hd h2{float: left;color: #333;display: inline-block;}
+.hd {position: relative; height:50px}
+.hd h2{float: left;color: #333;font-size:22px;margin:0;padding:0;line-height:50px;}
+.hd .pagination{float:right; width:auto; margin: 8px 0px;}
+
 
 .pagination li span{padding: 3px 6px;}
 .pagination li input{width: 64px}
@@ -167,7 +169,7 @@ ul.items li .tools span.view{float: right; color:#6cc01a;}
 ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
 
 /* explore cateogry */
-.category {background: #fff; display: block;}
+.category {background: #fff; display: block;margin-bottom: 30px;}
 .cat-list {margin-right:330px;float:left;}
 
 .cate_list_wrap_v1 .cate_highlight .cate_show_v1 { background-color:#fff; border-right: 0;  }
@@ -184,7 +186,7 @@ ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
   height: 55px;
 }
 .cate_show_v1 .nav_link_v1 {
-  font-size: 18px;
+  font-size: 16px;
   color: #444;
   display: block;
   margin-left: 10px;
@@ -230,12 +232,12 @@ ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
 .c_d_list .c_d_mod .title,
 .c_d_words_box a {
   color: #585858;
-  font-size: 16px;
   height: 32px;
   line-height: 32px;
 }
 .c_d_list .c_d_mod .title {
   font-weight:bold;
+  font-size:14px;
 }
 .c_d_words_box {
   overflow: hidden;
@@ -243,7 +245,7 @@ ul.items li .comment{padding: 10px 5px; font-size: 12px; color:#999;}
 }
 .c_d_words_box a {
   margin-right:20px;
-  font-size: 14px;
+  font-size: 12px;
 }
 .c_d_words_box .active{color: #6cc01a}
 
@@ -378,20 +380,46 @@ ul#sites li{float:left;margin-right:10px;}
   border-bottom: 1px dotted #ebebeb;
 }
 
-#items .details .zoom img{max-width: 100%; max-height: 360px; _height:360px}
+#items .details .zoom img{max-width: 100%; max-height: 360px; height:360px}
 #items #more {text-align:center;}
 #items #more #expand {background-color:#efefef; color:#acdb7e; margin: 10px 0; cursor: pointer}
 #items #more img{max-width: 100%;}
-#items .details .thumb li{float: left; width: 64px; margin-right: 5px;}
+#items .details .thumb li{float: left; margin-right: 5px;}
 #items .details .thumb .active{border:2px solid #f40;}
 #items .details .comment{ height: 120px; }
-#items .info .price{font-size:40px; line-height: 45px; color: red}
-#items .info .buy .url{float: right; font-size: 22px; line-height: 45px; cursor: pointer;}
+#items .info .price{font-size: 32px; line-height: 32px; color: #fc7623}
+#items .info .buy .url{float: right; font-size: 22px; line-height: 32px; cursor: pointer;}
 #items .info .buy .url a{color: rgb(252,118,35);}
 
 #items .guess{margin-top: 30px;}
 
 #items #item ul li{float: left; margin-right: 10px;}
+#bookmark .cover{float:left; width: 120px; overflow:hidden}
+#bookmark .new{margin-left: 130px;}
+#bookmark #list{position: relative;border:solid 1px #ccc; cursor: pointer;}
+#bookmark #list .selected{display:block; width:350px; height:32px; line-height:32px; padding: 0 10px;}
+#bookmark #list .caret{position: absolute; right: 10px; top: 18px}
+#bookmark .bookmarks{position: relative; border:solid 1px #ccc; }
+#bookmark .bookmarks ul li,
+#bookmark .bookmarks .add{border-bottom:solid 1px #ccc; background-color:#fff; padding: 8px 10px;}
+#bookmark .bookmarks .add button{float:right;width:50px;}
+#bookmark .bookmarks .add .createBoardNameContainer{overflow:hidden; margin-right:70px}
+#bookmark .bookmarks .add .createBoardNameContainer input{width:100%}
+#bookmark .bookmarks ul{width:100%; overflow-y:scroll; z-index: 100000}
+#bookmark .bookmarks ul li{cursor:pointer }
+#bookmark .bookmarks ul li:hover{background-color:#f5f5f5;}
+#bookmark .submit{margin:10px 0;text-align: right}
+#bookmark #description textarea{border: 1px solid #ddd;
+resize: none;
+outline: 0;
+font-family: Arial;
+word-wrap: break-word;
+color: #999;
+font-size: 14px;
+margin-top: 8px;
+height: 60px;
+padding: 4px;
+width: 100%;}
 
 .color-chips{
     padding: 5px;
@@ -548,3 +576,20 @@ dl.comment dt{float:left; width: 64px;}
 #help #view .time{float: right; font-size: 11px; color: #999;}
 
 #help #about ul li a{padding: 24px 15px 24px 34px; line-height: 26px; display: block; margin-left: 10px;}
+
+#footer .share a {
+float: left;
+width: 28px;
+height: 28px;
+margin-left: 20px;
+background: image-url('share.png') no-repeat;
+}
+#footer .share .att_weibo {
+background-position: 0 0;
+}
+#footer .share .att_zone {
+background-position: 0 -30px;
+}
+#footer .share .att_weixin {
+background-position: 0 -60px;
+}

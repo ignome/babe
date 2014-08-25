@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140816041736) do
+ActiveRecord::Schema.define(version: 20140825074517) do
 
   create_table "ads", force: true do |t|
     t.string   "title"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20140816041736) do
     t.integer  "expires_on"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "bookmarks", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "items_count", default: 0
   end
 
   create_table "catalogs", force: true do |t|
@@ -93,23 +101,32 @@ ActiveRecord::Schema.define(version: 20140816041736) do
     t.string   "title"
     t.string   "url"
     t.string   "cover"
-    t.decimal  "price",                     precision: 10, scale: 2
+    t.decimal  "price",                      precision: 10, scale: 2
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "likes_count",                                        default: 0
-    t.integer  "comments_count",                                     default: 0
-    t.integer  "views_count",                                        default: 0
-    t.string   "catalog",        limit: 32
-    t.decimal  "mprice",                    precision: 10, scale: 2
-    t.integer  "status",                                             default: 0
-    t.string   "provider",       limit: 16
-    t.integer  "iid",            limit: 8
+    t.integer  "likes_count",                                         default: 0
+    t.integer  "comments_count",                                      default: 0
+    t.integer  "views_count",                                         default: 0
+    t.string   "catalog",         limit: 32
+    t.decimal  "mprice",                     precision: 10, scale: 2
+    t.integer  "status",                                              default: 0
+    t.string   "provider",        limit: 16
+    t.integer  "iid",             limit: 8
+    t.integer  "favorites_count",                                     default: 0
   end
 
   add_index "items", ["provider", "iid"], name: "provider", unique: true, using: :btree
   add_index "items", ["user_id"], name: "user", using: :btree
   add_index "items", ["user_id"], name: "user_id", using: :btree
+
+  create_table "items_of_bookmarks", force: true do |t|
+    t.integer  "item_id"
+    t.integer  "bookmark_id"
+    t.string   "description", limit: 140
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "items_of_categories", force: true do |t|
     t.integer "item_id"
@@ -276,6 +293,7 @@ ActiveRecord::Schema.define(version: 20140816041736) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "cover"
+    t.integer  "bookmarks_count",                   default: 0
   end
 
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree

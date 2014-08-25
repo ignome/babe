@@ -51,10 +51,14 @@ Babe::Application.routes.draw do
     end
   end
 
+  resources :bookmark
+
   resources :items do
     member do
       post 'like'
       delete 'like' => 'items#unlike'
+      get 'favorites' => 'bookmark#new'
+      post 'favorites' => 'items#favorites'
     end
 
     collection do

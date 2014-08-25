@@ -154,9 +154,10 @@ $(document).ready(function(){
               if(img.complete) --t;
               //new images
               img.onload = function(){
-                if (0 >= --t) water();
+                --t;
               }
             }
+            if(t == 0) waterFall();
 
             $('#loading').hide();
             loading = false;

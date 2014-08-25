@@ -7,20 +7,20 @@
   </li>
 
   <li>
-    <a href="/" class="btn btn-xs with-count favourite" rel="nofollow">
+    <%= link_to favorites_item_path(target), rel: 'nofollow', class: "btn btn-xs with-count favorites" do %>
       <span class="glyphicon glyphicon-star"></span>收藏
-    </a>
-    <span class="social-count">0</span>
+    <% end %>
+    <span class="social-count"><%= target.favorites_count%></span>
   </li>
 
   <li class="share">
     <div class="bdsharebuttonbox">
-      <a class="title">分享到</a>
+      <a class="title" _hover-ignore="1" _orighref="" _tkworked="true">分享到</a>
       <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
       <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
       <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
       <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
     </div>
-    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"<%=target.title%>","bdMini":"1","bdMiniList":false,"bdPic":"<%= "#{root_url}#{target.cover.url}"%>","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>  
+    <script>window._bd_share_config={"common":{"bdText":"<%=target.title%>","bdMini":"1","bdMiniList":false,"bdPic":"<%= "#{root_url}#{target.cover.url}"%>","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>  
   </li>
 </ul>

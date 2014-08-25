@@ -72,6 +72,12 @@ class ItemsController < ApplicationController
     render text: @item.likes_count
   end
 
+  def favorites
+    ItemsOfBookmark.where(bookmark_id: params[:bookmark_id], item_id: params[:id]).first_or_create()
+    count = Item.select('favorites_count').where('id = ?', params[:id])
+    render json: [0, count[0]['favorites_count']].to_json
+  end
+
   protected
 
   def item_params
@@ -79,6 +85,10 @@ class ItemsController < ApplicationController
   end
 
   def find
-    @item = Item.find(params[:id])
+    begin
+      @item = Item.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render_404
+    end
   end
 end

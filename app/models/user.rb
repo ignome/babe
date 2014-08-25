@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :photos
   has_many :comments
   has_many :topics
+  has_many :bookmarks
   
   has_many :followerships, foreign_key: 'following_id'
   has_many :followers, :through => :followerships, :source => :follower

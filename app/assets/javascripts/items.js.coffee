@@ -24,9 +24,14 @@ window.Item =
 
       false
 
-  Favourite : ()->
+  Favorites : ()->
     self = $(this)
-    $('#pop').modal()
+    $.ajax
+      dataType : 'html',
+      url: self.attr('href')
+      success: (html)->
+        $('#bookmark .modal-body').html(html)
+        $('#bookmark').modal()
     false
 
   Thumbnail :
@@ -50,4 +55,4 @@ window.Item =
 $(document).on 'click', '.navbar a.share', Item.share
 $(document).on 'click', '.tools a.like', Item.Like.toggle
 $(document).on 'mouseover', '.thumb li', Item.Thumbnail.select
-$(document).on 'click', '.tools a.favourite', Item.Favourite
+$(document).on 'click', '.tools a.favorites', Item.Favorites

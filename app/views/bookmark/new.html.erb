@@ -1,0 +1,92 @@
+<div id="favourite" class="clearfix">
+  <div class="cover">
+    <%= image_tag @item.cover.default.url, size: '100x100' %>
+  </div>
+  <div class="new">
+    <form method="post" action="<%= favorites_item_path(@item)%>" id="form">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
+      <input type="hidden" name="bookmark[bookmark_id]" id="bookmark_id" value="" >
+      <div id="list">
+        <span class="caret"></span>
+        <div class="selected">选择收藏夹默认上次收藏的</div>
+      </div>
+      <div class="bookmarks" style="display:none">
+        <div class="add">
+          <button class="btn btn-success btn-xs" id="add">创建</button>
+          <div class="createBoardNameContainer"><input type="text" name="bookmark[title]" id="title"></div>
+        </div>
+        <ul class="clearfix">
+          <% current_user.bookmarks.each do |book| %>
+          <li><span id="<%= book.id%>"><%=book.title%></span></li>
+          <% end %>
+        </ul>
+      </div>
+      <div id="description">
+        <textarea name="bookmark[description]" id="description" rows="2"></textarea>
+      </div>
+      <div class="submit">
+        <button type="button" class="btn btn-primary btn-xs" id="create">收藏</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script type="text/javascript">
+var url = "<%= bookmark_index_path%>",
+    token = $('#authenticity_token').val();
+
+$('#add').on('click', function(){
+  var title = $('#title');
+  if( title.val().length < 2){
+    title[0].focus();
+    title.css('border', 'solid 1px red');
+    return false;
+  }
+//*
+  $.ajax({
+    url : url,
+    data : { title: title.val(), authenticity_token: token },
+    type : 'POST',
+    dataType : 'JSON',
+    success : function(data){
+      $('#bookmark_id').val( data[1]['id'] );
+      $('.bookmarks ul').append('<li><span id="'+ data[1]['id']+'">'+data[1]['title']+'</span></li>');
+      $('.selected').text(data[1]['title']);
+    }
+  });
+  return false;
+//*/
+});
+
+$('#create').on('click', function(){
+  var id = $('#bookmark_id').val();
+  $.ajax({
+    url : $('#form').attr('action'),
+    data : {bookmark_id: id, authenticity_token : token},
+    type : 'POST',
+    dataType : 'JSON',
+    success : function(data){
+      $('.tools .favorites').siblings('.social-count').text(data[1]);
+      $('#bookmark').modal('hide');
+    }
+  });
+  return false;
+});
+
+$('#list .selected').on('click', function(){
+  var self = $(this);
+  if(self.hasClass('show')){
+    self.removeClass('show');
+    $('.new .bookmarks').hide();
+  }else{
+    self.addClass('show');
+    $('.new .bookmarks').show();
+  }
+});
+
+$(document).on('click', '.bookmarks li', function(){
+  self = $(this);
+  $('#bookmark_id').val( self.find('span').attr('id'));
+  $('.selected').text( self.find('span').text() ).removeClass('show');
+  $('.new .bookmarks').hide();
+});
+</script>

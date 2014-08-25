@@ -14,7 +14,7 @@
  *= require_self
  */
 
-body{background: rgb(243,243,243) image-url('body-bg.png') no-repeat;}
+body{background-color: #faf3ed;}
 ol,ul {list-style: none; padding: 0; margin: 0}
 div.go-top {
     display: none;
@@ -76,22 +76,22 @@ div.go-top div.stick {
 .pagination ul li>span {
   position: relative;
   float: left;
-  padding: 6px 12px;
+  padding: 6px 10px;
   margin-left: -1px;
   line-height: 1.428571429;
   text-decoration: none;
-  color:#6cc01a;
-  background-color: #fff;
-  border: 1px solid #6cc01a
+  color:#878787;
 }
 
-.pagination ul >li:first-child>a,.pagination ul li:first-child>span {
+.pagination ul >li:first-child>a,
+.pagination ul li:first-child>span {
   margin-left: 0;
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px
 }
 
-.pagination ul li:last-child>a,.pagination ul li:last-child>span {
+.pagination ul li:last-child>a,
+.pagination ul li:last-child>span {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px
 }
@@ -100,8 +100,7 @@ div.go-top div.stick {
 .pagination ul li>span:hover,
 .pagination ul li>a:focus,
 .pagination ul li>span:focus {
-  background-color: #6cc01a;
-  color: #fff;
+
 }
 
 .pagination .active>a,
@@ -123,10 +122,8 @@ div.go-top div.stick {
 .pagination .disabled>a,
 .pagination .disabled>a:hover,
 .pagination .disabled>a:focus {
-  color: #6cc01a;
+
   cursor: not-allowed;
-  background-color: #fff;
-  border-color: #6cc01a
 }
 
 .pagination-lg li>a,
@@ -164,6 +161,12 @@ div.go-top div.stick {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px
 }
+
+.pagination li.prev a{
+  margin-right: 30px;  
+}
+.pagination li.next a{margin-left:30px;}
+
 .alert{margin-bottom: 0}
 
 .social-count .bdshare-button-style1-16 a{margin:2px 6px 2px 0}
